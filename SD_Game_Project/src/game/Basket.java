@@ -1,3 +1,4 @@
+package game;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class Basket {
         this.y = y;
         this.width = width;
         this.height = height;
+        // Initializes image from images folder. Image selected via fileName
         File pic = new File("images/" + fileName);
         try {
             image = ImageIO.read(pic);
@@ -31,6 +33,23 @@ public class Basket {
             System.out.println("file not found");
         }
     }
+
+    /*
+     * Methods
+     * Created methods here for movement
+     * Implement these methods in GameManager
+     * I've added some examples but you can create any method you wish to run each frame of the game
+     */
+    public void update(){
+
+    }
+    public void move(){
+
+    }
+    public void increaseSpeed(){
+
+    }
+
 
     // Getters and Setters
     public String getName() {
