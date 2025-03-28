@@ -8,10 +8,8 @@ public class GameManager {
      * This class is where all game assets are added and their positons. ie. basket, falling eggs, score tracker etc.
      * 
      */
-    
-     /*
-      * Create instance of your class here
-      */
+
+    private Egg egg;
     private Basket basket;
 
     /*
@@ -27,6 +25,7 @@ public class GameManager {
      */
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
+        egg = new Egg(150, 0, "egg_01.png");
     }
 
     /*
@@ -34,9 +33,9 @@ public class GameManager {
      * Implement graphics.drawImage(image, int x position, int y position, int wifth, int height, panel); to render an image to the panel
      */
     public void drawSprites(Graphics2D graphics, JPanel panel){
+        egg.draw(graphics, panel); // draws egg first
         //Draw Basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
-        
 
     }
 
@@ -48,6 +47,7 @@ public class GameManager {
      */
     public void update(){
         basket.update();
+        egg.update();
     }
 
 }
