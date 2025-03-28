@@ -12,7 +12,13 @@ public class GamePanel extends JPanel implements KeyListener{
 
     public GamePanel(){
         addKeyListener(this);               // Sets up keyboard event listener
+        setFocusable(true);
+        requestFocusInWindow(); // ensures key input works
         game = new GameManager();
+
+        // Game loop - calls update() 60 times per second
+        javax.swing.Timer timer = new javax.swing.Timer(1000 / 60, e -> update());
+        timer.start();
     }
 
     @Override
