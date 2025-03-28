@@ -14,7 +14,7 @@ public class Egg {
     public Egg(int x, int y, String imageName) {
         this.x = x;
         this.y = y;
-        eggImage = new ImageIcon("images/" + imageName).getImage();
+        eggImage = new ImageIcon("images/egg_01.png" + imageName).getImage();
     }
 
     public void update() {
