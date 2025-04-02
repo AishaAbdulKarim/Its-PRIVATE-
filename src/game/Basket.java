@@ -25,7 +25,7 @@ public class Basket {
         this.width = width;
         this.height = height;
         // Initializes image from images folder. Image selected via fileName
-        File pic = new File("src/images/" + fileName);
+        File pic = new File("SD_Game_project/src/images/" + fileName);
         try {
             image = ImageIO.read(pic);
         } catch (IOException e) {
