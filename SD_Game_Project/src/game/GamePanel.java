@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements KeyListener{
     private GameManager game;
 
     public GamePanel(){
-        addKeyListener(this);               // Sets up keyboard event listener
+        addKeyListener(this);// Sets up keyboard event listener
         setFocusable(true);
         requestFocusInWindow(); // ensures key input works
         game = new GameManager();

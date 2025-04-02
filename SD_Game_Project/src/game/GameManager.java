@@ -56,7 +56,9 @@ public class GameManager {
      * etc.
      */
     public void update() {
+        // Update basket position
         basket.update();
+        // Update each egg's position
         for (Egg egg : eggs) {
             egg.update();
         }
