@@ -9,14 +9,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements KeyListener {
-    private GameManager game;
+    private GameManager game; // Manages game elements
 
-    public GamePanel(){
+    // Constructor initializes the game and sets up key listener
+    public GamePanel() {
         addKeyListener(this);
         setFocusable(true);
         game = new GameManager();
     }
 
+    // Draws the game components on the panel
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -29,33 +31,37 @@ public class GamePanel extends JPanel implements KeyListener {
         game.drawSprites(graphics, this);
     }
 
-    public void drawBackground(Graphics2D graphics){
+    // Draws the background color
+    public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
 
-    public void update(){
+    // Updates the game state and repaints the screen
+    public void update() {
         game.update();
         this.repaint();
     }
 
+    // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
         Basket basket = game.getBasket();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            basket.moveLeft();
+            basket.moveLeft(); // Move left
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            basket.moveRight();
+            basket.moveRight(); // Move right
         }
     }
-    
 
+    // Handles key release (not used for now)
     @Override
     public void keyReleased(KeyEvent e) {
-        // No need for actions on key release for now
     }
 
+    // Handles key typing (not used)
     @Override
     public void keyTyped(KeyEvent e) {
     }
 }
+
