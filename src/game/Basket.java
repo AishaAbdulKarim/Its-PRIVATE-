@@ -34,12 +34,7 @@ public class Basket {
         }
     }
 
-    /*
-     * Methods
-     * Created methods here for movement
-     * Implement these methods in GameManager
-     * I've added some examples but you can create any method you wish to run each frame of the game
-     */
+   
     public void update(){
 
     }
