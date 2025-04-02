@@ -34,12 +34,7 @@ public class GameManager {
      * Renders images to panel
      * Implement graphics.drawImage(image, int x position, int y position, int wifth, int height, panel); to render an image to the panel
      */
-    public void drawSprites1(Graphics2D graphics, JPanel panel){
-        //Draw Basket
-        graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
-        
-
-    }
+ 
 
 
 
