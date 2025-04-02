@@ -2,13 +2,15 @@ package game;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 public class Basket {
     private String name;
     private String fileName;
-    private BufferedImage image;
+    private Image image;
     private int x;                          // x position for Basket
     private int y;                          // y position for Basket
     private int width;                      // width of Basket image
@@ -31,6 +33,15 @@ public class Basket {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("file not found");
+        }
+
+        URL imageUrl = getClass().getClassLoader().getResource("images/" + fileName);
+        if (imageUrl == null) {
+            System.out.println("Basket image not found: images/" + fileName);
+            // if found, confirm it and load the image
+        } else {
+            System.out.println("Basket image loaded: " + imageUrl);
+            image = new ImageIcon(imageUrl).getImage();
         }
     }
 
@@ -64,7 +75,7 @@ public class Basket {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-    public BufferedImage getImage() {
+    public Image getImage() {
         return image;
     }
     public void setImage(BufferedImage image) {
