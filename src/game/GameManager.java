@@ -45,21 +45,21 @@ public class GameManager {
         }
         //Draw Basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
-
     }
 
-    /*
-     * Implement class methods to run each frame here
-     * basket.move();
-     * egg.spawn();
-     * etc.
-     */
+
+    // Updates game logic
     public void update() {
         // Update basket position
         basket.update();
-        // Update each egg's position
+        // Update each eggs position
         for (Egg egg : eggs) {
             egg.update();
         }
     }
-}
+
+    // Returns the basket object
+    public Basket getBasket() {
+        return basket;
+    }
+	}

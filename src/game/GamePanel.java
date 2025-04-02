@@ -1,4 +1,5 @@
 package game;
+
 import javax.swing.JPanel;
 import gameConstants.Constants;
 import java.awt.Graphics;
@@ -7,13 +8,13 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements KeyListener{
-    private GameManager game;
+public class GamePanel extends JPanel implements KeyListener {
+    private GameManager game; // Manages game elements
 
-    public GamePanel(){
-        addKeyListener(this);// Sets up keyboard event listener
+    // Constructor initializes the game and sets up key listener
+    public GamePanel() {
+        addKeyListener(this);
         setFocusable(true);
-        requestFocusInWindow(); // ensures key input works
         game = new GameManager();
 
         // Game loop - calls update() 60 times per second
@@ -21,50 +22,50 @@ public class GamePanel extends JPanel implements KeyListener{
         timer.start();
     }
 
+    // Draws the game components on the panel
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        Graphics2D graphics = (Graphics2D)g;
-        // Improves image rendering
+        Graphics2D graphics = (Graphics2D) g;
         RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHints(hints);
 
-        // Draw Background
         drawBackground(graphics);
-
-        // Draws Sprites (buckets, eggs, timer, score etc.)
         game.drawSprites(graphics, this);
     }
 
-    // Sets background color, size of screen
-    public void drawBackground(Graphics2D graphics){
+    // Draws the background color
+    public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
 
-    public void update(){
+    // Updates the game state and repaints the screen
+    public void update() {
         game.update();
         this.repaint();
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-    }
-
+    // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        Basket basket = game.getBasket();
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            basket.moveLeft(); // Move left
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            basket.moveRight(); // Move right
+        }
     }
 
+    // Handles key release (not used for now)
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
-    
+
+    // Handles key typing (not used)
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
 }
+

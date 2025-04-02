@@ -8,31 +8,31 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class Basket {
-    private String name;
-    private String fileName;
-    private Image image;
-    private int x;                          // x position for Basket
-    private int y;                          // y position for Basket
-    private int width;                      // width of Basket image
-    private int height;                     // height of basket image
+    private String name;       // Basket name
+    private String fileName;   // Image file name
+    private Image image;       // Basket image
+    private int x;             // X position of the basket
+    private int y;             // Y position of the basket
+    private int width;         // Width of the basket
+    private int height;        // Height of the basket
+    private int speed = 10;
 
-    /*
-     * Constructor
-     * Image for basket will be selected with fileName when Basket is constructed
-     */
-    public Basket(String name, int x, int y, int width, int height, String fileName){
+    // Constructor to initialize the basket
+    public Basket(String name, int x, int y, int width, int height, String fileName) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        // Initializes image from images folder. Image selected via fileName
-        File pic = new File("images/" + fileName);
+        this.fileName = fileName;
+
+        // Load the basket image
+        File pic = new File("SD_Game_project/src/images/" + fileName);
         try {
             image = ImageIO.read(pic);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("file not found");
+            System.out.println("File not found: " + fileName);
         }
 
         URL imageUrl = getClass().getClassLoader().getResource("images/" + fileName);
@@ -45,66 +45,96 @@ public class Basket {
         }
     }
 
-    /*
-     * Methods
-     * Created methods here for movement
-     * Implement these methods in GameManager
-     * I've added some examples but you can create any method you wish to run each frame of the game
-     */
-    public void update(){
-
-    }
-    public void move(){
-
-    }
-    public void increaseSpeed(){
-
+    public void moveLeft() {
+        if (x > 0) {  // Prevent moving out of bounds
+            x -= speed;
+        }
     }
 
+    public void moveRight() {
+        if (x + width < gameConstants.Constants.FRAME_WIDTH) {  // Prevent moving out of bounds
+            x += speed;
+        }
+    }
 
-    // Getters and Setters
+    // Update basket (done in future updates)
+    public void update() {
+    }
+
+    // Move basket 
+    public void move() {
+    }
+
+    // Increase basket speed 
+    public void increaseSpeed() {
+    }
+
+    // Getter for basket name
     public String getName() {
         return name;
     }
+
+    // Setter for basket name
     public void setName(String name) {
         this.name = name;
     }
+
+    // Getter for file name
     public String getFileName() {
         return fileName;
     }
+
+    // Setter for file name
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
     public Image getImage() {
         return image;
     }
+
+    // Setter for basket image
     public void setImage(BufferedImage image) {
         this.image = image;
     }
+
+    // Getter for x position
     public int getX() {
         return x;
     }
+
+    // Setter for x position
     public void setX(int x) {
         this.x = x;
     }
+
+    // Getter for y position
     public int getY() {
         return y;
     }
+
+    // Setter for y position
     public void setY(int y) {
         this.y = y;
     }
+
+    // Getter for basket width
     public int getWidth() {
         return width;
     }
+
+    // Setter for basket width
     public void setWidth(int width) {
         this.width = width;
     }
+
+    // Getter for basket height
     public int getHeight() {
         return height;
     }
+
+    // Setter for basket height
     public void setHeight(int height) {
         this.height = height;
     }
-
-    
 }
+
