@@ -1,4 +1,5 @@
 package game;
+
 import javax.swing.JPanel;
 import gameConstants.Constants;
 import java.awt.Graphics;
@@ -7,11 +8,12 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements KeyListener{
+public class GamePanel extends JPanel implements KeyListener {
     private GameManager game;
 
     public GamePanel(){
-        addKeyListener(this);               // Sets up keyboard event listener
+        addKeyListener(this);
+        setFocusable(true);
         game = new GameManager();
     }
 
@@ -19,19 +21,14 @@ public class GamePanel extends JPanel implements KeyListener{
     public void paint(Graphics g) {
         super.paint(g);
 
-        Graphics2D graphics = (Graphics2D)g;
-        // Improves image rendering
+        Graphics2D graphics = (Graphics2D) g;
         RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHints(hints);
 
-        // Draw Background
         drawBackground(graphics);
-
-        // Draws Sprites (buckets, eggs, timer, score etc.)
         game.drawSprites(graphics, this);
     }
 
-    // Sets background color, size of screen
     public void drawBackground(Graphics2D graphics){
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
@@ -42,23 +39,12 @@ public class GamePanel extends JPanel implements KeyListener{
         this.repaint();
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-    }
-
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        Basket basket = game.getBasket();
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            basket.moveLeft();
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            basket.moveRight();
+        }
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-    }
-    
-}
