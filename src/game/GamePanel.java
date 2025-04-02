@@ -48,3 +48,14 @@ public class GamePanel extends JPanel implements KeyListener {
             basket.moveRight();
         }
     }
+    
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // No need for actions on key release for now
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+}
