@@ -13,6 +13,7 @@ public class Basket {
     private int y;             // Y position of the basket
     private int width;         // Width of the basket
     private int height;        // Height of the basket
+    private int speed = 10;
 
     // Constructor to initialize the basket
     public Basket(String name, int x, int y, int width, int height, String fileName) {
@@ -30,6 +31,18 @@ public class Basket {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("File not found: " + fileName);
+        }
+    }
+
+    public void moveLeft() {
+        if (x > 0) {  // Prevent moving out of bounds
+            x -= speed;
+        }
+    }
+
+    public void moveRight() {
+        if (x + width < gameConstants.Constants.FRAME_WIDTH) {  // Prevent moving out of bounds
+            x += speed;
         }
     }
 

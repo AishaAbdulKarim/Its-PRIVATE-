@@ -2,8 +2,6 @@ package game;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import gameConstants.Constants;
-public class GameManager {
-
     /*
      * This class is where all game assets are added and their positons. ie. basket, falling eggs, score tracker etc.
      * 
