@@ -9,50 +9,36 @@ public class GameManager {
      * 
      */
     
-     /*
-      * Create instance of your class here
-      */
-    private Basket basket;
 
-    /*
-     * Executed by GamePanel
-     */
-    public GameManager(){
-        start();
-    }
-    
+	public class GameManager {
 
-    /*
-     * Initialize classes to be rendered here
-     */
-    public void start(){
-    	String fileName = "empty_basket";
-        basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
-    }
+	    // Manages game elements like the basket and falling eggs
 
-    /*
-     * Renders images to panel
-     * Implement graphics.drawImage(image, int x position, int y position, int wifth, int height, panel); to render an image to the panel
-     */
- 
+	    // Basket instance
+	    private Basket basket;
 
+	    // Constructor initializes the game
+	    public GameManager() {
+	        start();
+	    }
 
+	    // Initializes game elements
+	    public void start() {
+	        basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
+	    }
 
-    public void drawSprites(Graphics2D graphics, JPanel panel){
-        graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
-    }
+	    // Draws game objects on the screen
+	    public void drawSprites(Graphics2D graphics, JPanel panel) {
+	        graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
+	    }
 
-    public void update(){
-        // Update basket position (called every frame)
-    }
+	    // Updates game logic
+	    public void update() {
+	        // Future updates go here
+	    }
 
-    public Basket getBasket() {
-    	
-        return basket;
-        
-    }
-}
-
-
-
-
+	    // Returns the basket object
+	    public Basket getBasket() {
+	        return basket;
+	    }
+	}
