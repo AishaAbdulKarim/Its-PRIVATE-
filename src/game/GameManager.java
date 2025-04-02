@@ -26,6 +26,7 @@ public class GameManager {
      * Initialize classes to be rendered here
      */
     public void start(){
+    	String fileName = "empty_basket";
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
     }
 
@@ -33,21 +34,30 @@ public class GameManager {
      * Renders images to panel
      * Implement graphics.drawImage(image, int x position, int y position, int wifth, int height, panel); to render an image to the panel
      */
-    public void drawSprites(Graphics2D graphics, JPanel panel){
+    public void drawSprites1(Graphics2D graphics, JPanel panel){
         //Draw Basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
         
 
     }
 
-    /*
-     * Implement class methods to run each frame here
-     * basket.move();
-     * egg.spawn();
-     * etc.
-     */
-    public void update(){
-        basket.update();
+
+
+    public void drawSprites(Graphics2D graphics, JPanel panel){
+        graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
     }
 
+    public void update(){
+        // Update basket position (called every frame)
+    }
+
+    public Basket getBasket() {
+    	
+        return basket;
+        
+    }
 }
+
+
+
+
