@@ -47,6 +47,9 @@ public class GamePanel extends JPanel implements KeyListener {
         game.update();
         this.repaint();
     }
+    public GameManager getGameManager() { 
+        return game;
+    }
 
     // Handles key press events for moving the basket
     @Override
