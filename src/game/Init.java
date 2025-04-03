@@ -30,10 +30,13 @@ public static void main(String[] args) {
     while(true){
         long elapsedTime = System.currentTimeMillis() - startTime;
         if(elapsedTime > Constants.REFRESH_RATE){
-            
             panel.update();
-            startTime = System.currentTimeMillis();                         // This function must remain at the end of this statement
+            startTime = System.currentTimeMillis();
+            
+            // Print score in console (optional)
+            System.out.println("Score: " + panel.getGameManager().getScore());
         }
     }
+    
 }
 }

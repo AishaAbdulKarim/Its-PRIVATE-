@@ -25,15 +25,16 @@ public class GamePanel extends JPanel implements KeyListener {
     // Draws the game components on the panel
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
+    super.paint(g);
+    Graphics2D graphics = (Graphics2D) g;
+    RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    graphics.setRenderingHints(hints);
 
-        Graphics2D graphics = (Graphics2D) g;
-        RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setRenderingHints(hints);
+    drawBackground(graphics);
+    game.drawSprites(graphics, this);
+}
 
-        drawBackground(graphics);
-        game.drawSprites(graphics, this);
-    }
+
 
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
@@ -45,6 +46,9 @@ public class GamePanel extends JPanel implements KeyListener {
     public void update() {
         game.update();
         this.repaint();
+    }
+    public GameManager getGameManager() { 
+        return game;
     }
 
     // Handles key press events for moving the basket
