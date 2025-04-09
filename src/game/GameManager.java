@@ -23,7 +23,7 @@ public class GameManager {
  
     
      public GameManager(){
-        start();
+        
     }
     
     // Runs once on startup. Instantiate game objects here

@@ -21,7 +21,7 @@ public class EggSpawner {
     public void spawnEgg(){
         // Create a random number between 1 and 100
         int randomNumber = (int) (Math.random() * 100) + 1;
-        int randomX = (int) (Math.random() * (Constants.FRAME_WIDTH - 100)) + 50;
+        int randomX = (int) (Math.random() * (Constants.FRAME_WIDTH - 200)) + 100;
         
 
     // Check if the random number is less than 20

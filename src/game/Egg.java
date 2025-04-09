@@ -11,7 +11,7 @@ public class Egg { // Defines the Egg class
     private int y; // Vertical position of the egg
     private int width = 40; // Egg sprite width
     private int height = 50; // Egg sprite height
-    private int speed = 5; // Speed at which the egg falls
+    private int speed = 4; // Speed at which the egg falls
     private Image eggImage; // Image used to display the egg
 
     // Constructor to initialize the egg's position and load its image

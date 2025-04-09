@@ -31,8 +31,7 @@ public class Basket {
         try {
             image = ImageIO.read(pic);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("File not found: " + fileName);
+            throw new RuntimeException("Error loading image: " + fileName, e);
         }
 
         URL imageUrl = getClass().getClassLoader().getResource("images/" + fileName);

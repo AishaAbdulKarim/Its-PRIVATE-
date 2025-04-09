@@ -24,7 +24,6 @@ public static void main(String[] args) {
 
     /*
      * Game Loop
-     * 
      */
     long startTime = System.currentTimeMillis();
     while(true){
@@ -32,9 +31,6 @@ public static void main(String[] args) {
         if(elapsedTime > Constants.REFRESH_RATE){
             panel.update();
             startTime = System.currentTimeMillis();
-            
-            // Print score in console (optional)
-            System.out.println("Score: " + panel.getGameManager().getScore());
         }
     }
     
