@@ -12,6 +12,14 @@ public class GameManager {
      private Basket basket;
      private EggSpawner eggSpawner;
      private int score = 0;  //  Track the player's score
+
+     // 🚀 Detects if the basket catches an egg
+    private boolean checkCollision(Egg egg, Basket basket) {
+        return egg.getX() < basket.getX() + basket.getWidth() &&
+        egg.getX() + 40 > basket.getX() && // 40 = egg width
+        egg.getY() + 50 > basket.getY() && // 50 = egg height
+        egg.getY() < basket.getY() + basket.getHeight();
+    }
  
     
      public GameManager(){
@@ -39,35 +47,37 @@ public class GameManager {
         graphics.drawString("Score: " + score, 20, 30);
     }
 
+    /*
+     * Updates game objects
+     * Objects will render in order placed within method. Each object in front of previous
+     */
     public void update() {
-        basket.update();
         eggSpawner.update();
-        // // Move eggs down and check for collision
-        // for (int i = 0; i < eggs.size(); i++) {
-        //     Egg egg = eggs.get(i);
-        //     egg.update();
-
-        //     if (checkCollision(egg, basket)) {
-        //         score += 10;  // 🏆 Increase score
-        //         eggs.remove(i); // Remove egg from list
-        //         i--; // Adjust index after removal
-        //     }
-        // }
+        basket.update();
+        updateCollision();
     }
 
- // 🚀 Detects if the basket catches an egg
- private boolean checkCollision(Egg egg, Basket basket) {
-    return egg.getX() < basket.getX() + basket.getWidth() &&
-           egg.getX() + 40 > basket.getX() && // 40 = egg width
-           egg.getY() + 50 > basket.getY() && // 50 = egg height
-           egg.getY() < basket.getY() + basket.getHeight();
-}
 
-public Basket getBasket() {
-    return basket;
-}
+    // Checks if egg collides with basket, delets egg, score ++
+    public void updateCollision(){
+        // Move eggs down and check for collision
+        for (int i = 0; i < eggSpawner.getEggList().size(); i++) {
+            Egg egg = eggSpawner.getEggList().get(i);
+            egg.update();
 
-public int getScore() {
-    return score;
-}
+            if (checkCollision(egg, basket)) {
+                score += 10;  // 🏆 Increase score
+                eggSpawner.getEggList().remove(i); // Remove egg from list
+                i--; // Adjust index after removal
+            }
+        }
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }
