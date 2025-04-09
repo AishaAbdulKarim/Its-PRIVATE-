@@ -2,7 +2,6 @@ package game;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import gameConstants.Constants;
-import java.util.ArrayList;
 public class GameManager {
 
     /*
@@ -10,10 +9,7 @@ public class GameManager {
      * 
      */
 
-
-     private Egg egg;
      private Basket basket;
-     private ArrayList<Egg> eggs;
      private int score = 0;  //  Track the player's score
  
     
@@ -21,20 +17,14 @@ public class GameManager {
         start();
     }
     
+    // Runs once on startup. Instantiate game objects here
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
-        eggs = new ArrayList<>();
 
-        // Adding a few eggs with different positions
-        eggs.add(new Egg(100, 0, "egg_01.png"));
-        eggs.add(new Egg(200, -100, "egg_01.png"));
-        eggs.add(new Egg(300, -200, "egg_01.png"));
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel){
-        for (Egg egg : eggs) {
-            egg.draw(graphics, panel);
-        }
+        // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
 
         // 🏆 Display Score on Screen
@@ -46,17 +36,17 @@ public class GameManager {
     public void update() {
         basket.update();
         
-        // Move eggs down and check for collision
-        for (int i = 0; i < eggs.size(); i++) {
-            Egg egg = eggs.get(i);
-            egg.update();
+        // // Move eggs down and check for collision
+        // for (int i = 0; i < eggs.size(); i++) {
+        //     Egg egg = eggs.get(i);
+        //     egg.update();
 
-            if (checkCollision(egg, basket)) {
-                score += 10;  // 🏆 Increase score
-                eggs.remove(i); // Remove egg from list
-                i--; // Adjust index after removal
-            }
-        }
+        //     if (checkCollision(egg, basket)) {
+        //         score += 10;  // 🏆 Increase score
+        //         eggs.remove(i); // Remove egg from list
+        //         i--; // Adjust index after removal
+        //     }
+        // }
     }
 
  // 🚀 Detects if the basket catches an egg

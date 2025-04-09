@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.net.URL;
+
 public class Egg { // Defines the Egg class
     private int x; // Horizontal position of the egg
     private int y; // Vertical position of the egg
