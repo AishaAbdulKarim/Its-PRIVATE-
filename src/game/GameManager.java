@@ -10,6 +10,7 @@ public class GameManager {
      */
 
      private Basket basket;
+     private EggSpawner eggSpawner;
      private int score = 0;  //  Track the player's score
  
     
@@ -26,6 +27,11 @@ public class GameManager {
     public void drawSprites(Graphics2D graphics, JPanel panel){
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
+
+        // Draw Eggs
+        for (Egg e : eggSpawner.eggList) {
+            graphics.drawImage(e.getEggImage(), e.getX(), e.getY(), e.getWidth(), e.getHeight(), panel);
+        }
 
         // 🏆 Display Score on Screen
         graphics.setColor(java.awt.Color.BLACK);
