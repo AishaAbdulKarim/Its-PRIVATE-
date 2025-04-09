@@ -26,7 +26,6 @@ public class Egg { // Defines the Egg class
             System.out.println("Egg image not found: images/" + imageName);
             // if found, confirm it and load the image
         } else {
-            System.out.println("Egg image loaded: " + imageUrl);
             eggImage = new ImageIcon(imageUrl).getImage();
         }
     }

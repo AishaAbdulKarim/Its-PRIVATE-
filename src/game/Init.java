@@ -24,6 +24,7 @@ public static void main(String[] args) {
 
     /*
      * Game Loop
+     * 
      */
     long startTime = System.currentTimeMillis();
     while(true){

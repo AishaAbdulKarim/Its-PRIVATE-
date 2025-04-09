@@ -1,9 +1,6 @@
 package game;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
@@ -27,19 +24,11 @@ public class Basket {
         this.fileName = fileName;
 
         // Load the basket image
-        File pic = new File("SD_Game_project/src/images/" + fileName);
-        try {
-            image = ImageIO.read(pic);
-        } catch (IOException e) {
-            throw new RuntimeException("Error loading image: " + fileName, e);
-        }
-
         URL imageUrl = getClass().getClassLoader().getResource("images/" + fileName);
         if (imageUrl == null) {
             System.out.println("Basket image not found: images/" + fileName);
             // if found, confirm it and load the image
         } else {
-            System.out.println("Basket image loaded: " + imageUrl);
             image = new ImageIcon(imageUrl).getImage();
         }
     }
@@ -135,5 +124,19 @@ public class Basket {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    
 }
 
