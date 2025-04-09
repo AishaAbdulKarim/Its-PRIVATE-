@@ -9,13 +9,17 @@ import java.net.URL;
 public class Egg { // Defines the Egg class
     private int x; // Horizontal position of the egg
     private int y; // Vertical position of the egg
+    private int width = 40; // Egg sprite width
+    private int height = 50; // Egg sprite height
     private int speed = 2; // Speed at which the egg falls
     private Image eggImage; // Image used to display the egg
 
     // Constructor to initialize the egg's position and load its image
-    public Egg(int x, int y, String imageName) {
-        this.x = x; // Set the egg's x position
-        this.y = y; // Set the egg's y position
+    public Egg(int x, int y, int width, int height, String imageName) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
 
         URL imageUrl = getClass().getClassLoader().getResource("images/" + imageName);
         if (imageUrl == null) {
@@ -35,7 +39,7 @@ public class Egg { // Defines the Egg class
     // Draws the egg image on the screen
     public void draw(Graphics2D graphics, JPanel panel) {
         if (eggImage != null) { // Only draw if the image was successfully loaded
-            graphics.drawImage(eggImage, x, y, 40, 50, panel); // Draw egg at (x, y) with width 40 and height 50
+            graphics.drawImage(eggImage, x, y, this.width, this.height, panel); // Draw egg at (x, y) with width 40 and height 50
         }
     }
 
@@ -70,6 +74,22 @@ public class Egg { // Defines the Egg class
 
     public void setEggImage(Image eggImage) {
         this.eggImage = eggImage;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     
