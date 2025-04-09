@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.net.URL;
 
-public abstract class Egg { // Defines the Egg class
+public class Egg { // Defines the Egg class
     private int x; // Horizontal position of the egg
     private int y; // Vertical position of the egg
     private int width = 40; // Egg sprite width
