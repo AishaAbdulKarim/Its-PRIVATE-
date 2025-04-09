@@ -21,7 +21,7 @@ public class GameManager {
     // Runs once on startup. Instantiate game objects here
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
-
+        eggSpawner = new EggSpawner();
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel){
@@ -41,7 +41,7 @@ public class GameManager {
 
     public void update() {
         basket.update();
-        
+        eggSpawner.update();
         // // Move eggs down and check for collision
         // for (int i = 0; i < eggs.size(); i++) {
         //     Egg egg = eggs.get(i);
