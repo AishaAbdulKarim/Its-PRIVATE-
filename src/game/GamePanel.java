@@ -9,29 +9,28 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements KeyListener {
-    private GameManager game; // Manages game elements
+    final private GameManager GAME; // Manages game elements
 
     // Constructor initializes the game and sets up key listener
+    @SuppressWarnings("LeakingThisInConstructor")
     public GamePanel() {
         addKeyListener(this);
         setFocusable(true);
-        game = new GameManager();
+        GAME = new GameManager();
+        GAME.start();
 
-        // Game loop - calls update() 60 times per second
-        javax.swing.Timer timer = new javax.swing.Timer(1000 / 60, e -> update());
-        timer.start();
     }
 
     // Draws the game components on the panel
     @Override
     public void paint(Graphics g) {
-    super.paint(g);
-    Graphics2D graphics = (Graphics2D) g;
-    RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    graphics.setRenderingHints(hints);
+        super.paint(g);
+        Graphics2D graphics = (Graphics2D) g;
+        RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics.setRenderingHints(hints);
 
-    drawBackground(graphics);
-    game.drawSprites(graphics, this);
+        drawBackground(graphics);
+        GAME.drawSprites(graphics, this);
 }
 
 
@@ -44,17 +43,17 @@ public class GamePanel extends JPanel implements KeyListener {
 
     // Updates the game state and repaints the screen
     public void update() {
-        game.update();
+        GAME.update();
         this.repaint();
     }
     public GameManager getGameManager() { 
-        return game;
+        return GAME;
     }
 
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
-        Basket basket = game.getBasket();
+        Basket basket = GAME.getBasket();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             basket.moveLeft(); // Move left
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
