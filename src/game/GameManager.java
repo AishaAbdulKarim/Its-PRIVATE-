@@ -12,6 +12,7 @@ public class GameManager {
      private Basket basket;
      private EggSpawner eggSpawner;
      private int score = 0;  //  Track the player's score
+    private boolean isGameOver = false;
     private int lives = 3;
 
      // 🚀 Detects if the basket catches an egg
@@ -56,6 +57,10 @@ public class GameManager {
         eggSpawner.update();
         basket.update();
         updateCollision();
+
+        if (lives <= 0) {
+            isGameOver = true;
+        }
     }
 
 
