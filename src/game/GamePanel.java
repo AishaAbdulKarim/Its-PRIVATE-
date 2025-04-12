@@ -43,8 +43,10 @@ public class GamePanel extends JPanel implements KeyListener {
 
     // Updates the game state and repaints the screen
     public void update() {
-        GAME.update();
-        this.repaint();
+        if (!GAME.isGameOver()) { // Only update if the game is still active
+            GAME.update();
+            this.repaint();
+        }
     }
     public GameManager getGameManager() { 
         return GAME;
