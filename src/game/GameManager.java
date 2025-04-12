@@ -39,7 +39,7 @@ public class GameManager {
 
         // Load heart image for representing lives
         try {
-            heartImage = ImageIO.read(new File("images/redHeart.png"));
+            heartImage = ImageIO.read(new File("src/images/redHeart.png"));
         } catch (IOException e) {
             e.printStackTrace(); // Log the error if the image can't be loaded
         }
