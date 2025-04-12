@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
     // Updates the game state and repaints the screen
     public void update() {
-        if (!GAME.isGameOver()) { // Only update if the game is still active
+        if (!GAME.isGameOver()) { //Prevents game updates and drawing if the player has lost
             GAME.update();
             this.repaint();
         }
@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements KeyListener {
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
+        if (GAME.isGameOver()) return; // Ignore movement if game is over
         Basket basket = GAME.getBasket();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             basket.moveLeft(); // Move left
