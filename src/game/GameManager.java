@@ -74,12 +74,18 @@ public class GameManager {
             graphics.setColor(java.awt.Color.BLACK);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
 
-            //draws hearts based on lives
+            int paddingRight = 20;// adding space to the right border
+            int paddingTop = 20;// adding spacing form the top
+            int spacing = 10; // space between hearts
+
             for (int i = 0; i < lives; i++) {
+                int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
+                int y = paddingTop;
+
                 graphics.drawImage(
                         heartImage,
-                        Constants.FRAME_WIDTH - 40 - (i * Constants.HEART_SIZE),
-                        10,
+                        x,
+                        y,
                         Constants.HEART_SIZE,
                         Constants.HEART_SIZE,
                         panel
