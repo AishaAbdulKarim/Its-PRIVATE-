@@ -1,5 +1,5 @@
 package game;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -62,11 +62,17 @@ public class GameManager {
         if (isGameOver) {
             graphics.setColor(java.awt.Color.RED);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36));
-            graphics.drawString("Game Over", 100, 200);
-        } else {
+
+            // centering the game over text
+            String gameOverText = "Game Over!!!";
+            FontMetrics fm = graphics.getFontMetrics();
+            int textWidth = fm.stringWidth(gameOverText);
+            int x = (Constants.FRAME_WIDTH - textWidth) / 2;
+            int y = Constants.FRAME_HEIGHT / 2;
+
+            graphics.drawString(gameOverText, x, y);        } else {
             graphics.setColor(java.awt.Color.BLACK);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-            graphics.drawString("Lives: " + lives, 20, 60);
 
             //draws hearts based on lives
             for (int i = 0; i < lives; i++) {
