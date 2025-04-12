@@ -39,7 +39,7 @@ public class GameManager {
 
         // Load heart image for representing lives
         try {
-            heartImage = ImageIO.read(new File("src/images/heart.png"));
+            heartImage = ImageIO.read(new File("images/redHeart.png"));
         } catch (IOException e) {
             e.printStackTrace(); // Log the error if the image can't be loaded
         }
@@ -58,6 +58,11 @@ public class GameManager {
         graphics.setColor(java.awt.Color.BLACK);
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
+
+        // draws the hearts to represent lives
+        for (int i = 0; i < lives; i++) {
+            graphics.drawImage(heartImage, Constants.FRAME_WIDTH - 40 - (i * 40), 10, 30, 30, panel);
+        }
 
         if (isGameOver) {
             graphics.setColor(java.awt.Color.RED);
