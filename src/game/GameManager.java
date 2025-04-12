@@ -1,19 +1,23 @@
 package game;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import gameConstants.Constants;
 public class GameManager {
 
     /*
      * This class is where all game assets are added and their positons. ie. basket, falling eggs, score tracker etc.
-     *
      */
 
      private Basket basket;
      private EggSpawner eggSpawner;
      private int score = 0;  //  Track the player's score
-    private boolean isGameOver = false;
-    private int lives = 3;
+     private boolean isGameOver = false;
+     private int lives = 3;
+     private BufferedImage heartImage;
 
      // 🚀 Detects if the basket catches an egg
     private boolean checkCollision(Egg egg, Basket basket) {
@@ -32,6 +36,13 @@ public class GameManager {
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
         eggSpawner = new EggSpawner();
+
+        // Load heart image for representing lives
+        try {
+            heartImage = ImageIO.read(new File("src/images/heart.png"));
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the error if the image can't be loaded
+        }
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel) {
