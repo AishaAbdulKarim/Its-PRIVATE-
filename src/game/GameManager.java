@@ -6,12 +6,13 @@ public class GameManager {
 
     /*
      * This class is where all game assets are added and their positons. ie. basket, falling eggs, score tracker etc.
-     * 
+     *
      */
 
      private Basket basket;
      private EggSpawner eggSpawner;
      private int score = 0;  //  Track the player's score
+    private int lives = 3;
 
      // 🚀 Detects if the basket catches an egg
     private boolean checkCollision(Egg egg, Basket basket) {
@@ -20,12 +21,12 @@ public class GameManager {
         egg.getY() + 50 > basket.getY() && // 50 = egg height
         egg.getY() < basket.getY() + basket.getHeight();
     }
- 
-    
+
+
      public GameManager(){
-        
+
     }
-    
+
     // Runs once on startup. Instantiate game objects here
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
@@ -69,7 +70,12 @@ public class GameManager {
                 score += 10;  // 🏆 Increase score
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index after removal
-            }
+            } else if (egg.getY() > Constants.FRAME_HEIGHT) {
+            //  Egg missed, life will be reduced
+            lives--;
+            eggSpawner.getEggList().remove(i); // Remove missed egg
+            i--; //  index is adjusted after removal
+        }
         }
     }
 
