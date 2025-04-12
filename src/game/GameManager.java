@@ -34,7 +34,7 @@ public class GameManager {
         eggSpawner = new EggSpawner();
     }
 
-    public void drawSprites(Graphics2D graphics, JPanel panel){
+    public void drawSprites(Graphics2D graphics, JPanel panel) {
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
 
@@ -47,6 +47,16 @@ public class GameManager {
         graphics.setColor(java.awt.Color.BLACK);
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
+
+        if (isGameOver) {
+            graphics.setColor(java.awt.Color.RED);
+            graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36));
+            graphics.drawString("Game Over", 100, 200);
+        } else {
+            graphics.setColor(java.awt.Color.BLACK);
+            graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
+            graphics.drawString("Lives: " + lives, 20, 60);
+        }
     }
 
     /*
