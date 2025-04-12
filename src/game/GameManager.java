@@ -59,11 +59,6 @@ public class GameManager {
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
 
-        // draws the hearts to represent lives
-        for (int i = 0; i < lives; i++) {
-            graphics.drawImage(heartImage, Constants.FRAME_WIDTH - 40 - (i * 40), 10, 30, 30, panel);
-        }
-
         if (isGameOver) {
             graphics.setColor(java.awt.Color.RED);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36));
@@ -72,6 +67,18 @@ public class GameManager {
             graphics.setColor(java.awt.Color.BLACK);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
             graphics.drawString("Lives: " + lives, 20, 60);
+
+            //draws hearts based on lives
+            for (int i = 0; i < lives; i++) {
+                graphics.drawImage(
+                        heartImage,
+                        Constants.FRAME_WIDTH - 40 - (i * Constants.HEART_SIZE),
+                        10,
+                        Constants.HEART_SIZE,
+                        Constants.HEART_SIZE,
+                        panel
+                );
+            }
         }
     }
 
