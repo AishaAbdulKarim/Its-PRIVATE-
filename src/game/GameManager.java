@@ -41,6 +41,7 @@ public class GameManager {
         try {
             heartImage = ImageIO.read(new File("src/images/redHeart.png"));
         } catch (IOException e) {
+            System.err.println(" Could not load heart image redHeart.png");
             e.printStackTrace(); // Log the error if the image can't be loaded
         }
     }
@@ -70,7 +71,8 @@ public class GameManager {
             int x = (Constants.FRAME_WIDTH - textWidth) / 2;
             int y = Constants.FRAME_HEIGHT / 2;
 
-            graphics.drawString(gameOverText, x, y);        } else {
+            graphics.drawString(gameOverText, x, y);
+        } else {
             graphics.setColor(java.awt.Color.BLACK);
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
 
@@ -78,18 +80,22 @@ public class GameManager {
             int paddingTop = 20;// adding spacing form the top
             int spacing = 10; // space between hearts
 
-            for (int i = 0; i < lives; i++) {
-                int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
-                int y = paddingTop;
+            if(heartImage !=null) {
+                for (int i = 0; i < lives; i++) {
+                    int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
+                    int y = paddingTop;
 
-                graphics.drawImage(
-                        heartImage,
-                        x,
-                        y,
-                        Constants.HEART_SIZE,
-                        Constants.HEART_SIZE,
-                        panel
-                );
+                    graphics.drawImage(
+                            heartImage,
+                            x,
+                            y,
+                            Constants.HEART_SIZE,
+                            Constants.HEART_SIZE,
+                            panel
+                    );
+                }
+            }else{
+                graphics.drawString("❤️ x " + lives, Constants.FRAME_WIDTH - 100, paddingTop + 20);
             }
         }
     }
