@@ -136,4 +136,7 @@ public class GameManager {
     public int getScore() {
         return score;
     }
+    public boolean isGameOver() {
+        return isGameOver;
+    }
 }

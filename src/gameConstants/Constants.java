@@ -18,6 +18,6 @@ public class Constants {
     public final static int BASKET_Y = (int)(FRAME_HEIGHT*.75)-BASKET_HEIGHT;
 
     //Heart Constant
-    public final static int HEART_SIZE = 30;git add
+    public final static int HEART_SIZE = 30;
 
 }
