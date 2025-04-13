@@ -63,7 +63,7 @@ public class GameManager {
         if (isGameOver) {// If the player has lost all lives, the "Game Over" message is shown
             graphics.setColor(java.awt.Color.RED);// Set the text color to red to indicate game over
             graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36)); // Use a bold, large font for the game over message
-git add
+
             // centering the game over text
             String gameOverText = "Game Over!!!";
             // Measure the text width so we can center it horizontally
