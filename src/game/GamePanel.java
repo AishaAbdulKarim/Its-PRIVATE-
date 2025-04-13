@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
     final private GameManager GAME; // Manages game elements
+    boolean movingLeft = false;
+    boolean movingRight = false;
 
     // Constructor initializes the game and sets up key listener
     @SuppressWarnings("LeakingThisInConstructor")
@@ -46,10 +48,16 @@ public class GamePanel extends JPanel implements KeyListener {
         if (!GAME.isGameOver()) { //Prevents game updates and drawing if the player has lost
             GAME.update();
             this.repaint();
+            updateMove();
         }
     }
     public GameManager getGameManager() { 
         return GAME;
+    }
+
+    public void updateMove(){
+        if(movingLeft) GAME.getBasket().moveLeft();
+        if(movingRight) GAME.getBasket().moveRight();
     }
 
     // Handles key press events for moving the basket
@@ -59,15 +67,23 @@ public class GamePanel extends JPanel implements KeyListener {
         
         Basket basket = GAME.getBasket();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            basket.moveLeft(); // Move left
+            movingLeft = true; // Move left
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            basket.moveRight(); // Move right
+            movingRight = true; // Move right
         }
     }
 
     // Handles key release (not used for now)
     @Override
     public void keyReleased(KeyEvent e) {
+        if (GAME.isGameOver()) return; // Ignore movement if game is over
+        
+        Basket basket = GAME.getBasket();
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            movingLeft = false; // Move left
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            movingRight = false; // Move right
+        }
     }
 
     // Handles key typing (not used)
