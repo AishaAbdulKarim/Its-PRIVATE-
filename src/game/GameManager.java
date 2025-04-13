@@ -1,11 +1,11 @@
 package game;
+import gameConstants.Constants;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import gameConstants.Constants;
 public class GameManager {
 
     /*
@@ -60,48 +60,8 @@ public class GameManager {
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
 
-        if (isGameOver) {// If the player has lost all lives, the "Game Over" message is shown
-            graphics.setColor(java.awt.Color.RED);// Set the text color to red to indicate game over
-            graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36)); // Use a bold, large font for the game over message
-
-            // centering the game over text
-            String gameOverText = "Game Over!!!";
-            // Measure the text width so we can center it horizontally
-            FontMetrics fm = graphics.getFontMetrics();
-            int textWidth = fm.stringWidth(gameOverText);
-            // Calculating the x-position to center the text on the screen
-            int x = (Constants.FRAME_WIDTH - textWidth) / 2;
-            int y = Constants.FRAME_HEIGHT / 2;
-            graphics.drawString(gameOverText, x, y);
-
-        } else {// else if game is ongoing, draw hearts representing remaining lives
-            graphics.setColor(java.awt.Color.BLACK);
-            graphics.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-
-            int paddingRight = 20;// adding space to the right border
-            int paddingTop = 20;// adding spacing form the top
-            int spacing = 10; // space between hearts
-
-            if(heartImage !=null) {//if the heart image was loaded successfully
-                for (int i = 0; i < lives; i++) {// Loop through the number of lives and draw one heart per life
-                    // Calculate X and Y position for each heart
-                    int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
-                    int y = paddingTop;
-
-                    // Draw the heart icon at the calculated position
-                    graphics.drawImage(
-                            heartImage,
-                            x,
-                            y,
-                            Constants.HEART_SIZE,
-                            Constants.HEART_SIZE,
-                            panel
-                    );
-                }
-            }else{ //else if heart image failed to load, fallback to emoji text
-                graphics.drawString("❤️ x " + lives, Constants.FRAME_WIDTH - 100, paddingTop + 20);
-            }
-        }
+        loseState(graphics, panel);
+        
     }
 
     /*
@@ -118,6 +78,50 @@ public class GameManager {
         }
     }
 
+    public void loseState(Graphics2D g, JPanel p){
+        if (isGameOver) {// If the player has lost all lives, the "Game Over" message is shown
+            g.setColor(java.awt.Color.RED);// Set the text color to red to indicate game over
+            g.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 36)); // Use a bold, large font for the game over message
+
+            // centering the game over text
+            String gameOverText = "Game Over!!!";
+            // Measure the text width so we can center it horizontally
+            FontMetrics fm = g.getFontMetrics();
+            int textWidth = fm.stringWidth(gameOverText);
+            // Calculating the x-position to center the text on the screen
+            int x = (Constants.FRAME_WIDTH - textWidth) / 2;
+            int y = Constants.FRAME_HEIGHT / 2;
+            g.drawString(gameOverText, x, y);
+
+        } else {// else if game is ongoing, draw hearts representing remaining lives
+            g.setColor(java.awt.Color.BLACK);
+            g.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
+
+            int paddingRight = 20;// adding space to the right border
+            int paddingTop = 20;// adding spacing form the top
+            int spacing = 10; // space between hearts
+
+            if(heartImage !=null) {//if the heart image was loaded successfully
+                for (int i = 0; i < lives; i++) {// Loop through the number of lives and draw one heart per life
+                    // Calculate X and Y position for each heart
+                    int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
+                    int y = paddingTop;
+
+                    // Draw the heart icon at the calculated position
+                    g.drawImage(
+                            heartImage,
+                            x,
+                            y,
+                            Constants.HEART_SIZE,
+                            Constants.HEART_SIZE,
+                            p
+                    );
+                }
+            }else{ //else if heart image failed to load, fallback to emoji text
+                g.drawString("❤️ x " + lives, Constants.FRAME_WIDTH - 100, paddingTop + 20);
+            }
+        }
+    }
 
     // Checks if egg collides with basket, deletes egg, score ++
     public void updateCollision(){

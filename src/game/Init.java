@@ -1,7 +1,6 @@
 package game;
-import javax.swing.JFrame;
-
 import gameConstants.Constants;
+import javax.swing.JFrame;
 
 public class Init {
 public static void main(String[] args) {
