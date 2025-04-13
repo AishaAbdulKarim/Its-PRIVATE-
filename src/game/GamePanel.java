@@ -1,12 +1,12 @@
 package game;
 
-import javax.swing.JPanel;
 import gameConstants.Constants;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
     final private GameManager GAME; // Manages game elements
@@ -43,8 +43,10 @@ public class GamePanel extends JPanel implements KeyListener {
 
     // Updates the game state and repaints the screen
     public void update() {
-        GAME.update();
-        this.repaint();
+        if (!GAME.isGameOver()) { //Prevents game updates and drawing if the player has lost
+            GAME.update();
+            this.repaint();
+        }
     }
     public GameManager getGameManager() { 
         return GAME;
@@ -53,6 +55,7 @@ public class GamePanel extends JPanel implements KeyListener {
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
+        if (GAME.isGameOver()) return; // Ignore movement if game is over
         Basket basket = GAME.getBasket();
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             basket.moveLeft(); // Move left
