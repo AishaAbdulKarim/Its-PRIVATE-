@@ -2,6 +2,7 @@ package game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -36,7 +37,7 @@ public class MainMenu extends JPanel {
 
         // Bubbly title
         JLabel title = new JLabel("🍳 Omelette Rescue");
-        title.setFont(new Font("Comic Sans MS", Font.BOLD, 42)); // Bubbly font
+        title.setFont(new Font("Comic Sans MS", Font.BOLD, 42)); // Fun font
         title.setForeground(new Color(50, 50, 50));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -73,11 +74,9 @@ public class MainMenu extends JPanel {
         btn.setForeground(Color.WHITE);
         btn.setContentAreaFilled(false);
         btn.setOpaque(true);
-        btn.setBorder(BorderFactory.createLineBorder(new Color(30, 100, 200), 2));
-        btn.setBackground(new Color(70, 130, 180)); // Nice sky blue
+        btn.setBackground(new Color(70, 130, 180)); // Soft blue
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 2));
-        btn.setBorder(new RoundedBorder(20)); // Rounded edges
+        btn.setBorder(new RoundedBorder(25)); // Apply rounded border
 
         // Hover effect
         btn.addMouseListener(new MouseAdapter() {
@@ -93,7 +92,7 @@ public class MainMenu extends JPanel {
         return btn;
     }
 
-    // Custom rounded border class
+    // ✅ Correct Border Implementation
     static class RoundedBorder implements Border {
         private int radius;
 
@@ -102,16 +101,18 @@ public class MainMenu extends JPanel {
         }
 
         public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
+            return new Insets(radius, radius, radius, radius);
         }
 
         public boolean isBorderOpaque() {
-            return true;
+            return false;
         }
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.setColor(((JButton)c).getBackground().darker());
-            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(((JButton)c).getBackground().darker());
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
 }
