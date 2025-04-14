@@ -36,7 +36,7 @@ public class MainMenu extends JPanel {
         gbc.insets = new Insets(20, 20, 20, 20);
 
         // Bubbly title
-        JLabel title = new JLabel("🍳 Omelette Rescue");
+        JLabel title = new JLabel("   Omelette Rescue");
         title.setFont(new Font("Comic Sans MS", Font.BOLD, 42)); // Fun font
         title.setForeground(new Color(50, 50, 50));
         gbc.gridx = 0;
