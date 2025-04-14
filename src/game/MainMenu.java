@@ -16,7 +16,7 @@ public class MainMenu extends JPanel {
         this.frame = frame;
 
         // Load background image using class loader
-        String fileName = "Mainmenu.png"; // make sure this matches your image file name
+        String fileName = "Mainmenu.png";
         URL imageUrl = getClass().getClassLoader().getResource("images/" + fileName);
         if (imageUrl == null) {
             System.out.println("Background image not found: images/" + fileName);
@@ -28,15 +28,16 @@ public class MainMenu extends JPanel {
             }
         }
 
-        setOpaque(false); // Let the background show through
+        setOpaque(false);
         setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
 
-        JLabel title = new JLabel("🥚 Egg Catcher");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 40));
-        title.setForeground(new Color(60, 60, 60));
+        // Bubbly title
+        JLabel title = new JLabel("🍳 Omelette Rescue");
+        title.setFont(new Font("Comic Sans MS", Font.BOLD, 42)); // Bubbly font
+        title.setForeground(new Color(50, 50, 50));
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(title, gbc);
@@ -66,24 +67,51 @@ public class MainMenu extends JPanel {
 
     private JButton createStyledButton(String text) {
         JButton btn = new JButton(text);
-        btn.setPreferredSize(new Dimension(220, 50));
-        btn.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        btn.setPreferredSize(new Dimension(240, 55));
+        btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         btn.setFocusPainted(false);
-        btn.setBackground(new Color(100, 149, 237)); // Cornflower blue
         btn.setForeground(Color.WHITE);
-        btn.setBorder(BorderFactory.createEmptyBorder());
+        btn.setContentAreaFilled(false);
+        btn.setOpaque(true);
+        btn.setBorder(BorderFactory.createLineBorder(new Color(30, 100, 200), 2));
+        btn.setBackground(new Color(70, 130, 180)); // Nice sky blue
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180), 2));
+        btn.setBorder(new RoundedBorder(20)); // Rounded edges
 
+        // Hover effect
         btn.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                btn.setBackground(new Color(70, 130, 180)); // Darker blue
+                btn.setBackground(new Color(60, 120, 170)); // slightly darker
             }
 
             public void mouseExited(MouseEvent evt) {
-                btn.setBackground(new Color(100, 149, 237));
+                btn.setBackground(new Color(70, 130, 180));
             }
         });
 
         return btn;
+    }
+
+    // Custom rounded border class
+    static class RoundedBorder implements Border {
+        private int radius;
+
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
+        }
+
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.setColor(((JButton)c).getBackground().darker());
+            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+        }
     }
 }
