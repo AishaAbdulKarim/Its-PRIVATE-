@@ -1,8 +1,7 @@
 package game;
 
-import javax.swing.*;
 import gameConstants.Constants;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Init extends JFrame {
     private MainMenu mainMenu;
@@ -24,6 +23,8 @@ public class Init extends JFrame {
         remove(mainMenu);
         gamePanel = new GamePanel();
         add(gamePanel);
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocusInWindow();
         revalidate();
         gameLoop();
     }
