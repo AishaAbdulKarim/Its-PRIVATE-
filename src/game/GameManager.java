@@ -19,13 +19,11 @@ public class GameManager {
      private int lives = 3;// Tracks the player's  live
      private BufferedImage heartImage;// store heart image for life display
 
-     // 🚀 Detects if the basket catches an egg
-    private boolean checkCollision(Egg egg, Basket basket) {
-        return egg.getX() < basket.getX() + basket.getWidth() &&
-        egg.getX() + 40 > basket.getX() && // 40 = egg width
-        egg.getY() + 50 > basket.getY() && // 50 = egg height
-        egg.getY() < basket.getY() + basket.getHeight();
-    }
+     private int currentPlayer = 1; 
+     private int player1Score = 0; 
+     private int player2Score = 0; 
+     private boolean isMultiplayer = true; 
+     private boolean waitingForPlayer2Start = false; 
 
 
      public GameManager(){
