@@ -140,7 +140,10 @@ public class GamePanel extends JPanel implements KeyListener {
             winnerMessage = "Player 1 Wins! (" + player1Score + " - " + player2Score + ")";
         } else if (player2Score > player1Score) {
             winnerMessage = "Player 2 Wins! (" + player2Score + " - " + player1Score + ")";
-        } 
+        } else {
+            winnerMessage = "It's a Tie! (" + player1Score + " - " + player2Score + ")";
+        }
+    }
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
