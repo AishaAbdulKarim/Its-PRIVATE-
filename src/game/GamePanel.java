@@ -20,14 +20,12 @@ public class GamePanel extends JPanel implements KeyListener {
     private String winnerMessage = "";
 
     // Constructor initializes the game and sets up key listener
-    @SuppressWarnings("LeakingThisInConstructor")
     public GamePanel() {
-        addKeyListener(this);
-        setFocusable(true);
+        setLayout(null); // Absolute layout for manual positioning
+
+        // Create and start game logic
         GAME = new GameManager();
         GAME.start();
-
-    }
 
     // Draws the game components on the panel
     @Override
