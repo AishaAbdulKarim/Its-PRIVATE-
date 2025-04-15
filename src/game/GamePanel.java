@@ -97,6 +97,16 @@ public class GamePanel extends JPanel implements KeyListener {
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+          // Display winner message if available
+          if (!winnerMessage.isEmpty()) {
+            graphics.setColor(Color.BLACK);
+            graphics.setFont(new Font("Arial", Font.BOLD, 34));
+            int x = (Constants.FRAME_WIDTH - graphics.getFontMetrics().stringWidth(winnerMessage)) / 2;
+            int y = Constants.FRAME_HEIGHT / 2 + 40;
+            graphics.drawString(winnerMessage, x, y);
+        }
+    }
+
     // Updates the game state and repaints the screen
     public void update() {
         if (!GAME.isGameOver()) { //Prevents game updates and drawing if the player has lost
