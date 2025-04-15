@@ -143,10 +143,10 @@ public class GameManager {
         }
 
        
-        if (isGameOver && currentPlayer == 2) {
+         // Skip drawing duplicate game over message during Player 2 end – handled in GamePanel
+         if (isGameOver && currentPlayer == 2) {
             return;
         }
-
         // Display the player's current lives with heart icons
         if (!isGameOver) {
             g.setColor(Color.BLACK);
