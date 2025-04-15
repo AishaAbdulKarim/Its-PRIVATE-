@@ -17,6 +17,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
      private JButton startPlayer2Button;
     private JButton restartGameButton;
+    private String winnerMessage = "";
+
     // Constructor initializes the game and sets up key listener
     @SuppressWarnings("LeakingThisInConstructor")
     public GamePanel() {
