@@ -97,11 +97,13 @@ public class GameManager {
             graphics.drawImage(e.getEggImage(), e.getX(), e.getY(), e.getWidth(), e.getHeight(), panel);
         }
 
-        // 🏆 Display Score on Screen
-        graphics.setColor(java.awt.Color.BLACK);
-        graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+        // Draw the player's current status (Player 1 or Player 2)
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("Arial", Font.BOLD, 20));
+        graphics.drawString("Player " + currentPlayer, 20, 55);
         graphics.drawString("Score: " + score, 20, 30);
 
+        // Handle displaying lose state (end game or waiting for next player)
         loseState(graphics, panel);
         
     }
