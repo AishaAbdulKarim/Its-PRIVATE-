@@ -80,6 +80,14 @@ public class GameManager {
         System.out.println("Starting Player 2...");
     }
 
+      // Resets values for the next player's turn
+      private void resetForNextPlayer() {
+        lives = 3; 
+        score = 0; 
+        eggSpawner.getEggList().clear(); 
+        basket.setX(Constants.BASKET_X); 
+    }
+
     public void drawSprites(Graphics2D graphics, JPanel panel) {
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
