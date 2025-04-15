@@ -68,6 +68,13 @@ public class GamePanel extends JPanel implements KeyListener {
      restartGameButton.setFocusable(false);
      restartGameButton.setVisible(false);
 
+  
+  restartGameButton.setOpaque(true);
+  restartGameButton.setBackground(Color.WHITE);
+  restartGameButton.setForeground(Color.BLACK);
+  restartGameButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+  restartGameButton.setFont(new Font("Arial", Font.BOLD, 16));
+
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
