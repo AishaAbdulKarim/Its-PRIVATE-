@@ -114,6 +114,16 @@ public class GamePanel extends JPanel implements KeyListener {
                 // Show Start Player 2 button if waiting
                 startPlayer2Button.setVisible(true);
             }
+
+                // Game over after Player 2 finishes
+                if (!GAME.isWaitingForPlayer2() && GAME.getCurrentPlayer() == 2) {
+                    restartGameButton.setVisible(true);
+                    compareScores();
+                }
+    
+                repaint();
+                return;
+            }
     public GameManager getGameManager() { 
         return GAME;
     }
