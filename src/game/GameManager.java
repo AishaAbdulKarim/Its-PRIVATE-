@@ -35,6 +35,12 @@ public class GameManager {
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
         eggSpawner = new EggSpawner();
 
+        score = 0; 
+        lives = 3; 
+        isGameOver = false; 
+        waitingForPlayer2Start = false;
+        currentPlayer = 1; // Starts with Player 1
+
         // try to Load heart image for representing lives
         try {
             heartImage = ImageIO.read(new File("src/images/redHeart.png"));
