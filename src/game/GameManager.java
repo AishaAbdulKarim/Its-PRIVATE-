@@ -50,6 +50,27 @@ public class GameManager {
         }
     }
 
+    public void update() {
+        if (isGameOver) return; // If the game is over, stop updating the game
+
+        eggSpawner.update(); // Update the state of the eggs
+        basket.update(); // Update the state of the basket
+        updateCollision(); // Check for collisions between the basket and the eggs
+
+        if (lives <= 0) { // Check if lives have reached zero
+            if (isMultiplayer && currentPlayer == 1 && !waitingForPlayer2Start) {
+                player1Score = score; // Save Player 1's score
+                waitingForPlayer2Start = true; // Set the flag to wait for Player 2
+                isGameOver = true; // End the game
+                return;
+            }
+            if (!waitingForPlayer2Start && currentPlayer == 2) {
+                player2Score = score; // Save Player 2's score
+                isGameOver = true; // End the game
+            }
+        }
+    }
+
     public void drawSprites(Graphics2D graphics, JPanel panel) {
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
