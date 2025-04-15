@@ -81,6 +81,10 @@ public class GamePanel extends JPanel implements KeyListener {
     restartGameButton.setVisible(false);
     winnerMessage = "";
     this.requestFocusInWindow();
+
+    this.add(startPlayer2Button);
+    this.add(restartGameButton);
+
 });
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
