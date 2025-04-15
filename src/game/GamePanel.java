@@ -10,23 +10,22 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
-    private final GameManager GAME;
-    private boolean movingLeft = false;
-    private boolean movingRight = false;
-    private JButton startPlayer2Button;
-    private JButton restartGameButton;
-    private String winnerMessage = "";
-    // Constructor initializes the game and sets up key listener
-   
-    
-    public GamePanel() {
-        setLayout(null); // We'll control layout manually
+    final private GameManager GAME; // Manages game elements
+    boolean movingLeft = false;
+    boolean movingRight = false;
 
+
+     private JButton startPlayer2Button;
+    private JButton restartGameButton;
+    // Constructor initializes the game and sets up key listener
+    @SuppressWarnings("LeakingThisInConstructor")
+    public GamePanel() {
+        addKeyListener(this);
+        setFocusable(true);
         GAME = new GameManager();
         GAME.start();
 
-        addKeyListener(this);
-        setFocusable(true);
+    }
 
     // Draws the game components on the panel
     @Override
