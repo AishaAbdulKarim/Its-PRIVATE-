@@ -27,6 +27,9 @@ public class GamePanel extends JPanel implements KeyListener {
         GAME = new GameManager();
         GAME.start();
 
+        addKeyListener(this);
+        setFocusable(true);
+
     // Draws the game components on the panel
     @Override
     public void paint(Graphics g) {
