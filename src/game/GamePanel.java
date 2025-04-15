@@ -91,6 +91,11 @@ public class GamePanel extends JPanel implements KeyListener {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     // Updates the game state and repaints the screen
     public void update() {
