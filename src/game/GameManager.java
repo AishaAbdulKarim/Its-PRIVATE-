@@ -103,7 +103,7 @@ public class GameManager {
         graphics.drawString("Player " + currentPlayer, 20, 55);
         graphics.drawString("Score: " + score, 20, 30);
 
-        // Handle displaying lose state (end game or waiting for next player)
+        
         loseState(graphics, panel);
         
     }
