@@ -71,6 +71,15 @@ public class GameManager {
         }
     }
 
+      // Starts Player 2's turn, resetting necessary states
+      public void startPlayer2() {
+        waitingForPlayer2Start = false; 
+        isGameOver = false; 
+        resetForNextPlayer(); 
+        currentPlayer = 2; 
+        System.out.println("Starting Player 2...");
+    }
+
     public void drawSprites(Graphics2D graphics, JPanel panel) {
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
