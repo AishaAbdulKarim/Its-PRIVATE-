@@ -191,7 +191,14 @@ public class GameManager {
      if (isGameOver && currentPlayer == 2) {
         return;
     }
-
+ // Getter methods for various game state variables
+ public Basket getBasket() { return basket; }
+ public int getScore() { return score; }
+ public boolean isGameOver() { return isGameOver; }
+ public boolean isWaitingForPlayer2() { return waitingForPlayer2Start; }
+ public int getCurrentPlayer() { return currentPlayer; }
+ public int getPlayer1Score() { return player1Score; }
+ public int getPlayer2Score() { return player2Score; }
     public Basket getBasket() {
         return basket;
     }
