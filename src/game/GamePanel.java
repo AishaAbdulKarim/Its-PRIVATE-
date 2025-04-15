@@ -42,7 +42,11 @@ public class GamePanel extends JPanel implements KeyListener {
         GAME.drawSprites(graphics, this);
 }
 
-
+  // Setup "Start Player 2" Button
+  startPlayer2Button = new JButton("Start Player 2");
+  startPlayer2Button.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 100, 200, 40);
+  startPlayer2Button.setFocusable(false);
+  startPlayer2Button.setVisible(false);
 
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
