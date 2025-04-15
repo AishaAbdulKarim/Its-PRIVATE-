@@ -17,14 +17,16 @@ public class GamePanel extends JPanel implements KeyListener {
     private JButton restartGameButton;
     private String winnerMessage = "";
     // Constructor initializes the game and sets up key listener
-    @SuppressWarnings("LeakingThisInConstructor")
+   
+    
     public GamePanel() {
-        addKeyListener(this);
-        setFocusable(true);
+        setLayout(null); // We'll control layout manually
+
         GAME = new GameManager();
         GAME.start();
 
-    }
+        addKeyListener(this);
+        setFocusable(true);
 
     // Draws the game components on the panel
     @Override
