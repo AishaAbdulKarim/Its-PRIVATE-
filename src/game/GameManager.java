@@ -187,6 +187,11 @@ public class GameManager {
         }
     }
 
+     // Skip drawing duplicate game over message during Player 2 end – handled in GamePanel
+     if (isGameOver && currentPlayer == 2) {
+        return;
+    }
+
     public Basket getBasket() {
         return basket;
     }
