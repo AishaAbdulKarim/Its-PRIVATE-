@@ -55,6 +55,13 @@ public class GamePanel extends JPanel implements KeyListener {
    startPlayer2Button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
    startPlayer2Button.setFont(new Font("Arial", Font.BOLD, 16));
 
+     // Action: Start second player and hide button
+     startPlayer2Button.addActionListener(e -> {
+        GAME.startPlayer2();
+        startPlayer2Button.setVisible(false);
+        this.requestFocusInWindow();
+    });
+
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
