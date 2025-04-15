@@ -130,7 +130,7 @@ public class GameManager {
                egg.getY() < basket.getY() + basket.getHeight();
     }
 
-    // Draws the lose state message and heart icons for remaining lives
+    
     public void loseState(Graphics2D g, JPanel p) {
         if (waitingForPlayer2Start) { // Display message when Player 1 finishes
             g.setColor(Color.BLUE);
