@@ -46,34 +46,34 @@ public class GamePanel extends JPanel implements KeyListener {
         startPlayer2Button.setFocusable(false);
         startPlayer2Button.setVisible(false);
 
-       
+        // Styling for Player 2 button
         startPlayer2Button.setOpaque(true);
         startPlayer2Button.setBackground(Color.WHITE);
         startPlayer2Button.setForeground(Color.BLACK);
         startPlayer2Button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         startPlayer2Button.setFont(new Font("Arial", Font.BOLD, 16));
 
-        
+        // Action: Start second player and hide button
         startPlayer2Button.addActionListener(e -> {
             GAME.startPlayer2();
             startPlayer2Button.setVisible(false);
             this.requestFocusInWindow();
         });
 
-     
+        // Setup "Restart Game" Button
         restartGameButton = new JButton("Restart Game");
         restartGameButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 150, 200, 40);
         restartGameButton.setFocusable(false);
         restartGameButton.setVisible(false);
 
-        
+        // Styling for Restart button
         restartGameButton.setOpaque(true);
         restartGameButton.setBackground(Color.WHITE);
         restartGameButton.setForeground(Color.BLACK);
         restartGameButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         restartGameButton.setFont(new Font("Arial", Font.BOLD, 16));
 
-       
+        // Action: Restart the game and hide winner message
         restartGameButton.addActionListener(e -> {
             GAME.start();
             restartGameButton.setVisible(false);
@@ -86,7 +86,9 @@ public class GamePanel extends JPanel implements KeyListener {
         this.add(restartGameButton);
     }
 
-    
+    /**
+     * Paints the background, game objects, and winner message if applicable.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -106,13 +108,17 @@ public class GamePanel extends JPanel implements KeyListener {
         }
     }
 
-   
+    /**
+     * Fills the background with sky blue color.
+     */
     public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
 
-    
+    /**
+     * Updates game state, handles player transitions, and repaints panel.
+     */
     public void update() {
         if (GAME.isGameOver()) {
             if (GAME.isWaitingForPlayer2()) {
@@ -120,7 +126,7 @@ public class GamePanel extends JPanel implements KeyListener {
                 startPlayer2Button.setVisible(true);
             }
 
-            
+            // Game over after Player 2 finishes
             if (!GAME.isWaitingForPlayer2() && GAME.getCurrentPlayer() == 2) {
                 restartGameButton.setVisible(true);
                 compareScores();
@@ -130,16 +136,18 @@ public class GamePanel extends JPanel implements KeyListener {
             return;
         }
 
-       
+        // Handle player movement input
         if (movingLeft) GAME.getBasket().moveLeft();
         if (movingRight) GAME.getBasket().moveRight();
 
-       
+        // Update game logic and repaint screen
         GAME.update();
         repaint();
     }
 
-    
+    /**
+     * Compares player scores and sets the winner message.
+     */
     private void compareScores() {
         int player1Score = GAME.getPlayer1Score();
         int player2Score = GAME.getPlayer2Score();
@@ -153,7 +161,9 @@ public class GamePanel extends JPanel implements KeyListener {
         }
     }
 
-    
+    /**
+     * Returns the current GameManager instance.
+     */
     public GameManager getGameManager() {
         return GAME;
     }
@@ -176,7 +186,7 @@ public class GamePanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if (GAME.isGameOver()) return;
 
-       
+        // Track key release to stop movement
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             movingLeft = false;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -189,4 +199,3 @@ public class GamePanel extends JPanel implements KeyListener {
         // Not used but required by KeyListener interface
     }
 }
-
