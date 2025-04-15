@@ -6,13 +6,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
-    final private GameManager GAME; // Manages game elements
-    boolean movingLeft = false;
-    boolean movingRight = false;
-
+    private final GameManager GAME;
+    private boolean movingLeft = false;
+    private boolean movingRight = false;
+    private JButton startPlayer2Button;
+    private JButton restartGameButton;
+    private String winnerMessage = "";
     // Constructor initializes the game and sets up key listener
     @SuppressWarnings("LeakingThisInConstructor")
     public GamePanel() {
