@@ -132,7 +132,9 @@ public class GamePanel extends JPanel implements KeyListener {
         if(movingLeft) GAME.getBasket().moveLeft();
         if(movingRight) GAME.getBasket().moveRight();
     }
-
+    private void compareScores() {
+        int player1Score = GAME.getPlayer1Score();
+        int player2Score = GAME.getPlayer2Score();
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
