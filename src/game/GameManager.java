@@ -17,16 +17,16 @@ public class GameManager {
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
 
-    private int currentPlayer = 1; 
-    private int player1Score = 0; 
-    private int player2Score = 0; 
+    private int currentPlayer = 1; // Tracks which player is playing (1 or 2)
+    private int player1Score = 0; // Score for player 1
+    private int player2Score = 0; // Score for player 2
     private boolean isMultiplayer = true; // Flag to check if multiplayer is enabled
     private boolean waitingForPlayer2Start = false; // Flag to check if it's waiting for Player 2 to start
 
     // Constructor, initializes objects when the game starts
     public GameManager() {}
 
-    
+    // Starts a new game, resets all values
     public void start() {
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
         eggSpawner = new EggSpawner(); // Creates the egg spawner
@@ -36,7 +36,7 @@ public class GameManager {
         waitingForPlayer2Start = false; // Resets the flag for Player 2 start
         currentPlayer = 1; // Starts with Player 1
 
-        
+        // Tries to load the heart image, which is used for lives
         try {
             heartImage = ImageIO.read(new File("src/images/redHeart.png"));
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class GameManager {
         basket.update(); // Update the state of the basket
         updateCollision(); // Check for collisions between the basket and the eggs
 
-        if (lives <= 0) { 
+        if (lives <= 0) { // Check if lives have reached zero
             if (isMultiplayer && currentPlayer == 1 && !waitingForPlayer2Start) {
                 player1Score = score; // Save Player 1's score
                 waitingForPlayer2Start = true; // Set the flag to wait for Player 2
@@ -61,22 +61,22 @@ public class GameManager {
                 return;
             }
             if (!waitingForPlayer2Start && currentPlayer == 2) {
-                player2Score = score; 
-                isGameOver = true; 
+                player2Score = score; // Save Player 2's score
+                isGameOver = true; // End the game
             }
         }
     }
 
-   
+    // Starts Player 2's turn, resetting necessary states
     public void startPlayer2() {
-        waitingForPlayer2Start = false; 
-        isGameOver = false; 
-        resetForNextPlayer();
-        currentPlayer = 2; 
+        waitingForPlayer2Start = false; // Stop waiting for Player 2 to start
+        isGameOver = false; // Set game over flag to false
+        resetForNextPlayer(); // Reset for the next player
+        currentPlayer = 2; // Set current player to Player 2
         System.out.println("Starting Player 2...");
     }
 
-    
+    // Resets values for the next player's turn
     private void resetForNextPlayer() {
         lives = 3; // Reset lives
         score = 0; // Reset score
@@ -84,7 +84,7 @@ public class GameManager {
         basket.setX(Constants.BASKET_X); // Reset basket position
     }
 
-    
+    // Draws all game objects on the screen, including the basket, eggs, and HUD
     public void drawSprites(Graphics2D graphics, JPanel panel) {
         // Draw the basket and eggs
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
@@ -103,7 +103,7 @@ public class GameManager {
         loseState(graphics, panel);
     }
 
-   
+    // Updates the collision checks for eggs falling and basket interaction
     public void updateCollision() {
         for (int i = 0; i < eggSpawner.getEggList().size(); i++) {
             Egg egg = eggSpawner.getEggList().get(i);
@@ -114,15 +114,15 @@ public class GameManager {
                 score += 10; // Increase score
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
-            } else if (egg.getY() > Constants.FRAME_HEIGHT) { 
+            } else if (egg.getY() > Constants.FRAME_HEIGHT) { // Egg fell out of the screen
                 lives--; // Decrease lives
                 eggSpawner.getEggList().remove(i); // Remove egg from list
-                i--; 
+                i--; // Adjust index since list size has changed
             }
         }
     }
 
-   
+    // Checks if an egg has collided with the basket
     private boolean checkCollision(Egg egg, Basket basket) {
         return egg.getX() < basket.getX() + basket.getWidth() &&
                egg.getX() + egg.getWidth() > basket.getX() &&
@@ -130,7 +130,7 @@ public class GameManager {
                egg.getY() < basket.getY() + basket.getHeight();
     }
 
-   
+    // Draws the lose state message and heart icons for remaining lives
     public void loseState(Graphics2D g, JPanel p) {
         if (waitingForPlayer2Start) { // Display message when Player 1 finishes
             g.setColor(Color.BLUE);
@@ -142,11 +142,11 @@ public class GameManager {
             return;
         }
 
-       
-         // Skip drawing duplicate game over message during Player 2 end – handled in GamePanel
-         if (isGameOver && currentPlayer == 2) {
+        // Skip drawing duplicate game over message during Player 2 end – handled in GamePanel
+        if (isGameOver && currentPlayer == 2) {
             return;
         }
+
         // Display the player's current lives with heart icons
         if (!isGameOver) {
             g.setColor(Color.BLACK);
@@ -169,7 +169,7 @@ public class GameManager {
         }
     }
 
-    
+    // Getter methods for various game state variables
     public Basket getBasket() { return basket; }
     public int getScore() { return score; }
     public boolean isGameOver() { return isGameOver; }
