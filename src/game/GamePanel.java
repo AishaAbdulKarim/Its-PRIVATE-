@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean movingLeft = false;
     private boolean movingRight = false;
     private JButton restartGameButton;
-    private JButton returnToMenuButton; // ✅ New
+    private JButton returnToMenuButton; 
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
@@ -40,13 +40,13 @@ public class GamePanel extends JPanel implements KeyListener {
         restartGameButton.addActionListener(e -> {
             game.start();
             restartGameButton.setVisible(false);
-            returnToMenuButton.setVisible(false); // ✅ Hide Return button too
+            returnToMenuButton.setVisible(false); 
             this.requestFocusInWindow();
         });
 
         this.add(restartGameButton);
 
-        // ✅ Setup "Return to Menu" Button
+        // return menu button
         returnToMenuButton = new JButton("Return to Menu");
         returnToMenuButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 100, 200, 40);
         returnToMenuButton.setFocusable(false);
@@ -91,10 +91,10 @@ public class GamePanel extends JPanel implements KeyListener {
         }
         if(game.getIsGameOver() == true){
             restartGameButton.setVisible(true);
-            returnToMenuButton.setVisible(true); // ✅ Show Return button
+            returnToMenuButton.setVisible(true); // Show Return button
             repaint();
 
-            // ✅ Update high score
+            // Update high score
             if (game.getScore() > ((Init) SwingUtilities.getWindowAncestor(this)).getHighScore()) {
                 ((Init) SwingUtilities.getWindowAncestor(this)).setHighScore(game.getScore());
             }

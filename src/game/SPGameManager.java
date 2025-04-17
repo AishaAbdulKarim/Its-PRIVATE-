@@ -52,7 +52,7 @@ public class SPGameManager {
             graphics.drawImage(e.getEggImage(), e.getX(), e.getY(), e.getWidth(), e.getHeight(), panel);
         }
 
-        // 🏆 Display Score on Screen
+        //  Display Score on Screen
         graphics.setColor(java.awt.Color.BLACK);
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
@@ -94,7 +94,7 @@ public class SPGameManager {
         }
     }
 
-     // 🚀 Detects if the basket catches an egg
+     // Detects if the basket catches an egg
      private boolean checkCollision(Egg egg, Basket basket) {
         return egg.getX() < basket.getX() + basket.getWidth() &&
         egg.getX() + 40 > basket.getX() && // 40 = egg width

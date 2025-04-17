@@ -88,7 +88,7 @@ public class MainMenu extends JPanel {
         btn.setForeground(Color.WHITE);
         btn.setContentAreaFilled(false);
         btn.setOpaque(true);
-        btn.setBackground(new Color(70, 130, 180)); // Soft blue
+        btn.setBackground(new Color(70, 130, 180)); 
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setBorder(new RoundedBorder(25)); // Apply rounded border
 
@@ -96,7 +96,7 @@ public class MainMenu extends JPanel {
         btn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent evt) {
-                btn.setBackground(new Color(60, 120, 170)); // slightly darker
+                btn.setBackground(new Color(60, 120, 170)); 
             }
 
             @Override

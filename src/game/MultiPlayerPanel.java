@@ -17,14 +17,14 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
     // UI buttons
     private JButton startPlayer2Button;
     private JButton restartGameButton;
-    private JButton returnToMenuButton; // ✅ New
+    private JButton returnToMenuButton; //
 
     // Message displayed when a player wins or game ends in a tie
     private String winnerMessage = "";
 
-    /**
-     * Constructs the game panel, initializes the game and UI components.
-     */
+    
+      //Constructs the game panel, initializes the game and UI components.
+    
     public MultiPlayerPanel() {
         setLayout(null); // Absolute layout for manual positioning
 
@@ -73,12 +73,12 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         restartGameButton.addActionListener(e -> {
             GAME.start();
             restartGameButton.setVisible(false);
-            returnToMenuButton.setVisible(false); // ✅ Hide Return button
+            returnToMenuButton.setVisible(false); // Hide Return button
             winnerMessage = "";
             this.requestFocusInWindow();
         });
 
-        // ✅ Setup "Return to Menu" Button
+        // Setup "Return to Menu" Button
         returnToMenuButton = new JButton("Return to Menu");
         returnToMenuButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 200, 200, 40);
         returnToMenuButton.setFocusable(false);
@@ -99,9 +99,9 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         this.add(returnToMenuButton);
     }
 
-    /**
-     * Paints the background, game objects, and winner message if applicable.
-     */
+    
+    // Paints the background, game objects, and winner message if applicable.
+     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -121,17 +121,17 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         }
     }
 
-    /**
-     * Fills the background with sky blue color.
-     */
+    
+     //Fills the background with sky blue color.
+     
     public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
 
-    /**
-     * Updates game state, handles player transitions, and repaints panel.
-     */
+    
+     //Updates game state, handles player transitions, and repaints panel.
+     
     public void update() {
         if (GAME.isGameOver()) {
             if (GAME.isWaitingForPlayer2()) {
@@ -142,7 +142,7 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
             // Game over after Player 2 finishes
             if (!GAME.isWaitingForPlayer2() && GAME.getCurrentPlayer() == 2) {
                 restartGameButton.setVisible(true);
-                returnToMenuButton.setVisible(true); // ✅ Show Return
+                returnToMenuButton.setVisible(true); // Show Return
                 compareScores();
             }
 
@@ -158,9 +158,9 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         repaint();
     }
 
-    /**
-     * Compares player scores and sets the winner message.
-     */
+    
+      //Compares player scores and sets the winner message.
+     
     private void compareScores() {
         int player1Score = GAME.getPlayer1Score();
         int player2Score = GAME.getPlayer2Score();
@@ -173,13 +173,13 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
             updateHighScore(player2Score);
         } else {
             winnerMessage = "It's a Tie! (" + player1Score + " - " + player2Score + ")";
-            updateHighScore(player1Score); // either one
+            updateHighScore(player1Score); 
         }
     }
 
-    /**
-     * Updates the overall high score if needed.
-     */
+    
+    // Updates the overall high score if needed.
+     
     private void updateHighScore(int score) {
         Init parent = (Init) SwingUtilities.getWindowAncestor(this);
         if (score > parent.getHighScore()) {
@@ -187,9 +187,9 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         }
     }
 
-    /**
-     * Returns the current GameManager instance.
-     */
+    
+     //Returns the current GameManager instance.
+     
     public GameManager getGameManager() {
         return GAME;
     }
@@ -199,7 +199,7 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         if(movingRight) GAME.getBasket().moveRight();
     }
 
-    // ==== KEY LISTENER METHODS ====
+    // key listener methods
 
     @Override
     public void keyPressed(KeyEvent e) {
