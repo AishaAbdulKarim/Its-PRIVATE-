@@ -9,8 +9,8 @@ import game.Basket;
 public class UnitTests {
 	
 	@Test
-	void test() {
-		Basket basket = new Basket("", 0, 0, 0, 0, "basket_01.png");
+	void testMoveBasketLeft() {
+		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		System.out.println(basket.getX());
 		basket.moveLeft();
 		System.out.println(basket.getX());
