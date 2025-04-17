@@ -4,10 +4,11 @@ import gameConstants.Constants;
 import javax.swing.*;
 
 public class Init extends JFrame {
-    private MainMenu mainMenu;
+    private final MainMenu MAIN_MENU;
     private MultiPlayerPanel gamePanelMP;
     private GamePanel gamePanelSP;
 
+    // Initiates Main Menu
     public Init() {
         setTitle("Egg Catcher");
         setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
@@ -15,23 +16,14 @@ public class Init extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        mainMenu = new MainMenu(this);
-        add(mainMenu);
+        MAIN_MENU = new MainMenu(this);
+        add(MAIN_MENU);
         setVisible(true);
     }
 
-    public void showMPGame() {
-        remove(mainMenu);
-        gamePanelMP = new MultiPlayerPanel();
-        add(gamePanelMP);
-        gamePanelMP.setFocusable(true);
-        gamePanelMP.requestFocusInWindow();
-        revalidate();
-        gameLoopMP();
-    }
-
+    // Transitions to single player panel
     public void showSPGame() {
-        remove(mainMenu);
+        remove(MAIN_MENU);
         gamePanelSP = new GamePanel();
         add(gamePanelSP);
         gamePanelSP.setFocusable(true);
@@ -39,7 +31,7 @@ public class Init extends JFrame {
         revalidate();
         gameLoopSP();
     }
-
+    // single player loop
     private void gameLoopSP() {
         new Thread(() -> {
             while (true) {
@@ -53,6 +45,17 @@ public class Init extends JFrame {
         }).start();
     }
 
+    // Transitions to multiplayer panel
+    public void showMPGame() {
+        remove(MAIN_MENU);
+        gamePanelMP = new MultiPlayerPanel();
+        add(gamePanelMP);
+        gamePanelMP.setFocusable(true);
+        gamePanelMP.requestFocusInWindow();
+        revalidate();
+        gameLoopMP();
+    }
+    // multiplayer loop
     private void gameLoopMP() {
         new Thread(() -> {
             while (true) {
@@ -67,8 +70,6 @@ public class Init extends JFrame {
     }
 
     public static void main(String[] args) {
-
-
         SwingUtilities.invokeLater(() -> new Init());
     }
 }

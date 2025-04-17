@@ -15,6 +15,7 @@ public class MainMenu extends JPanel {
     private boolean isSinglePlayer = false;
     private boolean isMultiPlayer = false;
 
+    @SuppressWarnings({"CallToPrintStackTrace", "OverridableMethodCallInConstructor"})
     public MainMenu(game.Init frame) {
         this.frame = frame;
 
@@ -46,21 +47,21 @@ public class MainMenu extends JPanel {
         add(title, gbc);
 
         String[] buttons = {"Play", "Multiplayer", "Highscores"};
-        for (int i = 0; i < buttons.length; i++) {
-            final String buttonText = buttons[i];
+        for (String buttonText : buttons) {
             JButton btn = createStyledButton(buttonText);
             gbc.gridy++;
             add(btn, gbc);
 
-            if (buttonText.equals("Multiplayer")) {
-                setMultiPlayer(true);
-                btn.addActionListener(e -> frame.showMPGame());
-            }else if (buttonText.equals("Play")) {
-                setSinglePlayer(true);
-                btn.addActionListener(e -> frame.showSPGame());
-            }
-             else {
-                btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
+            switch (buttonText) {
+                case "Multiplayer" -> {
+                    setMultiPlayer(true);
+                    btn.addActionListener(e -> frame.showMPGame());
+                }
+                case "Play" -> {
+                    setSinglePlayer(true);
+                    btn.addActionListener(e -> frame.showSPGame());
+                }
+                default -> btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
             }
         }
     }
@@ -87,10 +88,11 @@ public class MainMenu extends JPanel {
 
         // Hover effect
         btn.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseEntered(MouseEvent evt) {
                 btn.setBackground(new Color(60, 120, 170)); // slightly darker
             }
-
+            @Override
             public void mouseExited(MouseEvent evt) {
                 btn.setBackground(new Color(70, 130, 180));
             }
@@ -101,25 +103,28 @@ public class MainMenu extends JPanel {
 
     // ✅ Correct Border Implementation
     static class RoundedBorder implements Border {
-        private int radius;
+        private final int RADIUS;
 
-        RoundedBorder(int radius) {
-            this.radius = radius;
+        RoundedBorder(int RADIUS) {
+            this.RADIUS = RADIUS;
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(radius, radius, radius, radius);
+            return new Insets(RADIUS, RADIUS, RADIUS, RADIUS);
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return false;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setColor(((JButton)c).getBackground().darker());
             g2.setStroke(new BasicStroke(2));
-            g2.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+            g2.drawRoundRect(x, y, width - 1, height - 1, RADIUS, RADIUS);
         }
     }
 
@@ -139,6 +144,22 @@ public class MainMenu extends JPanel {
 
     public void setMultiPlayer(boolean isMultiPlayer) {
         this.isMultiPlayer = isMultiPlayer;
+    }
+
+    public game.Init getFrame() {
+        return frame;
+    }
+
+    public void setFrame(game.Init frame) {
+        this.frame = frame;
+    }
+
+    public BufferedImage getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(BufferedImage backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     
