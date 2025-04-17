@@ -1,39 +1,63 @@
 package game;
 
 import gameConstants.Constants;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
     private SPGameManager game; // Manages game elements
     private boolean movingLeft = false;
     private boolean movingRight = false;
+    private JButton restartGameButton;
+    private String winnerMessage = "Game Over";
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
+        setLayout(null);
         addKeyListener(this);
         setFocusable(true);
         game = new SPGameManager();
+
+        // Setup "Restart Game" Button
+        restartGameButton = new JButton("Restart Game");
+        restartGameButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 150, 200, 40);
+        restartGameButton.setFocusable(false);
+        restartGameButton.setVisible(false);
+
+        // Styling for Restart button
+        restartGameButton.setOpaque(true);
+        restartGameButton.setBackground(Color.WHITE);
+        restartGameButton.setForeground(Color.BLACK);
+        restartGameButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        restartGameButton.setFont(new Font("Arial", Font.BOLD, 16));
+
+        // Action: Restart the game and hide winner message
+        restartGameButton.addActionListener(e -> {
+            game.start();
+            restartGameButton.setVisible(false);
+            this.requestFocusInWindow();
+        });
+
+        
+        this.add(restartGameButton);
 
     }
 
     // Draws the game components on the panel
     @Override
-    public void paint(Graphics g) {
-    super.paint(g);
+    protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+
     Graphics2D graphics = (Graphics2D) g;
-    RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    graphics.setRenderingHints(hints);
+    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     drawBackground(graphics);
     game.drawSprites(graphics, this);
-}
-
-
+}  
 
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
@@ -48,7 +72,10 @@ public class GamePanel extends JPanel implements KeyListener {
             this.repaint();
             updateMove();
         }
-        
+        if(game.getIsGameOver() == true){
+            restartGameButton.setVisible(true);
+            repaint();
+        }
     }
 
     public SPGameManager getGameManager() { 

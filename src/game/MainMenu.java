@@ -74,6 +74,7 @@ public class MainMenu extends JPanel {
         }
     }
 
+    // Button Set-up
     private JButton createStyledButton(String text) {
         JButton btn = new JButton(text);
         btn.setPreferredSize(new Dimension(240, 55));

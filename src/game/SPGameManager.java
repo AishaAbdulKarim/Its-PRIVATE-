@@ -13,8 +13,6 @@ public class SPGameManager {
      * This class is where all game assets are added and their positons. ie. basket, falling eggs, score tracker etc.
      * 
      */
-    
-
     private Basket basket;
     private EggSpawner eggSpawner;
     private int score = 0;  //  Track the player's score
@@ -22,14 +20,13 @@ public class SPGameManager {
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
 
-    
- 
-    
+    @SuppressWarnings("OverridableMethodCallInConstructor")
      public SPGameManager(){
         start();
     }
     
     // Runs once on startup. Instantiate game objects here
+    @SuppressWarnings("CallToPrintStackTrace")
     public void start(){
         basket = new Basket("Player One", Constants.BASKET_X, Constants.BASKET_Y, Constants.BASKET_WIDTH, Constants.BASKET_HEIGHT, "basket_01.png");
         eggSpawner = new EggSpawner();
@@ -127,6 +124,8 @@ public class SPGameManager {
                 g.drawString("❤️ x " + lives, Constants.FRAME_WIDTH - 100, paddingTop + 20);
             }
         }
+
+        
     }
 
 
