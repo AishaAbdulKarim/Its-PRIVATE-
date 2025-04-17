@@ -9,14 +9,15 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener {
-    private GameManager game; // Manages game elements
+    private SPGameManager game; // Manages game elements
+    private boolean movingLeft = false;
+    private boolean movingRight = false;
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
         addKeyListener(this);
         setFocusable(true);
-        game = new GameManager();
-        game.setMultiplayer(false);
+        game = new SPGameManager();
 
         // Game loop - calls update() 60 times per second
         javax.swing.Timer timer = new javax.swing.Timer(1000 / 60, e -> update());
@@ -45,31 +46,76 @@ public class GamePanel extends JPanel implements KeyListener {
 
     // Updates the game state and repaints the screen
     public void update() {
-        game.update();
-        this.repaint();
+        if(!game.getIsGameOver()){
+            game.update();
+            this.repaint();
+            updateMove();
+        }
+        
     }
-    public GameManager getGameManager() { 
+
+    public SPGameManager getGameManager() { 
         return game;
+    }
+
+    public void updateMove(){
+        if(movingLeft) game.getBasket().moveLeft();
+        if(movingRight) game.getBasket().moveRight();
     }
 
     // Handles key press events for moving the basket
     @Override
     public void keyPressed(KeyEvent e) {
-        Basket basket = game.getBasket();
+        if (game.getIsGameOver()) return;
+
+        // Track left/right arrow key presses
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            basket.moveLeft(); // Move left
+            movingLeft = true;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            basket.moveRight(); // Move right
+            movingRight = true;
         }
     }
 
-    // Handles key release (not used for now)
     @Override
     public void keyReleased(KeyEvent e) {
+        if (game.getIsGameOver()) return;
+
+        // Track key release to stop movement
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            movingLeft = false;
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            movingRight = false;
+        }
     }
 
     // Handles key typing (not used)
     @Override
     public void keyTyped(KeyEvent e) {
     }
+
+    public SPGameManager getGame() {
+        return game;
+    }
+
+    public void setGame(SPGameManager game) {
+        this.game = game;
+    }
+
+    public boolean isMovingLeft() {
+        return movingLeft;
+    }
+
+    public void setMovingLeft(boolean movingLeft) {
+        this.movingLeft = movingLeft;
+    }
+
+    public boolean isMovingRight() {
+        return movingRight;
+    }
+
+    public void setMovingRight(boolean movingRight) {
+        this.movingRight = movingRight;
+    }
+
+    
 }

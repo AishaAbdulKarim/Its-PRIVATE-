@@ -41,15 +41,16 @@ public class Init extends JFrame {
     }
 
     private void gameLoopSP() {
-        long startTime = System.currentTimeMillis();
-        while(true){
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            if(elapsedTime > Constants.REFRESH_RATE){
-                
-                gamePanelSP.update();
-                startTime = System.currentTimeMillis();                         // This function must remain at the end of this statement
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(Constants.REFRESH_RATE);
+                    gamePanelSP.update();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }   
+        }).start();
     }
 
     private void gameLoopMP() {

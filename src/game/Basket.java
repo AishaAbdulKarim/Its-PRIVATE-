@@ -1,8 +1,8 @@
 package game;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.swing.ImageIcon;
-import java.awt.Image;
 
 public class Basket {
     private String name;       // Basket name
@@ -12,7 +12,7 @@ public class Basket {
     private int y;             // Y position of the basket
     private int width;         // Width of the basket
     private int height;        // Height of the basket
-    private int speed = 10;
+    private int speed = 5;
 
     // Constructor to initialize the basket
     public Basket(String name, int x, int y, int width, int height, String fileName) {

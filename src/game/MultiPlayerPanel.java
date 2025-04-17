@@ -132,8 +132,7 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         }
 
         // Handle player movement input
-        if (movingLeft) GAME.getBasket().moveLeft();
-        if (movingRight) GAME.getBasket().moveRight();
+        updateMove();
 
         // Update game logic and repaint screen
         GAME.update();
@@ -161,6 +160,11 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
      */
     public GameManager getGameManager() {
         return GAME;
+    }
+
+    public void updateMove(){
+        if(movingLeft) GAME.getBasket().moveLeft();
+        if(movingRight) GAME.getBasket().moveRight();
     }
 
     // ==== KEY LISTENER METHODS ====

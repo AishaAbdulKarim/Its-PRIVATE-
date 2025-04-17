@@ -2,16 +2,16 @@ package game;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class Egg { // Defines the Egg class
     private int x; // Horizontal position of the egg
     private int y; // Vertical position of the egg
     private int width = 40; // Egg sprite width
     private int height = 50; // Egg sprite height
-    private int speed = 4; // Speed at which the egg falls
+    private int speed = 2; // Speed at which the egg falls
     private Image eggImage; // Image used to display the egg
 
     // Constructor to initialize the egg's position and load its image
