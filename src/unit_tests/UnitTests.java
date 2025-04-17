@@ -25,11 +25,26 @@ public class UnitTests {
 	 * Aishat Aminu, Unit Tests
 	 */
 	
+	@Test
+	void testTwo() {
+		
+	}
+	
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
 	
+	@Test
+	void testThree() {
+		
+	}
+	
 	/*
 	 * Joanne Thomas, Unit Tests
 	 */
+	
+	@Test
+	void tesfouro() {
+		
+	}
 }
