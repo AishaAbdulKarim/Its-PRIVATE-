@@ -18,7 +18,6 @@ public class MainMenu extends JPanel {
     @SuppressWarnings({"CallToPrintStackTrace", "OverridableMethodCallInConstructor"})
     public MainMenu(game.Init frame) {
         this.frame = frame;
-        
 
         // Load background image using class loader
         String fileName = "Mainmenu.png";
@@ -54,17 +53,19 @@ public class MainMenu extends JPanel {
             add(btn, gbc);
 
             switch (buttonText) {
-                case "Multiplayer" -> {
+                case "Multiplayer":
                     setMultiPlayer(true);
                     btn.addActionListener(e -> frame.showMPGame());
-                }
-                case "Play" -> {
+                    break;
+                case "Play":
                     setSinglePlayer(true);
                     btn.addActionListener(e -> frame.showSPGame());
-                }
-                default -> btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
+                    break;
+                default:
+                    btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
+                    break;
             }
-        }
+        } 
     }
 
     @Override
@@ -94,6 +95,7 @@ public class MainMenu extends JPanel {
             public void mouseEntered(MouseEvent evt) {
                 btn.setBackground(new Color(60, 120, 170)); // slightly darker
             }
+
             @Override
             public void mouseExited(MouseEvent evt) {
                 btn.setBackground(new Color(70, 130, 180));
@@ -103,7 +105,7 @@ public class MainMenu extends JPanel {
         return btn;
     }
 
-    // ✅ Correct Border Implementation
+    // Correct Border Implementation
     static class RoundedBorder implements Border {
         private final int RADIUS;
 
@@ -124,13 +126,12 @@ public class MainMenu extends JPanel {
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(((JButton)c).getBackground().darker());
+            g2.setColor(((JButton) c).getBackground().darker());
             g2.setStroke(new BasicStroke(2));
             g2.drawRoundRect(x, y, width - 1, height - 1, RADIUS, RADIUS);
         }
     }
 
-    
     // Getters and Setters
     public boolean isSinglePlayer() {
         return isSinglePlayer;
@@ -163,6 +164,4 @@ public class MainMenu extends JPanel {
     public void setBackgroundImage(BufferedImage backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
-
-    
 }
