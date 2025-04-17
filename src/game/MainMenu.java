@@ -62,7 +62,10 @@ public class MainMenu extends JPanel {
                     btn.addActionListener(e -> frame.showSPGame());
                     break;
                 default:
-                    btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
+                    btn.addActionListener(e -> {
+                        int score = frame.getHighScore();
+                        JOptionPane.showMessageDialog(MainMenu.this, "🏆 Highest Score: " + score, "High Scores", JOptionPane.INFORMATION_MESSAGE);
+                    });
                     break;
             }
         } 

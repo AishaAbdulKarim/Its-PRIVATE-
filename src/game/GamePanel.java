@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class GamePanel extends JPanel implements KeyListener {
     private SPGameManager game; // Manages game elements
@@ -65,17 +66,21 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     // Updates the game state and repaints the screen
-    public void update() {
-        if(!game.getIsGameOver()){
-            game.update();
-            this.repaint();
-            updateMove();
-        }
-        if(game.getIsGameOver() == true){
-            restartGameButton.setVisible(true);
-            repaint();
-        }
+public void update() {
+    if (!game.getIsGameOver()) {
+        game.update();
+        this.repaint();
+        updateMove();
     }
+    if (game.getIsGameOver() == true) {
+        restartGameButton.setVisible(true);
+        // ✅ Check and update high score
+        if (game.getScore() > ((Init) SwingUtilities.getWindowAncestor(this)).getHighScore()) {
+            ((Init) SwingUtilities.getWindowAncestor(this)).setHighScore(game.getScore());
+        }
+        repaint();
+    }
+}
 
     public SPGameManager getGameManager() { 
         return game;

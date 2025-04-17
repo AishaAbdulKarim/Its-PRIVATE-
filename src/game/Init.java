@@ -8,7 +8,8 @@ public class Init extends JFrame {
     private MultiPlayerPanel gamePanelMP;
     private GamePanel gamePanelSP;
 
-    // Initiates Main Menu
+    private int highScore = 0; 
+
     public Init() {
         setTitle("Egg Catcher");
         setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
@@ -21,7 +22,6 @@ public class Init extends JFrame {
         setVisible(true);
     }
 
-    // Transitions to single player panel
     public void showSPGame() {
         remove(MAIN_MENU);
         gamePanelSP = new GamePanel();
@@ -31,7 +31,7 @@ public class Init extends JFrame {
         revalidate();
         gameLoopSP();
     }
-    // single player loop
+
     private void gameLoopSP() {
         Thread gameThread = new Thread(() -> {
             while (true) {
@@ -47,7 +47,6 @@ public class Init extends JFrame {
         gameThread.start();
     }
 
-    // Transitions to multiplayer panel
     public void showMPGame() {
         remove(MAIN_MENU);
         gamePanelMP = new MultiPlayerPanel();
@@ -57,7 +56,7 @@ public class Init extends JFrame {
         revalidate();
         gameLoopMP();
     }
-    // multiplayer loop
+
     private void gameLoopMP() {
         Thread gameThread = new Thread(() -> {
             while (true) {
@@ -71,6 +70,14 @@ public class Init extends JFrame {
         });
         gameThread.setDaemon(true);
         gameThread.start();
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 
     public static void main(String[] args) {

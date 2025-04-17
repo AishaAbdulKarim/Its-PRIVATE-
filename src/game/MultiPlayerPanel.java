@@ -145,13 +145,16 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
     private void compareScores() {
         int player1Score = GAME.getPlayer1Score();
         int player2Score = GAME.getPlayer2Score();
-
+    
         if (player1Score > player2Score) {
             winnerMessage = "Player 1 Wins! (" + player1Score + " - " + player2Score + ")";
+            updateHighScore(player1Score);
         } else if (player2Score > player1Score) {
             winnerMessage = "Player 2 Wins! (" + player2Score + " - " + player1Score + ")";
+            updateHighScore(player2Score);
         } else {
             winnerMessage = "It's a Tie! (" + player1Score + " - " + player2Score + ")";
+            updateHighScore(player1Score);
         }
     }
 
@@ -196,6 +199,12 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         // Not used but required by KeyListener interface
+    }
+    private void updateHighScore(int score) {
+        Init parent = (Init) SwingUtilities.getWindowAncestor(this);
+        if (score > parent.getHighScore()) {
+            parent.setHighScore(score);
+        }
     }
 
     
