@@ -12,6 +12,8 @@ import javax.swing.border.Border;
 public class MainMenu extends JPanel {
     private game.Init frame;
     private BufferedImage backgroundImage;
+    private boolean isSinglePlayer = false;
+    private boolean isMultiPlayer = false;
 
     public MainMenu(game.Init frame) {
         this.frame = frame;
@@ -50,9 +52,14 @@ public class MainMenu extends JPanel {
             gbc.gridy++;
             add(btn, gbc);
 
-            if (buttonText.equals("Play")) {
-                btn.addActionListener(e -> frame.showGame());
-            } else {
+            if (buttonText.equals("Multiplayer")) {
+                setMultiPlayer(true);
+                btn.addActionListener(e -> frame.showMPGame());
+            }else if (buttonText.equals("Play")) {
+                setSinglePlayer(true);
+                btn.addActionListener(e -> frame.showSPGame());
+            }
+             else {
                 btn.addActionListener(e -> JOptionPane.showMessageDialog(MainMenu.this, buttonText + " coming soon!"));
             }
         }
@@ -115,4 +122,24 @@ public class MainMenu extends JPanel {
             g2.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
+
+    
+    // Getters and Setters
+    public boolean isSinglePlayer() {
+        return isSinglePlayer;
+    }
+
+    public void setSinglePlayer(boolean isSinglePlayer) {
+        this.isSinglePlayer = isSinglePlayer;
+    }
+
+    public boolean isMultiPlayer() {
+        return isMultiPlayer;
+    }
+
+    public void setMultiPlayer(boolean isMultiPlayer) {
+        this.isMultiPlayer = isMultiPlayer;
+    }
+
+    
 }

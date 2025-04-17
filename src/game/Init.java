@@ -5,7 +5,8 @@ import javax.swing.*;
 
 public class Init extends JFrame {
     private MainMenu mainMenu;
-    private GamePanel gamePanel;
+    private MultiPlayerPanel gamePanelMP;
+    private GamePanel gamePanelSP;
 
     public Init() {
         setTitle("Egg Catcher");
@@ -19,22 +20,44 @@ public class Init extends JFrame {
         setVisible(true);
     }
 
-    public void showGame() {
+    public void showMPGame() {
         remove(mainMenu);
-        gamePanel = new GamePanel();
-        add(gamePanel);
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocusInWindow();
+        gamePanelMP = new MultiPlayerPanel();
+        add(gamePanelMP);
+        gamePanelMP.setFocusable(true);
+        gamePanelMP.requestFocusInWindow();
         revalidate();
-        gameLoop();
+        gameLoopMP();
     }
 
-    private void gameLoop() {
+    public void showSPGame() {
+        remove(mainMenu);
+        gamePanelSP = new GamePanel();
+        add(gamePanelSP);
+        gamePanelSP.setFocusable(true);
+        gamePanelSP.requestFocusInWindow();
+        revalidate();
+        gameLoopSP();
+    }
+
+    private void gameLoopSP() {
+        long startTime = System.currentTimeMillis();
+        while(true){
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            if(elapsedTime > Constants.REFRESH_RATE){
+                
+                gamePanelSP.update();
+                startTime = System.currentTimeMillis();                         // This function must remain at the end of this statement
+            }
+        }   
+    }
+
+    private void gameLoopMP() {
         new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(Constants.REFRESH_RATE);
-                    gamePanel.update();
+                    gamePanelMP.update();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -43,6 +66,8 @@ public class Init extends JFrame {
     }
 
     public static void main(String[] args) {
+
+
         SwingUtilities.invokeLater(() -> new Init());
     }
 }

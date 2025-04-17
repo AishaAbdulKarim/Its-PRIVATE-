@@ -6,8 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class MultiPlayerPanel  extends JPanel implements KeyListener {
-    private boolean isSinglePlayer = false;
-    private boolean isMultiPlayer = false;
 
     // Game state manager
     private final GameManager GAME;
@@ -196,20 +194,5 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         // Not used but required by KeyListener interface
     }
 
-    public boolean isSinglePlayer() {
-        return isSinglePlayer;
-    }
-
-    public void setSinglePlayer(boolean isSinglePlayer) {
-        this.isSinglePlayer = isSinglePlayer;
-    }
-
-    public boolean isMultiPlayer() {
-        return isMultiPlayer;
-    }
-
-    public void setMultiPlayer(boolean isMultiPlayer) {
-        this.isMultiPlayer = isMultiPlayer;
-    }
     
 }

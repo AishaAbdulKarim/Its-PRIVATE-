@@ -177,4 +177,14 @@ public class GameManager {
     public int getCurrentPlayer() { return currentPlayer; }
     public int getPlayer1Score() { return player1Score; }
     public int getPlayer2Score() { return player2Score; }
+
+    public boolean isMultiplayer() {
+        return isMultiplayer;
+    }
+
+    public void setMultiplayer(boolean isMultiplayer) {
+        this.isMultiplayer = isMultiplayer;
+    }
+
+
 }
