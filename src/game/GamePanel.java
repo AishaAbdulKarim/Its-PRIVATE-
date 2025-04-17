@@ -13,7 +13,6 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean movingLeft = false;
     private boolean movingRight = false;
     private JButton restartGameButton;
-    private String winnerMessage = "Game Over";
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {

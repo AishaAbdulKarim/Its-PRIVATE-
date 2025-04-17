@@ -33,7 +33,7 @@ public class Init extends JFrame {
     }
     // single player loop
     private void gameLoopSP() {
-        new Thread(() -> {
+        Thread gameThread = new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(Constants.REFRESH_RATE);
@@ -42,7 +42,9 @@ public class Init extends JFrame {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+        gameThread.setDaemon(true);
+        gameThread.start();
     }
 
     // Transitions to multiplayer panel
@@ -57,7 +59,7 @@ public class Init extends JFrame {
     }
     // multiplayer loop
     private void gameLoopMP() {
-        new Thread(() -> {
+        Thread gameThread = new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(Constants.REFRESH_RATE);
@@ -66,7 +68,9 @@ public class Init extends JFrame {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+        gameThread.setDaemon(true);
+        gameThread.start();
     }
 
     public static void main(String[] args) {

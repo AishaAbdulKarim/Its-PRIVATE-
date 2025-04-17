@@ -18,6 +18,7 @@ public class MainMenu extends JPanel {
     @SuppressWarnings({"CallToPrintStackTrace", "OverridableMethodCallInConstructor"})
     public MainMenu(game.Init frame) {
         this.frame = frame;
+        
 
         // Load background image using class loader
         String fileName = "Mainmenu.png";
