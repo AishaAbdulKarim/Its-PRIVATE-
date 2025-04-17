@@ -79,6 +79,14 @@ public class Init extends JFrame {
     public void setHighScore(int highScore) {
         this.highScore = highScore;
     }
+    public void returnToMainMenu() {
+        getContentPane().removeAll(); // Remove everything
+        add(MAIN_MENU);               // Add main menu back
+        MAIN_MENU.requestFocusInWindow();
+        revalidate();
+        repaint();
+    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Init());

@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean movingLeft = false;
     private boolean movingRight = false;
     private JButton restartGameButton;
+    private JButton returnToMenuButton; // ✅ New
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
@@ -39,25 +40,41 @@ public class GamePanel extends JPanel implements KeyListener {
         restartGameButton.addActionListener(e -> {
             game.start();
             restartGameButton.setVisible(false);
+            returnToMenuButton.setVisible(false); // ✅ Hide Return button too
             this.requestFocusInWindow();
         });
 
-        
         this.add(restartGameButton);
 
+        // ✅ Setup "Return to Menu" Button
+        returnToMenuButton = new JButton("Return to Menu");
+        returnToMenuButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 100, 200, 40);
+        returnToMenuButton.setFocusable(false);
+        returnToMenuButton.setVisible(false);
+
+        returnToMenuButton.setOpaque(true);
+        returnToMenuButton.setBackground(Color.WHITE);
+        returnToMenuButton.setForeground(Color.BLACK);
+        returnToMenuButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        returnToMenuButton.setFont(new Font("Arial", Font.BOLD, 16));
+        returnToMenuButton.addActionListener(e -> {
+            ((Init) SwingUtilities.getWindowAncestor(this)).returnToMainMenu();
+        });
+
+        this.add(returnToMenuButton);
     }
 
     // Draws the game components on the panel
     @Override
     protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
+        super.paintComponent(g);
 
-    Graphics2D graphics = (Graphics2D) g;
-    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-    drawBackground(graphics);
-    game.drawSprites(graphics, this);
-}  
+        drawBackground(graphics);
+        game.drawSprites(graphics, this);
+    }
 
     // Draws the background color
     public void drawBackground(Graphics2D graphics) {
@@ -66,21 +83,23 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     // Updates the game state and repaints the screen
-public void update() {
-    if (!game.getIsGameOver()) {
-        game.update();
-        this.repaint();
-        updateMove();
-    }
-    if (game.getIsGameOver() == true) {
-        restartGameButton.setVisible(true);
-        // ✅ Check and update high score
-        if (game.getScore() > ((Init) SwingUtilities.getWindowAncestor(this)).getHighScore()) {
-            ((Init) SwingUtilities.getWindowAncestor(this)).setHighScore(game.getScore());
+    public void update() {
+        if(!game.getIsGameOver()){
+            game.update();
+            this.repaint();
+            updateMove();
         }
-        repaint();
+        if(game.getIsGameOver() == true){
+            restartGameButton.setVisible(true);
+            returnToMenuButton.setVisible(true); // ✅ Show Return button
+            repaint();
+
+            // ✅ Update high score
+            if (game.getScore() > ((Init) SwingUtilities.getWindowAncestor(this)).getHighScore()) {
+                ((Init) SwingUtilities.getWindowAncestor(this)).setHighScore(game.getScore());
+            }
+        }
     }
-}
 
     public SPGameManager getGameManager() { 
         return game;
@@ -144,6 +163,4 @@ public void update() {
     public void setMovingRight(boolean movingRight) {
         this.movingRight = movingRight;
     }
-
-    
 }
