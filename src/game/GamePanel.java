@@ -19,9 +19,6 @@ public class GamePanel extends JPanel implements KeyListener {
         setFocusable(true);
         game = new SPGameManager();
 
-        // Game loop - calls update() 60 times per second
-        javax.swing.Timer timer = new javax.swing.Timer(1000 / 60, e -> update());
-        timer.start();
     }
 
     // Draws the game components on the panel
