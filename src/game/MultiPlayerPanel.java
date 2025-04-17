@@ -5,13 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-/**
- * GamePanel is the main panel that handles the drawing and user interaction
- * for the egg-catching game. It supports multiplayer gameplay and manages
- * game updates, player input, and button interactions.
- */
-public class GamePanel extends JPanel implements KeyListener {
-
+public class MultiPlayerPanel  extends JPanel implements KeyListener {
     private boolean isSinglePlayer = false;
     private boolean isMultiPlayer = false;
 
@@ -32,7 +26,7 @@ public class GamePanel extends JPanel implements KeyListener {
     /**
      * Constructs the game panel, initializes the game and UI components.
      */
-    public GamePanel() {
+    public MultiPlayerPanel() {
         setLayout(null); // Absolute layout for manual positioning
 
         // Create and start game logic
