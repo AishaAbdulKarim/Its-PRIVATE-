@@ -13,6 +13,7 @@ import game.EggSpawner;
 import game.SPGameManager;
 import gameConstants.Constants;
 import game.GameManager;
+import game.GamePanel;
 
 public class UnitTests {
 
@@ -235,6 +236,16 @@ public class UnitTests {
 		assertTrue(manager.isGameOver());
 		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should be the active player
 	}
+
+
+	@Test
+	public void testButtonActions() {
+		GamePanel panel = new GamePanel();
+		panel.restartGameButton.doClick(); // Simulate a click on the restart button
+		assertFalse(panel.restartGameButton.isVisible()); // Restart button should be hidden after click
+	}
+
+
 
 
 

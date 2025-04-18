@@ -13,8 +13,8 @@ public class GamePanel extends JPanel implements KeyListener {
     private SPGameManager game; // Manages game elements
     private boolean movingLeft = false;
     private boolean movingRight = false;
-    private JButton restartGameButton;
-    private JButton returnToMenuButton; 
+    public JButton restartGameButton;
+    private JButton returnToMenuButton;
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
