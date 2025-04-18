@@ -246,6 +246,22 @@ public class UnitTests {
 	}
 
 
+	@Test
+	public void testScoreResetForPlayer2() {
+		GameManager gameManager = new GameManager();
+		gameManager.start();
+
+		// Simulate Player 1 scoring points
+		gameManager.update();
+		gameManager.update();
+
+		int player1Score = gameManager.getScore();  // Save Player 1's score
+		gameManager.update();  // Simulate some game updates
+
+		// Simulate Player 1 finishing and Player 2 starting
+		gameManager.startPlayer2();
+
+	}
 
 
 
