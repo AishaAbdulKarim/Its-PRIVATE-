@@ -64,7 +64,8 @@ public class UnitTests {
 	 */
 	@Test
 	void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
-
+		SPGameManager manager = new SPGameManager();
+		assertEquals(3, manager.getLives(), "Initial lives should be 3 at game start.");
 	}
 	@Test
 	void testGameOverFlagAfterLivesZero() {//Ensures that the game sets 'game over' to true when lives reach 0
