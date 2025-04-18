@@ -307,5 +307,12 @@ public class UnitTests {
 		assertEquals(50, window.getHighScore());
 	}
 
+	@Test
+	void testReturnToMainMenuReplacesPanel() {
+		Init window = new Init();
+		window.showSPGame(); // switch to game panel
+		window.returnToMainMenu(); // switch back
+	}
+
 	}
 
