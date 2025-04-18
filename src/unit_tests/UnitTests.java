@@ -77,7 +77,16 @@ public class UnitTests {
 
 	@Test
 	void testEggCaughtIncreasesScoreAndRemovesEgg() {//Confirms that score increases by 10 and egg is removed after catching it
+		SPGameManager manager = new SPGameManager();
+		Basket b = manager.getBasket();
+		EggSpawner spawner = manager.getEggSpawner();
 
+		Egg egg = new Egg(b.getX(), b.getY(), 40, 50, "egg.png");
+		spawner.getEggList().add(egg);
+
+		manager.update(); // Should detect collision
+		assertEquals(10, manager.getScore(), "Score should increase by 10 on egg catch.");
+		assertEquals(0, spawner.getEggList().size(), "Egg should be removed after catch.");
 	}
 	@Test
 	void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
