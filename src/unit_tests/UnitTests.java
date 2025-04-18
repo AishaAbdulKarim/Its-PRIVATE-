@@ -118,6 +118,16 @@ public class UnitTests {
 	}
 	@Test
 	void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
+		SPGameManager manager = new SPGameManager();
+		manager.setLives(1);
+		manager.setScore(50);
+		manager.setGameOver(true);
+
+		manager.start(); // Reset game state
+
+		assertEquals(3, manager.getLives(), "Lives should reset to 3.");
+		assertEquals(0, manager.getScore(), "Score should reset to 0.");
+		assertFalse(manager.getIsGameOver(), "Game over should be reset.");
 	}
 	/*
 	 * Aisha Abdul Karim, Unit Tests
