@@ -104,7 +104,17 @@ public class UnitTests {
 	}
 	@Test
 	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
+		SPGameManager manager = new SPGameManager();
+		Basket b = manager.getBasket();
+		EggSpawner spawner = manager.getEggSpawner();
 
+		// Place egg far from basket so no collision happens
+		Egg egg = new Egg(b.getX() + 200, b.getY() + 200, 40, 50, "egg.png");
+		spawner.getEggList().add(egg);
+
+		manager.update();
+
+		assertEquals(0, manager.getScore(), "Score should not increase without collision.");
 	}
 	@Test
 	void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
