@@ -1,12 +1,16 @@
 package unit_tests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
 import game.Basket;
 import game.Egg;
 import game.EggSpawner;
+import game.SPGameManager;
+import gameConstants.Constants;
 
 public class UnitTests {
 	
