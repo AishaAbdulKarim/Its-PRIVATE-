@@ -21,6 +21,15 @@ public class UnitTests {
 		assertTrue(basket.getX() == 6);
 	}
 	
+	@Test
+	void testMoveBasketRight() {
+		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
+		System.out.println(basket.getX());
+		basket.moveRight();
+		System.out.println(basket.getX());
+		assertTrue(basket.getX() == 10);
+	}
+	
 	/*
 	 * Aishat Aminu, Unit Tests
 	 */
