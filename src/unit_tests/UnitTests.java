@@ -90,7 +90,17 @@ public class UnitTests {
 	}
 	@Test
 	void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
+		SPGameManager manager = new SPGameManager();
+		EggSpawner spawner = manager.getEggSpawner();
 
+		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 20, 40, 50, "egg.png"); // Below screen
+		spawner.getEggList().add(egg);
+
+		int initialLives = manager.getLives();
+		manager.update();
+
+		assertEquals(initialLives - 1, manager.getLives(), "Lives should decrease when egg is missed.");
+		assertTrue("Missed egg should be removed.", spawner.getEggList().isEmpty());
 	}
 	@Test
 	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
