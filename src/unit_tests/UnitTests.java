@@ -149,7 +149,30 @@ public class UnitTests {
 	 * Aisha Abdul Karim, Unit Tests
 	 */
 
+
 	@Test
+	void testStartPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start(); // Start the game for Player 1
+
+		// Assert Player 1 is active initially
+		assertEquals(1, manager.getCurrentPlayer());
+
+		// Simulate Player 1 losing all lives
+		manager.update(); // Call update to handle losing lives
+		manager.update();
+		manager.update(); // After 3 updates, Player 1 should be out of lives
+
+		// Call startPlayer2 to switch to Player 2
+		manager.startPlayer2();
+
+		// Assert Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer());
+
+		// Assert the score and lives have been reset for Player 2
+		assertEquals(0, manager.getScore());
+		assertFalse(manager.isGameOver()); // Game over should be false for Player 2
+	}
 	void testStartPlayer2SwitchesTurn() {
 		GameManager manager = new GameManager();
 		manager.start();
@@ -173,6 +196,10 @@ public class UnitTests {
 
 		assertEquals(2, manager.getCurrentPlayer());                // Player 2 should now be active
 	}
+
+
+
+
 	/*
 	 * Joanne Thomas, Unit Tests
 	 */
