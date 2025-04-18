@@ -32,7 +32,7 @@ public class UnitTests {
 	
 	@Test
 	void testBasketImageFilePath() {
-		Basket basket = new Basket("", 10, 10, 10, 10, null);
+		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		assertTrue(basket.getImage() != null);
 	}
 	
