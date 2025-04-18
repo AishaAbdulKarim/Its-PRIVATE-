@@ -300,5 +300,12 @@ public class UnitTests {
 	}
 
 
+	@Test
+	void testSetAndGetHighScore() {
+		Init window = new Init();
+		window.setHighScore(50);
+		assertEquals(50, window.getHighScore());
+	}
+
 	}
 
