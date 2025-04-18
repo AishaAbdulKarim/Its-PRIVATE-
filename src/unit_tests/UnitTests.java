@@ -49,8 +49,9 @@ public class UnitTests {
 	
 	@Test						// Assert eggSpawner.spawnRate increments by 1
 	void testSetEggSpawnRate() {
-		EggSpawner c = new EggSpawner();
-		assertTrue(c.getSpawnRate() == 6);
+		EggSpawner e = new EggSpawner();
+		e.setSpawnRate(e.getSpawnRate() + 1);
+		assertTrue(e.getSpawnRate() == 6);
 		
 	}
 	
