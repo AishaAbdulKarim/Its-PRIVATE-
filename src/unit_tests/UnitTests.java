@@ -314,5 +314,23 @@ public class UnitTests {
 		window.returnToMainMenu(); // switch back
 	}
 
+
+	@Test
+	void testHighscoresButtonExists() {
+		MainMenu menu = new MainMenu(new Init());
+
+		JButton highscoreButton = findButton(menu, "Highscores");
+		assertNotNull(highscoreButton, "'Highscores' button should exist");
+	}
+
+	private JButton findButton(MainMenu menu, String text) {
+		for (Component comp : menu.getComponents()) {
+			if (comp instanceof JButton btn && btn.getText().equals(text)) {
+				return btn;
+			}
+		}
+		return null;
+	}
+
 	}
 
