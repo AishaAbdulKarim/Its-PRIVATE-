@@ -173,6 +173,22 @@ public class UnitTests {
 		assertEquals(0, manager.getScore());
 		assertFalse(manager.isGameOver()); // Game over should be false for Player 2
 	}
+
+	@Test
+	void testWaitingForPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		// Simulate Player 1 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+		// Check that the game is waiting for Player 2
+		assertTrue(manager.isWaitingForPlayer2()); // Should be true after Player 1 finishes
+	}
+
+	@Test
 	void testStartPlayer2SwitchesTurn() {
 		GameManager manager = new GameManager();
 		manager.start();
