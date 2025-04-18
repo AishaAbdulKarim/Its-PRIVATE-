@@ -1,12 +1,15 @@
 package unit_tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import game.Basket;
 import game.Egg;
 import game.EggSpawner;
+import game.GameManager;
+import game.SPGameManager;
 
 public class UnitTests {
 	
@@ -61,18 +64,31 @@ public class UnitTests {
 	
 	@Test
 	void testTwo() {
+
+
 		
 	}
 	
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
-	
+
+
+
 	@Test
-	void testThree() {
-		
+	void testStartPlayer2SwitchesTurn() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		manager.startPlayer2();                                     // Simulate switch
+
+		assertEquals(2, manager.getCurrentPlayer());                // Should now be Player 2
+		assertEquals(0, manager.getScore());                        // Score should reset
+		assertFalse(manager.isGameOver());                          // Game should not be over
+		assertFalse(manager.isWaitingForPlayer2());                 // No longer waiting
 	}
-	
+
+
 	/*
 	 * Joanne Thomas, Unit Tests
 	 */
