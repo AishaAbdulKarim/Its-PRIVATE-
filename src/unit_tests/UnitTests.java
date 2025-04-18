@@ -14,7 +14,7 @@ public class UnitTests {
 	 * Alan Mc Gillivray, Unit Tests
 	 */
 	
-	@Test
+	@Test						// Asserts x position moves left by basket speed (4)
 	void testMoveBasketLeft() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		System.out.println(basket.getX());
@@ -23,7 +23,7 @@ public class UnitTests {
 		assertTrue(basket.getX() == 6);
 	}
 	
-	@Test
+	@Test						// Asserts x position moves right by basket speed (4)
 	void testMoveBasketRight() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		System.out.println(basket.getX());
@@ -32,16 +32,16 @@ public class UnitTests {
 		assertTrue(basket.getX() == 14);
 	}
 	
-	@Test
+	@Test						// Asserts basket image is not null after constructed
 	void testBasketImageFilePath() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		assertTrue(basket.getImage() != null);
 	}
 	
-	@Test
+	@Test						// Assert new egg is added to eggList after spawnEgg executes
 	void testEggSpawning() {
 		EggSpawner e = new EggSpawner();
-		
+		e.spawnEgg();
 		assertTrue(!e.getEggList().isEmpty());
 	}
 	
