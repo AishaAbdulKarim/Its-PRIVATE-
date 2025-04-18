@@ -286,7 +286,18 @@ public class UnitTests {
 		game.update(); // triggers checkCollisions()
 		assertTrue(game.getScore() > oldScore);
 	}
+	@Test
+	void testEggMissedDoesNotIncreaseScore() {
+		SPGameManager game = new SPGameManager();
+		game.getEggSpawner().getEggList().clear();
 
+		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
+		game.getEggSpawner().getEggList().add(egg);
+
+		int scoreBefore = game.getScore();
+		game.update(); // egg should be removed
+		assertEquals(scoreBefore, game.getScore());
+	}
 
 
 	}
