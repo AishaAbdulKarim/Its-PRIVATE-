@@ -30,6 +30,12 @@ public class UnitTests {
 		assertTrue(basket.getX() == 14);
 	}
 	
+	@Test
+	void testBasketImageFilePath() {
+		Basket basket = new Basket("", 10, 10, 10, 10, null);
+		assertTrue(basket.getImage() != null);
+	}
+	
 	/*
 	 * Aishat Aminu, Unit Tests
 	 */
