@@ -1,6 +1,7 @@
 package unit_tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -11,6 +12,7 @@ import game.Egg;
 import game.EggSpawner;
 import game.SPGameManager;
 import gameConstants.Constants;
+import game.GameManager;
 
 public class UnitTests {
 
@@ -73,8 +75,8 @@ public class UnitTests {
 		SPGameManager manager = new SPGameManager();                // Create game instance
 		manager.setLives(0);                                        // Force lives to 0
 		manager.update();                                           // Call update to trigger game over logic
-		assertTrue("Game should be over when lives reach 0.",                         // Check if game over flag is true
-				manager.getIsGameOver());
+		assertTrue(manager.getIsGameOver(),                         // Check if game over flag is true
+                "Game should be over when lives reach 0.");
 	}
 
 	@Test
@@ -107,8 +109,8 @@ public class UnitTests {
 
 		assertEquals(livesBefore - 1, manager.getLives(),           // Lives should decrease by 1
 				"Lives should decrease when egg is missed.");
-		assertTrue("Missed egg should be removed.",                  // Egg should be removed
-				spawner.getEggList().isEmpty());
+		assertTrue(spawner.getEggList().isEmpty(),                  // Egg should be removed
+                "Missed egg should be removed.");
 	}
 	@Test
 	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
@@ -148,8 +150,16 @@ public class UnitTests {
 	 */
 
 	@Test
-	void testThree() {
+	void testStartPlayer2SwitchesTurn() {
+		GameManager manager = new GameManager();
+		manager.start();
 
+		manager.startPlayer2();                                     // Simulate switch
+
+		assertEquals(2, manager.getCurrentPlayer());                // Should now be Player 2
+		assertEquals(0, manager.getScore());                        // Score should reset
+		assertFalse(manager.isGameOver());                          // Game should not be over
+		assertFalse(manager.isWaitingForPlayer2());                 // No longer waiting
 	}
 
 	/*
