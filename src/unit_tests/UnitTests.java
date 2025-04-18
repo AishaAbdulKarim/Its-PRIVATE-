@@ -69,8 +69,12 @@ public class UnitTests {
 	}
 	@Test
 	void testGameOverFlagAfterLivesZero() {//Ensures that the game sets 'game over' to true when lives reach 0
-
+		SPGameManager manager = new SPGameManager();
+		manager.setLives(0);
+		manager.update(); // Should trigger game over
+		assertTrue("Game should be over when lives reach 0.", manager.getIsGameOver());
 	}
+
 	@Test
 	void testEggCaughtIncreasesScoreAndRemovesEgg() {//Confirms that score increases by 10 and egg is removed after catching it
 
