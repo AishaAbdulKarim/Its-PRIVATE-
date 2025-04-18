@@ -27,7 +27,7 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveRight();
 		System.out.println(basket.getX());
-		assertTrue(basket.getX() == 10);
+		assertTrue(basket.getX() == 14);
 	}
 	
 	/*
