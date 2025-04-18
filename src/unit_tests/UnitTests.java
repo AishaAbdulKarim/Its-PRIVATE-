@@ -70,6 +70,10 @@ public class UnitTests {
 	void testEggCaughtIncreasesScoreAndRemovesEgg() {//Confirms that score increases by 10 and egg is removed after catching it
 
 	}
+	@Test
+	void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
+
+	}
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
