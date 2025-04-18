@@ -78,6 +78,9 @@ public class UnitTests {
 	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
 
 	}
+	@Test
+	void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
+	}
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
