@@ -9,6 +9,12 @@ import game.SPGameManager;
 import gameConstants.Constants;
 import game.GameManager;
 import game.GamePanel;
+import game.Init;
+import game.MainMenu;
+
+import javax.swing.*;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -268,7 +274,20 @@ public class UnitTests {
 	 */
 
 	@Test
-	void tesfouro() {
+	void testEggCaughtIncreasesScore() {
+		SPGameManager game = new SPGameManager();
+		Basket basket = game.getBasket();
+
+		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
+		game.getEggSpawner().getEggList().clear();
+		game.getEggSpawner().getEggList().add(egg);
+
+		int oldScore = game.getScore();
+		game.update(); // triggers checkCollisions()
+		assertTrue(game.getScore() > oldScore);
+	}
+
+
 
 	}
-}
+
