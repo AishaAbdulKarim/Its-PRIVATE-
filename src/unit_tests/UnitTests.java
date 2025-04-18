@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import game.Basket;
+import game.Egg;
+import game.EggSpawner;
 
 public class UnitTests {
 	
@@ -34,6 +36,13 @@ public class UnitTests {
 	void testBasketImageFilePath() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		assertTrue(basket.getImage() != null);
+	}
+	
+	@Test
+	void testEggSpawning() {
+		EggSpawner e = new EggSpawner();
+		
+		assertTrue(!e.getEggList().isEmpty());
 	}
 	
 	/*
