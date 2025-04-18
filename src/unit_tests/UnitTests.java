@@ -213,6 +213,28 @@ public class UnitTests {
 		assertEquals(2, manager.getCurrentPlayer());                // Player 2 should now be active
 	}
 
+	@Test
+	void testGameOverForPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		// Simulate Player 1 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+		// Start Player 2
+		manager.startPlayer2();
+
+		// Simulate Player 2 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+		// Assert game over state for Player 2
+		assertTrue(manager.isGameOver());
+		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should be the active player
+	}
 
 
 
