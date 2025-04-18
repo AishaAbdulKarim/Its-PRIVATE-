@@ -162,6 +162,17 @@ public class UnitTests {
 		assertFalse(manager.isWaitingForPlayer2());                 // No longer waiting
 	}
 
+	@Test
+	void testGameManagerDrawsCorrectPlayer() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		assertEquals(1, manager.getCurrentPlayer());
+
+		manager.startPlayer2();
+
+		assertEquals(2, manager.getCurrentPlayer());                // Player 2 should now be active
+	}
 	/*
 	 * Joanne Thomas, Unit Tests
 	 */
