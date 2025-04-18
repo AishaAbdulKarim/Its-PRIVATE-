@@ -58,10 +58,9 @@ public class UnitTests {
 	/*
 	 * Aishat Aminu, Unit Tests
 	 */
-	
 	@Test
-	void testTwo() {
-		
+	void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
+
 	}
 	
 	/*
