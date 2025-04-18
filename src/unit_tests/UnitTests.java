@@ -62,7 +62,10 @@ public class UnitTests {
 	void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
 
 	}
-	
+	@Test
+	void testGameOverFlagAfterLivesZero() {//Ensures that the game sets 'game over' to true when lives reach
+
+	}
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
