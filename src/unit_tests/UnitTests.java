@@ -73,8 +73,6 @@ public class UnitTests {
 	 * Aisha Abdul Karim, Unit Tests
 	 */
 
-
-
 	@Test
 	void testStartPlayer2SwitchesTurn() {
 		GameManager manager = new GameManager();
@@ -86,7 +84,8 @@ public class UnitTests {
 		assertEquals(0, manager.getScore());                        // Score should reset
 		assertFalse(manager.isGameOver());                          // Game should not be over
 		assertFalse(manager.isWaitingForPlayer2());                 // No longer waiting
-	}
+
+
 
 
 	/*
