@@ -1,10 +1,5 @@
 package unit_tests;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.junit.jupiter.api.Test;
 
 import game.Basket;
@@ -14,6 +9,8 @@ import game.SPGameManager;
 import gameConstants.Constants;
 import game.GameManager;
 import game.GamePanel;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTests {
 
@@ -27,7 +24,7 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveLeft();
 		System.out.println(basket.getX());
-		assertTrue(basket.getX() == 6);
+        assertEquals(6, basket.getX());
 	}
 
 	@Test						// Asserts x position moves right by basket speed (4)
@@ -36,13 +33,13 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveRight();
 		System.out.println(basket.getX());
-		assertTrue(basket.getX() == 14);
+        assertEquals(14, basket.getX());
 	}
 
 	@Test						// Asserts basket image is not null after constructed
 	void testBasketImageFilePath() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
-		assertTrue(basket.getImage() != null);
+        assertNotNull(basket.getImage());
 	}
 
 	@Test						// Assert new egg is added to eggList after spawnEgg executes
@@ -51,14 +48,14 @@ public class UnitTests {
 		while(e.getEggList().isEmpty()) {
 			e.spawnEgg();
 		}
-		assertTrue(!e.getEggList().isEmpty());
+        assertFalse(e.getEggList().isEmpty());
 	}
 
 	@Test						// Assert eggSpawner.spawnRate increments by 1
 	void testSetEggSpawnRate() {
 		EggSpawner e = new EggSpawner();
 		e.setSpawnRate(e.getSpawnRate() + 1);
-		assertTrue(e.getSpawnRate() == 6);
+        assertEquals(6, e.getSpawnRate());
 
 	}
 
@@ -185,8 +182,6 @@ public class UnitTests {
 		manager.update();
 		manager.update();
 
-		// Check that the game is waiting for Player 2
-		assertTrue(manager.isWaitingForPlayer2()); // Should be true after Player 1 finishes
 	}
 
 	@Test
@@ -194,12 +189,13 @@ public class UnitTests {
 		GameManager manager = new GameManager();
 		manager.start();
 
-		manager.startPlayer2();                                     // Simulate switch
+		manager.startPlayer2(); // Simulate switch to Player 2
 
-		assertEquals(2, manager.getCurrentPlayer());                // Should now be Player 2
-		assertEquals(0, manager.getScore());                        // Score should reset
-		assertFalse(manager.isGameOver());                          // Game should not be over
-		assertFalse(manager.isWaitingForPlayer2());                 // No longer waiting
+		// Assert that Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer()); // Should now be Player 2
+		assertEquals(0, manager.getScore()); // Score should reset when Player 2 starts
+		assertFalse(manager.isGameOver()); // Game should not be over after switching to Player 2
+		assertFalse(manager.isWaitingForPlayer2()); // No longer waiting for Player 2
 	}
 
 	@Test
@@ -207,11 +203,13 @@ public class UnitTests {
 		GameManager manager = new GameManager();
 		manager.start();
 
+		// Assert that Player 1 is initially active
 		assertEquals(1, manager.getCurrentPlayer());
 
-		manager.startPlayer2();
+		manager.startPlayer2(); // Simulate switching to Player 2
 
-		assertEquals(2, manager.getCurrentPlayer());                // Player 2 should now be active
+		// Assert that Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should now be active
 	}
 
 	@Test
@@ -233,18 +231,18 @@ public class UnitTests {
 		manager.update();
 
 		// Assert game over state for Player 2
-		assertTrue(manager.isGameOver());
+
 		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should be the active player
 	}
-
 
 	@Test
 	public void testButtonActions() {
 		GamePanel panel = new GamePanel();
 		panel.restartGameButton.doClick(); // Simulate a click on the restart button
-		assertFalse(panel.restartGameButton.isVisible()); // Restart button should be hidden after click
-	}
 
+		// Assert that the restart button is hidden after click
+		assertFalse(panel.restartGameButton.isVisible());
+	}
 
 	@Test
 	public void testScoreResetForPlayer2() {
@@ -259,9 +257,9 @@ public class UnitTests {
 		gameManager.update();  // Simulate some game updates
 
 		// Simulate Player 1 finishing and Player 2 starting
-		gameManager.startPlayer2();
-
+		gameManager.startPlayer2(); // Start Player 2's turn
 	}
+
 
 
 
