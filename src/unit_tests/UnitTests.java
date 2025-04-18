@@ -74,6 +74,10 @@ public class UnitTests {
 	void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
 
 	}
+	@Test
+	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
+
+	}
 	/*
 	 * Aisha Abdul Karim, Unit Tests
 	 */
