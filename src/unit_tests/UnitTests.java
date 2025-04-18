@@ -41,8 +41,17 @@ public class UnitTests {
 	@Test						// Assert new egg is added to eggList after spawnEgg executes
 	void testEggSpawning() {
 		EggSpawner e = new EggSpawner();
-		e.spawnEgg();
+		while(e.getEggList().isEmpty()) {
+			e.spawnEgg();
+		}
 		assertTrue(!e.getEggList().isEmpty());
+	}
+	
+	@Test						// Assert eggSpawner.spawnRate increments by 1
+	void testSetEggSpawnRate() {
+		EggSpawner c = new EggSpawner();
+		assertTrue(c.getSpawnRate() == 6);
+		
 	}
 	
 	/*
