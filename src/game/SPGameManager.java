@@ -20,6 +20,7 @@ public class SPGameManager {
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
 
+
     @SuppressWarnings("OverridableMethodCallInConstructor")
      public SPGameManager(){
         start();
@@ -127,7 +128,6 @@ public class SPGameManager {
 
         
     }
-
 
 
     public Basket getBasket() {
