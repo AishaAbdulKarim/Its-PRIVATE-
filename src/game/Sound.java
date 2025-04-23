@@ -15,7 +15,7 @@ public class Sound {
         // (assuming the sound can be played by the audio system)
         // from a wave File
         try {
-            File file = new File(fileName);
+            File file = new File("audio/" + fileName);
             if(file.exists()){
                 AudioInputStream sound = AudioSystem.getAudioInputStream(file);
                 // load the sound into memory (a Clip)

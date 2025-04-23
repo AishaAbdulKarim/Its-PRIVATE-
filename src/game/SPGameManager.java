@@ -44,7 +44,8 @@ public class SPGameManager {
             e.printStackTrace();
         }
 
-
+        mainMusic = new Sound("musicOne.mp3");
+        mainMusic.loop();
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel){
