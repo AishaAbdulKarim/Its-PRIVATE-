@@ -19,6 +19,7 @@ public class SPGameManager {
     private int lives = 3; // Number of lives the player has
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
+    private Sound mainMusic;
 
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -42,6 +43,8 @@ public class SPGameManager {
             System.err.println("Could not load heart image redHeart.png");
             e.printStackTrace();
         }
+
+
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel){
