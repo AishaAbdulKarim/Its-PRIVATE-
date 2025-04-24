@@ -11,6 +11,7 @@ public class Sound {
     // Dedicated persistent clip for loop/stop
     private Clip persistentClip;
 
+    @SuppressWarnings({"UseSpecificCatch", "ConvertToTryWithResources"})
     public Sound(String fileName) {
         try {
             File file = new File("audio/" + fileName);
@@ -30,18 +31,18 @@ public class Sound {
                 throw new RuntimeException("Sound file not found: " + fileName);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException("Error loading sound: " + e);
         }
     }
 
     // Supports overlapping sounds
+    @SuppressWarnings("CallToPrintStackTrace")
     public void play() {
         try {
             Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(format, audioData, 0, audioData.length);
             clip.start();
-        } catch (Exception e) {
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }
