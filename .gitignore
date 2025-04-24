@@ -1,0 +1,9 @@
+# Ignore IDE-specific settings
+.idea/
+*.iml
+
+# Ignore build and output folders
+bin/
+out/
+mk j
+/classes/
