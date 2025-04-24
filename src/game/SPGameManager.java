@@ -19,7 +19,7 @@ public class SPGameManager {
     private int lives = 3; // Number of lives the player has
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
-    private Sound mainMusic;
+    private Sound eggCatch;
 
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -44,8 +44,8 @@ public class SPGameManager {
             e.printStackTrace();
         }
 
-        mainMusic = new Sound("musicOne.mp3");
-        mainMusic.loop();
+        eggCatch = new Sound("catchOne.wav");
+
     }
 
     public void drawSprites(Graphics2D graphics, JPanel panel){
@@ -91,6 +91,7 @@ public class SPGameManager {
                 score += 10; // Increase score
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                eggCatch.play();
             } else if (egg.getY() > Constants.FRAME_HEIGHT) { // Egg fell out of the screen
                 lives--; // Decrease lives
                 eggSpawner.getEggList().remove(i); // Remove egg from list

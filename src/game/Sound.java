@@ -20,7 +20,7 @@ public class Sound {
                 AudioInputStream sound = AudioSystem.getAudioInputStream(file);
                 // load the sound into memory (a Clip)
                 clip = AudioSystem.getClip();
-                clip.open();
+                clip.open(sound);
             }else{
                 throw new RuntimeException("Sound: file not found: " + fileName);
             }
