@@ -22,6 +22,8 @@ public class GameManager {
     private int player2Score = 0; // Score for player 2
     private boolean isMultiplayer = true; // Flag to check if multiplayer is enabled
     private boolean waitingForPlayer2Start = false; // Flag to check if it's waiting for Player 2 to start
+    private Sound eggCatch; // Audio for basket catching egg
+    private Sound lostLife; // Audio for egg reaching bottom of screen
 
     // Constructor, initializes objects when the game starts
     public GameManager() {}
@@ -43,6 +45,8 @@ public class GameManager {
             System.err.println("Could not load heart image redHeart.png");
             e.printStackTrace();
         }
+        eggCatch = new Sound("one.wav");
+        lostLife = new Sound("lostLife.wav");
     }
 
     // Updates the game state, including egg spawning, basket movement, and collision detection
@@ -114,10 +118,12 @@ public class GameManager {
                 score += 10; // Increase score
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                eggCatch.play();
             } else if (egg.getY() > Constants.FRAME_HEIGHT) { // Egg fell out of the screen
                 lives--; // Decrease lives
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                lostLife.play();
             }
         }
     }

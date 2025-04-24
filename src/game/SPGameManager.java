@@ -19,7 +19,8 @@ public class SPGameManager {
     private int lives = 3; // Number of lives the player has
     private boolean isGameOver = false; // Flag indicating whether the game is over
     private BufferedImage heartImage; // Image of a heart to represent lives
-    private Sound eggCatch;
+    private Sound eggCatch; // Audio for basket catching egg
+    private Sound lostLife; // Audio for egg reaching bottom of screen
 
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -44,7 +45,8 @@ public class SPGameManager {
             e.printStackTrace();
         }
 
-        eggCatch = new Sound("catchOne.wav");
+        eggCatch = new Sound("one.wav");
+        lostLife = new Sound("lostLife.wav");
 
     }
 
@@ -96,6 +98,7 @@ public class SPGameManager {
                 lives--; // Decrease lives
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                lostLife.play();
             }
         }
     }

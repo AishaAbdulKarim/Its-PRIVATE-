@@ -1,56 +1,61 @@
 package game;
+
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import javax.sound.sampled.*;
 
-/*
- * Handles game audio
- */
 public class Sound {
-    private Clip clip;
+    private byte[] audioData;
+    private AudioFormat format;
+    private DataLine.Info info;
 
-    public Sound(String fileName){
-        // specify the sound to play
-        // (assuming the sound can be played by the audio system)
-        // from a wave File
+    // Dedicated persistent clip for loop/stop
+    private Clip persistentClip;
+
+    public Sound(String fileName) {
         try {
             File file = new File("audio/" + fileName);
-            if(file.exists()){
-                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
-                // load the sound into memory (a Clip)
-                clip = AudioSystem.getClip();
-                clip.open(sound);
-            }else{
-                throw new RuntimeException("Sound: file not found: " + fileName);
+            if (file.exists()) {
+                AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+                format = stream.getFormat();
+                audioData = stream.readAllBytes();
+                stream.close();
+
+                info = new DataLine.Info(Clip.class, format);
+
+                // Create persistent clip
+                persistentClip = (Clip) AudioSystem.getLine(info);
+                persistentClip.open(format, audioData, 0, audioData.length);
+
+            } else {
+                throw new RuntimeException("Sound file not found: " + fileName);
             }
-        }
-        catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Sound: Malformed URL: " + e);
-        }
-        catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Sound: Unsupported Audio File: " + e);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Sound: Input/Output Error: " + e);
-        }
-        catch (LineUnavailableException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Sound: Line Unavailable Exception Error: " + e);
+            throw new RuntimeException("Error loading sound: " + e);
         }
     }
 
-    public void play(){
-        clip.setFramePosition(0);
-        clip.start();
-    }    
-    public void loop(){
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    // Supports overlapping sounds
+    public void play() {
+        try {
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(format, audioData, 0, audioData.length);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    public void stop(){
-            clip.stop();
+
+    public void loop() {
+        if (persistentClip != null) {
+            persistentClip.setFramePosition(0);
+            persistentClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
+
+    public void stop() {
+        if (persistentClip != null && persistentClip.isRunning()) {
+            persistentClip.stop();
+        }
     }
 }
