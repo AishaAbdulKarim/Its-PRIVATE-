@@ -21,6 +21,7 @@ public class SPGameManager {
     private BufferedImage heartImage; // Image of a heart to represent lives
     private Sound eggCatch; // Audio for basket catching egg
     private Sound lostLife; // Audio for egg reaching bottom of screen
+    private int lastScoreCheckpoint = 0;
 
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -36,6 +37,7 @@ public class SPGameManager {
         score = 0; // Resets score
         lives = 3; // Resets lives
         isGameOver = false; // Resets the game over flag
+        lastScoreCheckpoint = 0;//Resets checkpoint
 
         // Tries to load the heart image, which is used for lives
         try {
