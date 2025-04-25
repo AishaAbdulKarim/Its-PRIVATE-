@@ -18,6 +18,7 @@ public class Sound {
             if (file.exists()) {
                 AudioInputStream stream = AudioSystem.getAudioInputStream(file);
                 format = stream.getFormat();
+                audioData = stream.readAllBytes();
                 stream.close();
 
                 info = new DataLine.Info(Clip.class, format);
