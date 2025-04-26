@@ -78,6 +78,19 @@ public class SPGameManager {
         basket.update();
         updateCollision();
 
+        if (score - lastScoreCheckpoint >= 100) {//Difficulty is increased every 100 points
+            lastScoreCheckpoint = score;
+
+            int newSpawnRate = eggSpawner.getSpawnRate() + 5;
+            eggSpawner.setSpawnRate(Math.min(newSpawnRate, 60));
+
+            for (Egg egg : eggSpawner.getEggList()) {
+                egg.setSpeed(egg.getSpeed() + 1);
+            }
+
+            System.out.println("Difficulty increased: spawnRate = " + eggSpawner.getSpawnRate());
+        }
+
         if (lives <= 0) {
             setGameOver(true);
         }
