@@ -52,6 +52,7 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         // Action: Start second player and hide button
         startPlayer2Button.addActionListener(e -> {
             GAME.startPlayer2();
+            resetMove();
             startPlayer2Button.setVisible(false);
             this.requestFocusInWindow();
         });
@@ -71,6 +72,7 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
 
         // Action: Restart the game and hide winner message
         restartGameButton.addActionListener(e -> {
+            resetMove();
             GAME.start();
             restartGameButton.setVisible(false);
             returnToMenuButton.setVisible(false); // Hide Return button
@@ -199,6 +201,11 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
         if(movingRight) GAME.getBasket().moveRight();
     }
 
+    public void resetMove(){
+        movingLeft = false;
+        movingRight = false;
+    }
+
     // key listener methods
 
     @Override
@@ -229,4 +236,6 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
     public void keyTyped(KeyEvent e) {
         // Not used but required by KeyListener interface
     }
+
+    
 }

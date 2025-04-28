@@ -90,6 +90,7 @@ public class GamePanel extends JPanel implements KeyListener {
             updateMove();
         }
         if(game.getIsGameOver() == true){
+            resetMove();
             restartGameButton.setVisible(true);
             returnToMenuButton.setVisible(true); // Show Return button
             repaint();
@@ -138,6 +139,11 @@ public class GamePanel extends JPanel implements KeyListener {
     // Handles key typing (not used)
     @Override
     public void keyTyped(KeyEvent e) {
+    }
+
+    public void resetMove(){
+        movingLeft = false;
+        movingRight = false;
     }
 
     public SPGameManager getGame() {
