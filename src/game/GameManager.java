@@ -39,6 +39,8 @@ public class GameManager {
         isGameOver = false; // Resets the game over flag
         waitingForPlayer2Start = false; // Resets the flag for Player 2 start
         currentPlayer = 1; // Starts with Player 1
+        lastScoreCheckpoint = 0; // Reset difficulty tracking
+
 
         // Tries to load the heart image, which is used for lives
         try {
