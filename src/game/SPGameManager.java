@@ -108,6 +108,10 @@ public class SPGameManager {
         }
     }
 
+// Draw Hearts
+for (Egg heart : heartList) {
+    graphics.drawImage(heart.getEggImage(), heart.getX(), heart.getY(), heart.getWidth(), heart.getHeight(), panel);
+}
 
     // Updates the collision checks for eggs falling and basket interaction
     public void updateCollision() {
