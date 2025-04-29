@@ -99,6 +99,23 @@ public void keyPressed(KeyEvent e) {
         movingRight = true;
     }
 }
+@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    Graphics2D graphics = (Graphics2D) g;
+    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+    drawBackground(graphics);
+    game.drawSprites(graphics, this);
+
+    if (paused) {
+        graphics.setColor(new Color(0, 0, 0, 100)); // dim background
+        graphics.fillRect(0, 0, getWidth(), getHeight()); // Fill screen with a semi-transparent color
+        graphics.setColor(Color.WHITE); // White text
+        graphics.setFont(new Font("Arial", Font.BOLD, 36)); // Large font size
+        graphics.drawString("PAUSED", Constants.FRAME_WIDTH / 2 - 80, Constants.FRAME_HEIGHT / 2); // Draw "PAUSED" message
+    }
+}
 
 
     // Draws the game components on the panel
