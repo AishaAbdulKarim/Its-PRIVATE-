@@ -28,7 +28,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        // Start Player 2
+        // Start Player 2 button setup
         startPlayer2Button = new JButton("Start Player 2");
         startPlayer2Button.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 100, 200, 40);
         styleButton(startPlayer2Button);
@@ -40,7 +40,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             this.requestFocusInWindow();
         });
 
-        // Restart Game
+        // Restart Game button setup
         restartGameButton = new JButton("Restart Game");
         restartGameButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 150, 200, 40);
         styleButton(restartGameButton);
@@ -54,7 +54,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             this.requestFocusInWindow();
         });
 
-        // Return to Menu
+        // Return to Menu button setup
         returnToMenuButton = new JButton("Return to Menu");
         returnToMenuButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 200, 200, 40);
         styleButton(returnToMenuButton);
@@ -63,7 +63,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             ((Init) SwingUtilities.getWindowAncestor(this)).returnToMainMenu();
         });
 
-        // Resume Button
+        // Resume button setup (for pausing)
         resumeButton = new JButton("Resume");
         resumeButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 250, 200, 40);
         styleButton(resumeButton);
@@ -74,12 +74,14 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             this.requestFocusInWindow();
         });
 
+        // Add buttons to panel
         add(startPlayer2Button);
         add(restartGameButton);
         add(returnToMenuButton);
         add(resumeButton);
     }
 
+    // Applies consistent style to buttons
     private void styleButton(JButton button) {
         button.setFocusable(false);
         button.setOpaque(true);
@@ -95,9 +97,13 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        // Draw background
         drawBackground(graphics);
+
+        // Draw game elements
         GAME.drawSprites(graphics, this);
 
+        // Show winner message if game is over
         if (!winnerMessage.isEmpty()) {
             graphics.setColor(Color.BLACK);
             graphics.setFont(new Font("Arial", Font.BOLD, 34));
@@ -106,6 +112,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             graphics.drawString(winnerMessage, x, y);
         }
 
+        // Show pause overlay
         if (paused) {
             graphics.setColor(new Color(0, 0, 0, 120));
             graphics.fillRect(0, 0, getWidth(), getHeight());
@@ -117,14 +124,17 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
         }
     }
 
+    // Fills background with sky blue color
     public void drawBackground(Graphics2D graphics) {
         graphics.setColor(Constants.SKY_BLUE);
         graphics.fillRect(0, 0, Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     }
 
+    // Updates the game state
     public void update() {
         if (paused) return;
 
+        // Game over logic
         if (GAME.isGameOver()) {
             if (GAME.isWaitingForPlayer2()) {
                 startPlayer2Button.setVisible(true);
@@ -140,11 +150,13 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             return;
         }
 
+        // Update movement and game logic
         updateMove();
         GAME.update();
         repaint();
     }
 
+    // Compares scores of both players and sets winner message
     private void compareScores() {
         int player1Score = GAME.getPlayer1Score();
         int player2Score = GAME.getPlayer2Score();
@@ -161,6 +173,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
         }
     }
 
+    // Updates high score in parent window if applicable
     private void updateHighScore(int score) {
         Init parent = (Init) SwingUtilities.getWindowAncestor(this);
         if (score > parent.getHighScore()) {
@@ -168,15 +181,18 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
         }
     }
 
+    // Provides access to the game manager instance
     public GameManager getGameManager() {
         return GAME;
     }
 
+    // Moves the basket left/right based on key flags
     public void updateMove() {
         if (movingLeft) GAME.getBasket().moveLeft();
         if (movingRight) GAME.getBasket().moveRight();
     }
 
+    // Resets movement flags
     public void resetMove() {
         movingLeft = false;
         movingRight = false;
@@ -184,6 +200,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        // Toggle pause
         if (e.getKeyCode() == KeyEvent.VK_P) {
             paused = !paused;
             resumeButton.setVisible(paused);
@@ -191,8 +208,10 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
             return;
         }
 
+        // Ignore input if game is over or paused
         if (GAME.isGameOver() || paused) return;
 
+        // Handle movement keys
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             movingLeft = true;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -202,8 +221,10 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // Ignore input if game is over or paused
         if (GAME.isGameOver() || paused) return;
 
+        // Stop movement on key release
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             movingLeft = false;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -212,5 +233,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+       
+    }
 }

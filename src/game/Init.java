@@ -105,5 +105,5 @@ public class Init extends JFrame {
     // Main method
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Init()); 
-    }
+     }
 }
