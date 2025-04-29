@@ -97,6 +97,18 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
             ((Init) SwingUtilities.getWindowAncestor(this)).returnToMainMenu();
         });
 
+        resumeButton = new JButton("Resume");
+resumeButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 250, 200, 40);
+styleButton(resumeButton);
+resumeButton.setVisible(false);
+resumeButton.addActionListener(e -> {
+    paused = false;
+    resumeButton.setVisible(false);
+    this.requestFocusInWindow();
+});
+add(resumeButton);
+
+
         // Add buttons to panel
         this.add(startPlayer2Button);
         this.add(restartGameButton);
