@@ -70,12 +70,12 @@ public class Init extends JFrame {
         }
 
         remove(MAIN_MENU); // Remove main menu
-        gamePanelMP = new MultiPlayerPanel(); // Create multiplayer panel
+        gamePanelMP = new MultiPlayerPanel(playerName); // pass name
         add(gamePanelMP);
         gamePanelMP.setFocusable(true);
-        gamePanelMP.requestFocusInWindow();
-        revalidate(); // Refresh layout
-        gameLoopMP(); // Start update loop
+        gamePanelMP.requestFocusInWindow();// Refresh layout
+        revalidate();
+        gameLoopMP (); // Start update loop
     }
 
     // Game loop for multiplayer - similar to single player
