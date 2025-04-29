@@ -78,19 +78,22 @@ public class SPGameManager {
         basket.update();
         updateCollision();
 
-        if (score - lastScoreCheckpoint >= 100) {//Difficulty is increased every 100 points
-            lastScoreCheckpoint = score;
+        if (score - lastScoreCheckpoint >= 150) {
+            lastScoreCheckpoint += 150; // move checkpoint forward by 150 points
 
-            int newSpawnRate = eggSpawner.getSpawnRate() + 5;
-            eggSpawner.setSpawnRate(Math.min(newSpawnRate, 60));
+            // Gradually increase spawn rate
+            int newSpawnRate = eggSpawner.getSpawnRate() + 1;
+            eggSpawner.setSpawnRate(Math.min(newSpawnRate, 25)); // cap spawnRate at 25%
 
-            for (Egg egg : eggSpawner.getEggList()) {
-                egg.setSpeed(egg.getSpeed() + 1);
+            // Every 2 difficulty jumps, slightly increase egg speed
+            if ((score / 150) % 2 == 0) {
+                for (Egg egg : eggSpawner.getEggList()) {
+                    egg.setSpeed(egg.getSpeed() + 1);
+                }
             }
 
             System.out.println("Difficulty increased: spawnRate = " + eggSpawner.getSpawnRate());
         }
-
         if (lives <= 0) {
             setGameOver(true);
         }
