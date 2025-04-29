@@ -153,6 +153,12 @@ private void spawnHeart() {
     Egg heart = new Egg(x, y, 30, 30, "redHeart.png");
     heartList.add(heart);
 }
+try {
+    heartImage = ImageIO.read(new File("src/images/redHeart.png"));
+} catch (IOException e) {
+    System.err.println("Could not load heart image redHeart.png");
+    e.printStackTrace();
+}
 
 
     // Update heart positions
