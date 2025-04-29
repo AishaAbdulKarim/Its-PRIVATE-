@@ -107,7 +107,14 @@ resumeButton.addActionListener(e -> {
     this.requestFocusInWindow();
 });
 add(resumeButton);
-
+private void styleButton(JButton button) {
+    button.setFocusable(false);
+    button.setOpaque(true);
+    button.setBackground(Color.WHITE);
+    button.setForeground(Color.BLACK);
+    button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+    button.setFont(new Font("Arial", Font.BOLD, 16));
+}
 
         // Add buttons to panel
         this.add(startPlayer2Button);
