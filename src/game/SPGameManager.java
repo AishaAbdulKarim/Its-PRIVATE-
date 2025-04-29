@@ -52,6 +52,7 @@ public class SPGameManager {
 
     }
 
+    private int lastHeartSpawnScore = 0;
     public void drawSprites(Graphics2D graphics, JPanel panel){
         // Draws basket
         graphics.drawImage(basket.getImage(), basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), panel);
