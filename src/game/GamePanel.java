@@ -116,6 +116,27 @@ protected void paintComponent(Graphics g) {
         graphics.drawString("PAUSED", Constants.FRAME_WIDTH / 2 - 80, Constants.FRAME_HEIGHT / 2); // Draw "PAUSED" message
     }
 }
+public void update() {
+    if (paused || game.getIsGameOver()) {
+        if (game.getIsGameOver()) {
+            resetMove(); // Reset movement when the game is over
+            restartGameButton.setVisible(true); // Show restart button
+            returnToMenuButton.setVisible(true); // Show return to menu button
+            resumeButton.setVisible(false); // Hide resume button when game over
+            repaint(); // Repaint the screen
+
+            // Update high score if necessary
+            if (game.getScore() > ((Init) SwingUtilities.getWindowAncestor(this)).getHighScore()) {
+                ((Init) SwingUtilities.getWindowAncestor(this)).setHighScore(game.getScore());
+            }
+        }
+        return; // Skip the game update if paused or game over
+    }
+
+    game.update(); // Proceed with regular game updates
+    this.repaint(); // Repaint the screen
+    updateMove(); // Update the movement of the basket
+}
 
 
     // Draws the game components on the panel
