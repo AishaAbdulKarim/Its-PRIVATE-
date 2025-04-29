@@ -133,6 +133,19 @@ for (Egg heart : heartList) {
             }
         }
     }
+// Check collisions with hearts
+for (int i = 0; i < heartList.size(); i++) {
+    Egg heart = heartList.get(i);
+
+    if (checkCollision(heart, basket)) {
+        lives++;  // Increase lives
+        heartList.remove(i);  // Remove heart from list
+        i--;
+    } else if (heart.getY() > Constants.FRAME_HEIGHT) {
+        heartList.remove(i);  // Remove heart that missed
+        i--;
+    }
+}
 
     // Update heart positions
 for (Egg heart : heartList) {
