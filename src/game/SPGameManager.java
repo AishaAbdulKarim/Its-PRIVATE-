@@ -90,8 +90,8 @@ public class SPGameManager {
             heart.update();  // Move heart down
         }
 
-        // Spawn hearts at specific score intervals (every 200 points)
-        if (score - lastHeartSpawnScore >= 200) {  // Every 200 points, spawn a heart
+        // Spawn hearts at specific score intervals (every 150 points)
+        if (score - lastHeartSpawnScore >= 150) {  // Every 150 points, spawn a heart
             spawnHeart();
             lastHeartSpawnScore = score;  // Update the last heart spawn score
         }
