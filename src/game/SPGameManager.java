@@ -67,6 +67,8 @@ public class SPGameManager {
             lastHeartSpawnScore = score;
         }
         
+        Egg heart = new Egg(x, y, 30, 30, "redHeart.png");
+
 
         //  Display Score on Screen
         graphics.setColor(java.awt.Color.BLACK);
