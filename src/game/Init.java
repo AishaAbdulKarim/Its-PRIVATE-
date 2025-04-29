@@ -64,6 +64,11 @@ public class Init extends JFrame {
 
     // Launches the multiplayer game mode
     public void showMPGame() {
+        playerName = JOptionPane.showInputDialog(this, "Enter your name:", "Player One");
+        if (playerName == null || playerName.trim().isEmpty()) {
+            playerName = "Player One";
+        }
+
         remove(MAIN_MENU); // Remove main menu
         gamePanelMP = new MultiPlayerPanel(); // Create multiplayer panel
         add(gamePanelMP);
