@@ -146,6 +146,14 @@ for (int i = 0; i < heartList.size(); i++) {
         i--;
     }
 }
+private void spawnHeart() {
+    int x = (int) (Math.random() * (Constants.FRAME_WIDTH - 40));
+    int y = -40;
+    int speed = 1 + (int) (Math.random() * 2);
+    Egg heart = new Egg(x, y, 30, 30, "redHeart.png");
+    heartList.add(heart);
+}
+
 
     // Update heart positions
 for (Egg heart : heartList) {
