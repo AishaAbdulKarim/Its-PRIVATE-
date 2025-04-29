@@ -65,6 +65,25 @@ public class GamePanel extends JPanel implements KeyListener {
         this.add(returnToMenuButton);
     }
 
+    private JButton resumeButton; // Declare the resume button
+
+resumeButton = new JButton("Resume");
+resumeButton.setBounds(Constants.FRAME_WIDTH / 2 - 100, Constants.FRAME_HEIGHT - 200, 200, 40);
+resumeButton.setFocusable(false);
+resumeButton.setVisible(false);  // Initially hidden
+resumeButton.setOpaque(true);
+resumeButton.setBackground(Color.WHITE);
+resumeButton.setForeground(Color.BLACK);
+resumeButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+resumeButton.setFont(new Font("Arial", Font.BOLD, 16));
+resumeButton.addActionListener(e -> {
+    paused = false; // Unpause when the button is clicked
+    resumeButton.setVisible(false); // Hide resume button after resuming
+    this.requestFocusInWindow(); // Refocus the panel
+});
+this.add(resumeButton);
+
+
     // Draws the game components on the panel
     @Override
     protected void paintComponent(Graphics g) {
