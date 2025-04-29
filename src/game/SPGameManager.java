@@ -62,6 +62,11 @@ public class SPGameManager {
         for (Egg e : eggSpawner.eggList) {
             graphics.drawImage(e.getEggImage(), e.getX(), e.getY(), e.getWidth(), e.getHeight(), panel);
         }
+        if (score - lastHeartSpawnScore >= 150 || score - lastHeartSpawnScore >= 200) {
+            spawnHeart();
+            lastHeartSpawnScore = score;
+        }
+        
 
         //  Display Score on Screen
         graphics.setColor(java.awt.Color.BLACK);
