@@ -133,6 +133,16 @@ styleButton(resumeButton);
     repaint();
     return;
 }
+
+if (paused) {
+    graphics.setColor(new Color(0, 0, 0, 120));
+    graphics.fillRect(0, 0, getWidth(), getHeight());
+    graphics.setColor(Color.WHITE);
+    graphics.setFont(new Font("Arial", Font.BOLD, 40));
+    String pauseMsg = "Game Paused";
+    int x = (Constants.FRAME_WIDTH - graphics.getFontMetrics().stringWidth(pauseMsg)) / 2;
+    graphics.drawString(pauseMsg, x, Constants.FRAME_HEIGHT / 2);
+}  
     // Paints the background, game objects, and winner message if applicable.
      
     @Override
