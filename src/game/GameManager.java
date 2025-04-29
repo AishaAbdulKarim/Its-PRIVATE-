@@ -24,6 +24,8 @@ public class GameManager {
     private boolean waitingForPlayer2Start = false; // Flag to check if it's waiting for Player 2 to start
     private Sound eggCatch; // Audio for basket catching egg
     private Sound lostLife; // Audio for egg reaching bottom of screen
+    private int lastScoreCheckpoint = 0; // To track difficulty upgrades
+
 
     // Constructor, initializes objects when the game starts
     public GameManager() {}
