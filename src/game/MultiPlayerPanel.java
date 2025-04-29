@@ -127,7 +127,12 @@ styleButton(resumeButton);
         this.add(returnToMenuButton);
     }
 
-    
+    if (e.getKeyCode() == KeyEvent.VK_P) {
+    paused = !paused;
+    resumeButton.setVisible(paused);
+    repaint();
+    return;
+}
     // Paints the background, game objects, and winner message if applicable.
      
     @Override
