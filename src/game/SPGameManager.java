@@ -29,7 +29,7 @@ public class SPGameManager {
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public SPGameManager(String playerName) {
         this.playerName = playerName;
-        start();  // Initializes the game
+        start();
     }
 
     // Initializes the game and resets necessary values

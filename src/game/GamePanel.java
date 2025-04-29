@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements KeyListener {
         setLayout(null); // No layout manager; absolute positioning
         addKeyListener(this); // Add key listener to detect keyboard input
         setFocusable(true);   // Allows the panel to receive keyboard focus
-        game = new SPGameManager(); // Initialize the game manager
+        game = new SPGameManager(playerName);
 
         // --- Restart Game Button Setup ---
         restartGameButton = new JButton("Restart Game");

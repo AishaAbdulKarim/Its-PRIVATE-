@@ -20,7 +20,7 @@ public class MultiPlayerPanel extends JPanel implements KeyListener {
 
     private String winnerMessage = "";
 
-    public MultiPlayerPanel() {
+    public MultiPlayerPanel(String playerName) {
         setLayout(null);
         GAME = new GameManager();
         GAME.start();

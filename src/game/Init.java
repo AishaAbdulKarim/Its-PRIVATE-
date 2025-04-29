@@ -29,6 +29,15 @@ public class Init extends JFrame {
         add(MAIN_MENU);
 
         setVisible(true); // Show the window
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int option = JOptionPane.showConfirmDialog(
+                        Init.this,
+                        "Are you sure you want to exit?",
+                        "Exit Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
     }
 
     // Launches the single-player game mode
