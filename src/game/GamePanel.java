@@ -15,6 +15,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean movingRight = false;
     private JButton restartGameButton;
     private JButton returnToMenuButton; 
+    private boolean paused = false;
 
     // Constructor initializes the game and sets up key listener
     public GamePanel() {
