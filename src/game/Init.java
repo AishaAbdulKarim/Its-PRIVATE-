@@ -2,6 +2,8 @@ package game;
 
 import gameConstants.Constants;
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Init extends JFrame {
     // Main menu panel instance
