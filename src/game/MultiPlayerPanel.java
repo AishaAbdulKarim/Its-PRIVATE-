@@ -9,6 +9,8 @@ public class MultiPlayerPanel  extends JPanel implements KeyListener {
 
     // Game state manager
     private final GameManager GAME;
+    private JButton resumeButton;
+
 
     // Player movement tracking
     private boolean movingLeft = false;
