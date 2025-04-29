@@ -174,7 +174,7 @@ for (Egg heart : heartList) {
     heart.update();  // Move heart down
 }
 
-
+private int lastHeartSpawnScore = 0;
      // Detects if the basket catches an egg
      private boolean checkCollision(Egg egg, Basket basket) {
         return egg.getX() < basket.getX() + basket.getWidth() &&
