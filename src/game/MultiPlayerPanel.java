@@ -116,6 +116,11 @@ private void styleButton(JButton button) {
     button.setFont(new Font("Arial", Font.BOLD, 16));
 }
 
+styleButton(startPlayer2Button);
+styleButton(restartGameButton);
+styleButton(returnToMenuButton);
+styleButton(resumeButton);
+
         // Add buttons to panel
         this.add(startPlayer2Button);
         this.add(restartGameButton);
