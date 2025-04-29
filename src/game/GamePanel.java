@@ -16,6 +16,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean movingLeft = false;  // Flag for left movement
     private boolean movingRight = false; // Flag for right movement
     private boolean paused = false;      // Flag to check if game is paused
+    private String playerName;
 
     // UI Buttons
     private JButton restartGameButton;
@@ -23,7 +24,8 @@ public class GamePanel extends JPanel implements KeyListener {
     private JButton resumeButton;
 
     // Constructor: Initializes panel, game, and UI buttons
-    public GamePanel() {
+    public GamePanel(String playerName) {
+        this.playerName = playerName;
         setLayout(null); // No layout manager; absolute positioning
         addKeyListener(this); // Add key listener to detect keyboard input
         setFocusable(true);   // Allows the panel to receive keyboard focus
