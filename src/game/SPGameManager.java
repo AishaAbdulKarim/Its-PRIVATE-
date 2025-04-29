@@ -20,13 +20,14 @@ public class SPGameManager {
     private Sound eggCatch;  // Sound to play when an egg is caught by the basket
     private Sound lostLife;  // Sound to play when an egg falls off the screen
     private int lastScoreCheckpoint = 0;  // Tracks the last score checkpoint for difficulty increase
+    private String playerName;
     
     private ArrayList<Egg> heartList = new ArrayList<>();  // List to store hearts
     private int lastHeartSpawnScore = 0;  // Tracks the last score at which a heart was spawned
 
     // Constructor to initialize the game and start it
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public SPGameManager() {
+    public SPGameManager(String playerName) {
         start();  // Initializes the game
     }
 
