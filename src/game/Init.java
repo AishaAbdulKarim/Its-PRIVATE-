@@ -14,6 +14,8 @@ public class Init extends JFrame {
     // Stores the highest score achieved
     private int highScore = 0;
 
+    private String playerName = "Player One"; // Default if user cancels
+
     // Constructor 
     public Init() {
         setTitle("Egg Catcher"); // Set window title
