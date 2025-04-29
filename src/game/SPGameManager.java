@@ -160,6 +160,12 @@ try {
     e.printStackTrace();
 }
 
+if (heartImage != null) {
+    for (int i = 0; i < lives; i++) {
+        int x = Constants.FRAME_WIDTH - paddingRight - ((i + 1) * Constants.HEART_SIZE) - (i * spacing);
+        g.drawImage(heartImage, x, y, Constants.HEART_SIZE, Constants.HEART_SIZE, p);
+    }
+}
 
     // Update heart positions
 for (Egg heart : heartList) {
