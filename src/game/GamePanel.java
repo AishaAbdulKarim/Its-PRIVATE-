@@ -137,6 +137,16 @@ public void update() {
     this.repaint(); // Repaint the screen
     updateMove(); // Update the movement of the basket
 }
+@Override
+public void keyReleased(KeyEvent e) {
+    if (game.getIsGameOver() || paused) return; // Skip key release if paused or game over
+
+    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        movingLeft = false;
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        movingRight = false;
+    }
+}
 
 
     // Draws the game components on the panel
