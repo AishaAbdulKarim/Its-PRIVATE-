@@ -28,6 +28,7 @@ public class SPGameManager {
     // Constructor to initialize the game and start it
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public SPGameManager(String playerName) {
+        this.playerName = playerName;
         start();  // Initializes the game
     }
 
