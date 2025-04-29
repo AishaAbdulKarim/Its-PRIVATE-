@@ -33,6 +33,10 @@ public class Init extends JFrame {
 
     // Launches the single-player game mode
     public void showSPGame() {
+        playerName = JOptionPane.showInputDialog(this, "Enter your name:", "Player Name", JOptionPane.PLAIN_MESSAGE);
+        if (playerName == null || playerName.trim().isEmpty()) {
+            playerName = "Player One";
+        }
         remove(MAIN_MENU); // Remove main menu from frame
         gamePanelSP = new GamePanel(); // Create game panel
         add(gamePanelSP); // Add game panel to frame
