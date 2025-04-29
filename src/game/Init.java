@@ -37,13 +37,13 @@ public class Init extends JFrame {
         if (playerName == null || playerName.trim().isEmpty()) {
             playerName = "Player One";
         }
-        remove(MAIN_MENU); // Remove main menu from frame
-        gamePanelSP = new GamePanel(); // Create game panel
-        add(gamePanelSP); // Add game panel to frame
+        remove(MAIN_MENU);
+        gamePanelSP = new GamePanel(playerName); // pass name to GamePanel
+        add(gamePanelSP);
         gamePanelSP.setFocusable(true);
         gamePanelSP.requestFocusInWindow();
-        revalidate(); // Refresh layout
-        gameLoopSP(); // Start update loop
+        revalidate();
+        gameLoopSP();
     }
 
     // Game loop for single player - updates the game at a fixed interval
