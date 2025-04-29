@@ -41,7 +41,6 @@ public class GameManager {
         currentPlayer = 1; // Starts with Player 1
         lastScoreCheckpoint = 0; // Reset difficulty tracking
 
-
         // Tries to load the heart image, which is used for lives
         try {
             heartImage = ImageIO.read(new File("src/images/redHeart.png"));
@@ -60,6 +59,22 @@ public class GameManager {
         eggSpawner.update(); // Update the state of the eggs
         basket.update(); // Update the state of the basket
         updateCollision(); // Check for collisions between the basket and the eggs
+
+        if (score - lastScoreCheckpoint >= 150) { // Every 150 points
+            lastScoreCheckpoint += 150;
+
+            int newSpawnRate = eggSpawner.getSpawnRate() + 1;
+            eggSpawner.setSpawnRate(Math.min(newSpawnRate, 25)); // Cap spawn rate at 25%
+
+            // Every 300 points
+            if ((score / 150) % 2 == 0) {
+                for (Egg egg : eggSpawner.getEggList()) {
+                    egg.setSpeed(egg.getSpeed() + 1);
+                }
+            }
+
+            System.out.println("Difficulty increased: spawnRate = " + eggSpawner.getSpawnRate());
+        }
 
         if (lives <= 0) { // Check if lives have reached zero
             if (isMultiplayer && currentPlayer == 1 && !waitingForPlayer2Start) {
