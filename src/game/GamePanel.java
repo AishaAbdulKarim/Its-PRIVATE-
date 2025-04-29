@@ -82,6 +82,23 @@ resumeButton.addActionListener(e -> {
     this.requestFocusInWindow(); // Refocus the panel
 });
 this.add(resumeButton);
+@Override
+public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_P) {
+        paused = !paused; // Toggle the paused state
+        resumeButton.setVisible(paused); // Show resume button when paused
+        repaint(); // Repaint to update the screen
+        return;
+    }
+
+    if (game.getIsGameOver() || paused) return; // Skip movement if game over or paused
+
+    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        movingLeft = true;
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        movingRight = true;
+    }
+}
 
 
     // Draws the game components on the panel
