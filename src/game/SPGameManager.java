@@ -76,6 +76,7 @@ public class SPGameManager {
         graphics.setColor(java.awt.Color.BLACK);
         graphics.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
         graphics.drawString("Score: " + score, 20, 30);
+        graphics.drawString("Player: " + playerName, 20, 55);
 
         // Display lives (using hearts) at the top-right corner
         loseState(graphics, panel);
