@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 public class SPGameManager {
@@ -166,7 +168,7 @@ if (heartImage != null) {
         g.drawImage(heartImage, x, y, Constants.HEART_SIZE, Constants.HEART_SIZE, p);
     }
 }
-
+private ArrayList<Egg> heartList = new ArrayList<>();
     // Update heart positions
 for (Egg heart : heartList) {
     heart.update();  // Move heart down
