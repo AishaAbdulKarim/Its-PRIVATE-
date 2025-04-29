@@ -177,6 +177,7 @@ if (score - lastHeartSpawnScore >= 250) {
     spawnHeart();
     lastHeartSpawnScore = score;
 }
+int speed = 1 + (int) (Math.random() * 2);  // Random speed for variety
 
 private int lastHeartSpawnScore = 0;
      // Detects if the basket catches an egg
