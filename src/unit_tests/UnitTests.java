@@ -92,22 +92,6 @@ public class UnitTests {
 		}
 
 		@Test
-		void testEggCaughtIncreasesScoreAndRemovesEgg() {//Confirms that score increases by 10 and egg is removed after catching it
-			SPGameManager manager = new SPGameManager(null);                // Create game manager
-			Basket basket = manager.getBasket();                        // Get basket reference
-			EggSpawner spawner = manager.getEggSpawner();               // Get egg spawner reference
-
-			// Create egg directly above basket to force collision
-			Egg egg = new Egg(basket.getX(), basket.getY(), 40, 50, "egg.png");
-			spawner.getEggList().add(egg);                              // Add egg to list
-
-			manager.update();                                           // Update game to check collision
-			assertEquals(10, manager.getScore(),                        // Score should be 10
-					"Score should increase by 10 on egg catch.");
-			assertEquals(0, spawner.getEggList().size(),                // Egg list should be empty
-					"Egg should be removed after catch.");
-		}
-		@Test
 		void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
 			SPGameManager manager = new SPGameManager(null);                // Game instance
 			EggSpawner spawner = manager.getEggSpawner();               // Access egg list
@@ -173,6 +157,35 @@ public class UnitTests {
 		// Check if gameOver flag was set to true
 		assertTrue(manager.getIsGameOver(), "Game should be over when lives reach 0.");
 	}
+	@Test
+	void testEggCaughtIncreasesScoreAndRemovesEgg() throws Exception {
+		// single-player game manager instance
+		SPGameManager manager = new SPGameManager(null);
+
+		Basket basket = manager.getBasket();
+
+		// Access the egg spawner so we can manually add an egg
+		EggSpawner spawner = manager.getEggSpawner();
+
+		//  Bypassed the game's countdown timer so update() actually processes game logic
+		Field countdownField = SPGameManager.class.getDeclaredField("countdownFinished");
+		countdownField.setAccessible(true);
+		countdownField.setBoolean(manager, true);
+
+		//  Created an egg positioned directly over the basket to force a collision
+		Egg egg = new Egg(basket.getX(), basket.getY(), 40, 50, "egg.png");
+		spawner.getEggList().add(egg); // Add the egg to the game manually
+
+		// Run one update cycle that  should detect the egg-basket collision
+		manager.update();
+
+		//  Asserts that score increased by 10 after catching the egg
+		assertEquals(10, manager.getScore(), "Score should increase by 10 on egg catch.");
+
+		//  Asserts that the egg is removed from the egg list after being caught
+		assertEquals(0, spawner.getEggList().size(), "Egg should be removed after catch.");
+	}
+
 
 	//	/*
 	//	 * Aisha Abdul Karim, Unit Tests
