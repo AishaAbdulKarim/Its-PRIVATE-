@@ -24,8 +24,7 @@ public class UnitTests {
 	 * Alan Mc Gillivray, Unit Tests
 	 */
 
-	@Test
-		// Asserts x position moves left by basket speed (4)
+	@Test						// Asserts x position moves left by basket speed (4)
 	void testMoveBasketLeft() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		System.out.println(basket.getX());
@@ -34,8 +33,7 @@ public class UnitTests {
 		assertEquals(4, basket.getX());
 	}
 
-	@Test
-		// Asserts x position moves right by basket speed (4)
+	@Test						// Asserts x position moves right by basket speed (4)
 	void testMoveBasketRight() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		System.out.println(basket.getX());
@@ -44,25 +42,22 @@ public class UnitTests {
 		assertEquals(16, basket.getX());
 	}
 
-	@Test
-		// Asserts basket image is not null after constructed
+	@Test						// Asserts basket image is not null after constructed
 	void testBasketImageFilePath() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
 		assertNotNull(basket.getImage());
 	}
 
-	@Test
-		// Assert new egg is added to eggList after spawnEgg executes
+	@Test						// Assert new egg is added to eggList after spawnEgg executes
 	void testEggSpawning() {
 		EggSpawner e = new EggSpawner();
-		while (e.getEggList().isEmpty()) {
+		while(e.getEggList().isEmpty()) {
 			e.spawnEgg();
 		}
 		assertFalse(e.getEggList().isEmpty());
 	}
 
-	@Test
-		// Assert eggSpawner.spawnRate increments by 1
+	@Test						// Assert eggSpawner.spawnRate increments by 1
 	void testSetEggSpawnRate() {
 		EggSpawner e = new EggSpawner();
 		e.setSpawnRate(e.getSpawnRate() + 1);
@@ -82,7 +77,6 @@ public class UnitTests {
 		mainMusic = new Sound("one.wav");
 		assertTrue(mainMusic.musicFileExists());
 	}
-}
 
 
 
@@ -176,144 +170,144 @@ public class UnitTests {
 	 */
 
 
-//	@Test
-//	void testStartPlayer2() {
-//		GameManager manager = new GameManager();
-//		manager.start(); // Start the game for Player 1
-//
-//		// Assert Player 1 is active initially
-//		assertEquals(1, manager.getCurrentPlayer());
-//
-//		// Simulate Player 1 losing all lives
-//		manager.update(); // Call update to handle losing lives
-//		manager.update();
-//		manager.update(); // After 3 updates, Player 1 should be out of lives
-//
-//		// Call startPlayer2 to switch to Player 2
-//		manager.startPlayer2();
-//
-//		// Assert Player 2 is now active
-//		assertEquals(2, manager.getCurrentPlayer());
-//
-//		// Assert the score and lives have been reset for Player 2
-//		assertEquals(0, manager.getScore());
-//		assertFalse(manager.isGameOver()); // Game over should be false for Player 2
-//	}
-//
-//	@Test
-//	void testWaitingForPlayer2() {
-//		GameManager manager = new GameManager();
-//		manager.start();
-//
-//		// Simulate Player 1 losing all lives
-//		manager.update();
-//		manager.update();
-//		manager.update();
-//
-//	}
-//
-//	@Test
-//	void testStartPlayer2SwitchesTurn() {
-//		GameManager manager = new GameManager();
-//		manager.start();
-//
-//		manager.startPlayer2(); // Simulate switch to Player 2
-//
-//		// Assert that Player 2 is now active
-//		assertEquals(2, manager.getCurrentPlayer()); // Should now be Player 2
-//		assertEquals(0, manager.getScore()); // Score should reset when Player 2 starts
-//		assertFalse(manager.isGameOver()); // Game should not be over after switching to Player 2
-//		assertFalse(manager.isWaitingForPlayer2()); // No longer waiting for Player 2
-//	}
-//
-//	@Test
-//	void testGameManagerDrawsCorrectPlayer() {
-//		GameManager manager = new GameManager();
-//		manager.start();
-//
-//		// Assert that Player 1 is initially active
-//		assertEquals(1, manager.getCurrentPlayer());
-//
-//		manager.startPlayer2(); // Simulate switching to Player 2
-//
-//		// Assert that Player 2 is now active
-//		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should now be active
-//	}
-//
-//	@Test
-//	void testGameOverForPlayer2() {
-//		GameManager manager = new GameManager();
-//		manager.start();
-//
-//		// Simulate Player 1 losing all lives
-//		manager.update();
-//		manager.update();
-//		manager.update();
-//
-//		// Start Player 2
-//		manager.startPlayer2();
-//
-//		// Simulate Player 2 losing all lives
-//		manager.update();
-//		manager.update();
-//		manager.update();
-//
-//		// Assert game over state for Player 2
-//
-//		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should be the active player
-//	}
-//
-//	@Test
-//	public void testButtonActions() {
-//		GamePanel panel = new GamePanel(null);
-//		panel.restartGameButton.doClick(); // Simulate a click on the restart button
-//
-//		// Assert that the restart button is hidden after click
-//		assertFalse(panel.restartGameButton.isVisible());
-//	}
-//
-//	@Test
-//	public void testScoreResetForPlayer2() {
-//		GameManager gameManager = new GameManager();
-//		gameManager.start();
-//
-//		// Simulate Player 1 scoring points
-//		gameManager.update();
-//		gameManager.update();
-//		int player1Score = gameManager.getScore();  // Save Player 1's score
-//		gameManager.update();  // Simulate some game updates
-//
-//		// Simulate Player 1 finishing and Player 2 starting
-//		gameManager.startPlayer2(); // Start Player 2's turn
-//	}
-//	@Test
-//	void testPauseToggleWithPKey() {
-//		GamePanel panel = new GamePanel("test");
-//
-//		// Simulate pressing 'P' to pause
-//		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
-//		panel.keyPressed(pauseEvent);
-//
-//		assertTrue(panel.resumeButton.isVisible(), "Resume button should be visible when paused.");
-//
-//		// Simulate pressing 'P' again to unpause
-//		panel.keyPressed(pauseEvent);
-//		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden when unpaused.");
-//	}
-//	@Test
-//	void testResumeButtonClickUnpausesGame() {
-//		GamePanel panel = new GamePanel("test");
-//
-//		// Manually pause the game
-//		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
-//		panel.keyPressed(pauseEvent);
-//
-//		// Simulate click on resume button
-//		panel.resumeButton.doClick();
-//
-//		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden after clicking resume.");
-//	}
-//}
+	@Test
+	void testStartPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start(); // Start the game for Player 1
+
+		// Assert Player 1 is active initially
+		assertEquals(1, manager.getCurrentPlayer());
+
+		// Simulate Player 1 losing all lives
+		manager.update(); // Call update to handle losing lives
+		manager.update();
+		manager.update(); // After 3 updates, Player 1 should be out of lives
+
+		// Call startPlayer2 to switch to Player 2
+		manager.startPlayer2();
+
+		// Assert Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer());
+
+		// Assert the score and lives have been reset for Player 2
+		assertEquals(0, manager.getScore());
+		assertFalse(manager.isGameOver()); // Game over should be false for Player 2
+	}
+
+	@Test
+	void testWaitingForPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		// Simulate Player 1 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+	}
+
+	@Test
+	void testStartPlayer2SwitchesTurn() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		manager.startPlayer2(); // Simulate switch to Player 2
+
+		// Assert that Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer()); // Should now be Player 2
+		assertEquals(0, manager.getScore()); // Score should reset when Player 2 starts
+		assertFalse(manager.isGameOver()); // Game should not be over after switching to Player 2
+		assertFalse(manager.isWaitingForPlayer2()); // No longer waiting for Player 2
+	}
+
+	@Test
+	void testGameManagerDrawsCorrectPlayer() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		// Assert that Player 1 is initially active
+		assertEquals(1, manager.getCurrentPlayer());
+
+		manager.startPlayer2(); // Simulate switching to Player 2
+
+		// Assert that Player 2 is now active
+		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should now be active
+	}
+
+	@Test
+	void testGameOverForPlayer2() {
+		GameManager manager = new GameManager();
+		manager.start();
+
+		// Simulate Player 1 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+		// Start Player 2
+		manager.startPlayer2();
+
+		// Simulate Player 2 losing all lives
+		manager.update();
+		manager.update();
+		manager.update();
+
+		// Assert game over state for Player 2
+
+		assertEquals(2, manager.getCurrentPlayer()); // Player 2 should be the active player
+	}
+
+	@Test
+	public void testButtonActions() {
+		GamePanel panel = new GamePanel(null);
+		panel.restartGameButton.doClick(); // Simulate a click on the restart button
+
+		// Assert that the restart button is hidden after click
+		assertFalse(panel.restartGameButton.isVisible());
+	}
+
+	@Test
+	public void testScoreResetForPlayer2() {
+		GameManager gameManager = new GameManager();
+		gameManager.start();
+
+		// Simulate Player 1 scoring points
+		gameManager.update();
+		gameManager.update();
+		int player1Score = gameManager.getScore();  // Save Player 1's score
+		gameManager.update();  // Simulate some game updates
+
+		// Simulate Player 1 finishing and Player 2 starting
+		gameManager.startPlayer2(); // Start Player 2's turn
+	}
+	@Test
+	void testPauseToggleWithPKey() {
+		GamePanel panel = new GamePanel("test");
+
+		// Simulate pressing 'P' to pause
+		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
+		panel.keyPressed(pauseEvent);
+
+		assertTrue(panel.resumeButton.isVisible(), "Resume button should be visible when paused.");
+
+		// Simulate pressing 'P' again to unpause
+		panel.keyPressed(pauseEvent);
+		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden when unpaused.");
+	}
+	@Test
+	void testResumeButtonClickUnpausesGame() {
+		GamePanel panel = new GamePanel("test");
+
+		// Manually pause the game
+		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
+		panel.keyPressed(pauseEvent);
+
+		// Simulate click on resume button
+		panel.resumeButton.doClick();
+
+		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden after clicking resume.");
+	}
+}
 
 
 
