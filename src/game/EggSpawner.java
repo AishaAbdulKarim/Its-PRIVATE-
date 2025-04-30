@@ -24,11 +24,11 @@ public class EggSpawner {
         int randomX = (int) (Math.random() * (Constants.FRAME_WIDTH - 200)) + 100;
         
 
-	    // Check if the random number is less than 20
-	    if (randomNumber < spawnRate) {
-	        Egg e = new Egg(randomX, 0, 40, 50, "egg_01.png");
-	        eggList.add(e);
-	    }
+    // Check if the random number is less than 20
+    if (randomNumber < spawnRate) {
+        Egg e = new Egg(randomX, 0, 40, 50, "egg_01.png");
+        eggList.add(e);
+    }
     }
 
     // Getters and Setters

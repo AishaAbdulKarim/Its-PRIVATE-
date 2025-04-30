@@ -14,6 +14,8 @@ public class MainMenu extends JPanel {
     private BufferedImage backgroundImage;
     private boolean isSinglePlayer = false;
     private boolean isMultiPlayer = false;
+    private boolean musicIsPlaying = false;
+    private Sound mainMusic;
 
     @SuppressWarnings({"CallToPrintStackTrace", "OverridableMethodCallInConstructor"})
     public MainMenu(game.Init frame) {
@@ -39,12 +41,19 @@ public class MainMenu extends JPanel {
         gbc.insets = new Insets(20, 20, 20, 20);
 
         // Bubbly title
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         JLabel title = new JLabel("   Omelette Rescue");
-        title.setFont(new Font("Comic Sans MS", Font.BOLD, 42)); // Fun font
+        title.setFont(new Font("Comic Sans MS", Font.BOLD, (int)(screenSize.getWidth() * .025) )); // Fun font
         title.setForeground(new Color(50, 50, 50));
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(title, gbc);
+
+        mainMusic = new Sound("musicOne.wav");
+        if(!isMusicIsPlaying()){
+            mainMusic.loop();
+        }
+        
 
         String[] buttons = {"Play", "Multiplayer", "Highscores"};
         for (String buttonText : buttons) {
@@ -166,5 +175,13 @@ public class MainMenu extends JPanel {
 
     public void setBackgroundImage(BufferedImage backgroundImage) {
         this.backgroundImage = backgroundImage;
+    }
+
+    public boolean isMusicIsPlaying() {
+        return musicIsPlaying;
+    }
+
+    public void setMusicIsPlaying(boolean musicIsPlaying) {
+        this.musicIsPlaying = musicIsPlaying;
     }
 }

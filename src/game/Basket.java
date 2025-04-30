@@ -12,7 +12,7 @@ public class Basket {
     private int y;             // Y position of the basket
     private int width;         // Width of the basket
     private int height;        // Height of the basket
-    private int speed = 4;
+    private int speed = 6;
 
     // Constructor to initialize the basket
     public Basket(String name, int x, int y, int width, int height, String fileName) {
