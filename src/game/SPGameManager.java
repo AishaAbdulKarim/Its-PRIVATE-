@@ -21,7 +21,9 @@ public class SPGameManager {
     private Sound lostLife;  // Sound to play when an egg falls off the screen
     private int lastScoreCheckpoint = 0;  // Tracks the last score checkpoint for difficulty increase
     private String playerName;
-    
+    private boolean countdownFinished = false;
+
+
     private ArrayList<Egg> heartList = new ArrayList<>();  // List to store hearts
     private int lastHeartSpawnScore = 0;  // Tracks the last score at which a heart was spawned
 

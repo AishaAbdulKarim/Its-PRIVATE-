@@ -34,16 +34,19 @@ public class Init extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int option = JOptionPane.showConfirmDialog(
+                // Show a confirmation dialog when the user tries to close the game window
+                int option = JOptionPane.showConfirmDialog(  // Parent component for dialog
                         Init.this,
-                        "Are you sure you want to exit?",
-                        "Exit Confirmation",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
+                        "Are you sure you want to exit?", // Message shown in the dialog
+                        "Exit Confirmation", // Title of the dialog
+                        JOptionPane.YES_NO_OPTION, // Show "Yes" and "No" buttons
+                        JOptionPane.QUESTION_MESSAGE // Display a question icon
                 );
+                // If the user clicks "Yes", exit the application
                 if (option == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 } else {
+                    // If the user clicks "No", cancel the close operation
                     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }
             }
