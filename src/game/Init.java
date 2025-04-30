@@ -2,6 +2,8 @@ package game;
 
 import gameConstants.Constants;
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Init extends JFrame {
     // Main menu panel instance
@@ -13,6 +15,8 @@ public class Init extends JFrame {
 
     // Stores the highest score achieved
     private int highScore = 0;
+
+    private String playerName = "Player One"; // Default if user cancels
 
     // Constructor 
     public Init() {
@@ -27,17 +31,41 @@ public class Init extends JFrame {
         add(MAIN_MENU);
 
         setVisible(true); // Show the window
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Show a confirmation dialog when the user tries to close the game window
+                int option = JOptionPane.showConfirmDialog(  // Parent component for dialog
+                        Init.this,
+                        "Are you sure you want to exit?", // Message shown in the dialog
+                        "Exit Confirmation", // Title of the dialog
+                        JOptionPane.YES_NO_OPTION, // Show "Yes" and "No" buttons
+                        JOptionPane.QUESTION_MESSAGE // Display a question icon
+                );
+                // If the user clicks "Yes", exit the application
+                if (option == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                } else {
+                    // If the user clicks "No", cancel the close operation
+                    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
+            }
+        });
     }
 
     // Launches the single-player game mode
     public void showSPGame() {
-        remove(MAIN_MENU); // Remove main menu from frame
-        gamePanelSP = new GamePanel(); // Create game panel
-        add(gamePanelSP); // Add game panel to frame
+        playerName = JOptionPane.showInputDialog(this, "Enter your name:", "Player Name", JOptionPane.PLAIN_MESSAGE);
+        if (playerName == null || playerName.trim().isEmpty()) {
+            playerName = "Player One";
+        }
+        remove(MAIN_MENU);
+        gamePanelSP = new GamePanel(playerName); // pass name to GamePanel
+        add(gamePanelSP);
         gamePanelSP.setFocusable(true);
         gamePanelSP.requestFocusInWindow();
-        revalidate(); // Refresh layout
-        gameLoopSP(); // Start update loop
+        revalidate();
+        gameLoopSP();
     }
 
     // Game loop for single player - updates the game at a fixed interval
@@ -58,13 +86,18 @@ public class Init extends JFrame {
 
     // Launches the multiplayer game mode
     public void showMPGame() {
+        playerName = JOptionPane.showInputDialog(this, "Enter your name:", "Player One");
+        if (playerName == null || playerName.trim().isEmpty()) {
+            playerName = "Player One";
+        }
+
         remove(MAIN_MENU); // Remove main menu
-        gamePanelMP = new MultiPlayerPanel(); // Create multiplayer panel
+        gamePanelMP = new MultiPlayerPanel(playerName); // pass name
         add(gamePanelMP);
         gamePanelMP.setFocusable(true);
-        gamePanelMP.requestFocusInWindow();
-        revalidate(); // Refresh layout
-        gameLoopMP(); // Start update loop
+        gamePanelMP.requestFocusInWindow();// Refresh layout
+        revalidate();
+        gameLoopMP (); // Start update loop
     }
 
     // Game loop for multiplayer - similar to single player
@@ -105,5 +138,5 @@ public class Init extends JFrame {
     // Main method
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Init()); 
-    }
+     }
 }

@@ -22,6 +22,10 @@ public class GameManager {
     private int player2Score = 0; // Score for player 2
     private boolean isMultiplayer = true; // Flag to check if multiplayer is enabled
     private boolean waitingForPlayer2Start = false; // Flag to check if it's waiting for Player 2 to start
+    private Sound eggCatch; // Audio for basket catching egg
+    private Sound lostLife; // Audio for egg reaching bottom of screen
+    private int lastScoreCheckpoint = 0; // To track difficulty upgrades
+
 
     // Constructor, initializes objects when the game starts
     public GameManager() {}
@@ -35,6 +39,7 @@ public class GameManager {
         isGameOver = false; // Resets the game over flag
         waitingForPlayer2Start = false; // Resets the flag for Player 2 start
         currentPlayer = 1; // Starts with Player 1
+        lastScoreCheckpoint = 0; // Reset difficulty tracking
 
         // Tries to load the heart image, which is used for lives
         try {
@@ -43,6 +48,8 @@ public class GameManager {
             System.err.println("Could not load heart image redHeart.png");
             e.printStackTrace();
         }
+        eggCatch = new Sound("one.wav");
+        lostLife = new Sound("lostLife.wav");
     }
 
     // Updates the game state, including egg spawning, basket movement, and collision detection
@@ -52,6 +59,22 @@ public class GameManager {
         eggSpawner.update(); // Update the state of the eggs
         basket.update(); // Update the state of the basket
         updateCollision(); // Check for collisions between the basket and the eggs
+
+        if (score - lastScoreCheckpoint >= 150) { // Every 150 points
+            lastScoreCheckpoint += 150;
+
+            int newSpawnRate = eggSpawner.getSpawnRate() + 1;
+            eggSpawner.setSpawnRate(Math.min(newSpawnRate, 25)); // Cap spawn rate at 25%
+
+            // Every 300 points
+            if ((score / 150) % 2 == 0) {
+                for (Egg egg : eggSpawner.getEggList()) {
+                    egg.setSpeed(egg.getSpeed() + 1);
+                }
+            }
+
+            System.out.println("Difficulty increased: spawnRate = " + eggSpawner.getSpawnRate());
+        }
 
         if (lives <= 0) { // Check if lives have reached zero
             if (isMultiplayer && currentPlayer == 1 && !waitingForPlayer2Start) {
@@ -114,10 +137,12 @@ public class GameManager {
                 score += 10; // Increase score
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                eggCatch.play();
             } else if (egg.getY() > Constants.FRAME_HEIGHT) { // Egg fell out of the screen
                 lives--; // Decrease lives
                 eggSpawner.getEggList().remove(i); // Remove egg from list
                 i--; // Adjust index since list size has changed
+                lostLife.play();
             }
         }
     }
