@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements KeyListener {
     // UI Buttons
     public JButton restartGameButton;
     private JButton returnToMenuButton;
-    private JButton resumeButton;
+    public JButton resumeButton;
 
     // Constructor: Initializes panel, game, and UI buttons
     public GamePanel(String playerName) {
