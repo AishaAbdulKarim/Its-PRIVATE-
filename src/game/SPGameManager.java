@@ -85,7 +85,7 @@ public class SPGameManager {
     }
 
     // Updates game state including eggs, hearts, and difficulty
-    public void update() {
+    public void update(!countdownFinished) {
         eggSpawner.update();  // Update the egg spawner (e.g., spawn new eggs)
         basket.update();  // Update the basket's position
         updateCollision();  // Check for collisions between eggs, hearts, and basket
