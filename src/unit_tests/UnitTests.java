@@ -199,6 +199,10 @@ public class UnitTests {
 		assertEquals(5, spGameManager.getEggSpawner().getSpawnRate(),
 				"Initial spawn rate should be 5");
 	}
+	@Test
+	public void testSpawnRateIncreasesAfterScoreCheckpoint_SPGameManager()  {
+
+	}
 
 
 	//	/*
