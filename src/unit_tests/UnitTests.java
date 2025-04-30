@@ -193,6 +193,10 @@ public class UnitTests {
 		// Confirm the egg is removed from the game
 		assertTrue(spawner.getEggList().isEmpty(), "Missed egg should be removed.");
 	}
+	@Test
+	public void testInitialSpawnRateSPMode() {
+
+	}
 
 
 	//	/*
