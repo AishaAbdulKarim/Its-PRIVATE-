@@ -46,6 +46,20 @@ public class SPGameManager {
         lastScoreCheckpoint = 0;  // Reset the score checkpoint
         lastHeartSpawnScore = 0;  // Initialize the last heart spawn score to 0
 
+        new Thread(() -> {
+            try {
+                for (int i = 3; i >= 1; i--) {
+                    System.out.println(i); // or draw it later nicely
+                    Thread.sleep(1000);
+                }
+                System.out.println("Go!");
+                countdownFinished = true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+
         // Attempt to load the heart image from the file system
         try {
             heartImage = ImageIO.read(new File("src/images/redHeart.png"));
@@ -57,6 +71,7 @@ public class SPGameManager {
         // Initialize sounds
         eggCatch = new Sound("one.wav");
         lostLife = new Sound("lostLife.wav");
+
     }
 
     // Draws all game elements (basket, eggs, hearts, score, and lives) to the screen
