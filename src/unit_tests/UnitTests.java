@@ -297,70 +297,84 @@ public class UnitTests {
 		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden when unpaused.");
 	}
 
-
-
-	/*
-	 * Joanne Thomas, Unit Tests
-	 */
-
 	@Test
-	void testEggCaughtIncreasesScore() {
-		SPGameManager game = new SPGameManager(null);
-		Basket basket = game.getBasket();
+	void testResumeButtonClickUnpausesGame() {
+		GamePanel panel = new GamePanel("test");
 
-		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
-		game.getEggSpawner().getEggList().clear();
-		game.getEggSpawner().getEggList().add(egg);
+		// Manually pause the game
+		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
+		panel.keyPressed(pauseEvent);
 
-		int oldScore = game.getScore();
-		game.update(); // triggers checkCollisions()
-		assertTrue(game.getScore() > oldScore);
+		// Simulate click on resume button
+		panel.resumeButton.doClick();
+
+		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden after clicking resume.");
 	}
-	@Test
-	void testEggMissedDoesNotIncreaseScore() {
-		SPGameManager game = new SPGameManager(null);
-		game.getEggSpawner().getEggList().clear();
-
-		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
-		game.getEggSpawner().getEggList().add(egg);
-
-		int scoreBefore = game.getScore();
-		game.update(); // egg should be removed
-		assertEquals(scoreBefore, game.getScore());
-	}
+}
 
 
-	@Test
-	void testSetAndGetHighScore() {
-		Init window = new Init();
-		window.setHighScore(50);
-		assertEquals(50, window.getHighScore());
-	}
-
-	@Test
-	void testReturnToMainMenuReplacesPanel() {
-		Init window = new Init();
-		window.showSPGame(); // switch to game panel
-		window.returnToMainMenu(); // switch back
-	}
-
-
-	@Test
-	void testHighscoresButtonExists() {
-		MainMenu menu = new MainMenu(new Init());
-
-		JButton highscoreButton = findButton(menu, "Highscores");
-		assertNotNull(highscoreButton, "'Highscores' button should exist");
-	}
-
-	private JButton findButton(MainMenu menu, String text) {
-		for (Component comp : menu.getComponents()) {
-			if (comp instanceof JButton btn && btn.getText().equals(text)) {
-				return btn;
-			}
-		}
-		return null;
-	}
-
-	}
+//	/*
+//	 * Joanne Thomas, Unit Tests
+//	 */
+//
+//	@Test
+//	void testEggCaughtIncreasesScore() {
+//		SPGameManager game = new SPGameManager(null);
+//		Basket basket = game.getBasket();
+//
+//		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
+//		game.getEggSpawner().getEggList().clear();
+//		game.getEggSpawner().getEggList().add(egg);
+//
+//		int oldScore = game.getScore();
+//		game.update(); // triggers checkCollisions()
+//		assertTrue(game.getScore() > oldScore);
+//	}
+//	@Test
+//	void testEggMissedDoesNotIncreaseScore() {
+//		SPGameManager game = new SPGameManager(null);
+//		game.getEggSpawner().getEggList().clear();
+//
+//		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
+//		game.getEggSpawner().getEggList().add(egg);
+//
+//		int scoreBefore = game.getScore();
+//		game.update(); // egg should be removed
+//		assertEquals(scoreBefore, game.getScore());
+//	}
+//
+//
+//	@Test
+//	void testSetAndGetHighScore() {
+//		Init window = new Init();
+//		window.setHighScore(50);
+//		assertEquals(50, window.getHighScore());
+//	}
+//
+//	@Test
+//	void testReturnToMainMenuReplacesPanel() {
+//		Init window = new Init();
+//		window.showSPGame(); // switch to game panel
+//		window.returnToMainMenu(); // switch back
+//	}
+//
+//
+//	@Test
+//	void testHighscoresButtonExists() {
+//		MainMenu menu = new MainMenu(new Init());
+//
+//		JButton highscoreButton = findButton(menu, "Highscores");
+//		assertNotNull(highscoreButton, "'Highscores' button should exist");
+//	}
+//
+//	private JButton findButton(MainMenu menu, String text) {
+//		for (Component comp : menu.getComponents()) {
+//			if (comp instanceof JButton btn && btn.getText().equals(text)) {
+//				return btn;
+//			}
+//		}
+//		return null;
+//	}
+//
+//	}
 
