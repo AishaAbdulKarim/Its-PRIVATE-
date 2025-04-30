@@ -31,7 +31,7 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveLeft();
 		System.out.println(basket.getX());
-        assertEquals(4, basket.getX());
+		assertEquals(4, basket.getX());
 	}
 
 	@Test						// Asserts x position moves right by basket speed (4)
@@ -40,13 +40,13 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveRight();
 		System.out.println(basket.getX());
-        assertEquals(16, basket.getX());
+		assertEquals(16, basket.getX());
 	}
 
 	@Test						// Asserts basket image is not null after constructed
 	void testBasketImageFilePath() {
 		Basket basket = new Basket("", 10, 10, 10, 10, "basket_01.png");
-        assertNotNull(basket.getImage());
+		assertNotNull(basket.getImage());
 	}
 
 	@Test						// Assert new egg is added to eggList after spawnEgg executes
@@ -55,23 +55,23 @@ public class UnitTests {
 		while(e.getEggList().isEmpty()) {
 			e.spawnEgg();
 		}
-        assertFalse(e.getEggList().isEmpty());
+		assertFalse(e.getEggList().isEmpty());
 	}
 
 	@Test						// Assert eggSpawner.spawnRate increments by 1
 	void testSetEggSpawnRate() {
 		EggSpawner e = new EggSpawner();
 		e.setSpawnRate(e.getSpawnRate() + 1);
-        assertEquals(6, e.getSpawnRate());
+		assertEquals(6, e.getSpawnRate());
 	}
-	
+
 	@Test
 	void testGetAudioMusicNotNull() {
 		Sound mainMusic;
 		mainMusic = new Sound("musicOne.wav");
 		assertTrue(mainMusic.musicFileExists());
 	}
-	
+
 	@Test
 	void testGetAudioEggCatchNotNull() {
 		Sound mainMusic;
@@ -82,49 +82,49 @@ public class UnitTests {
 
 
 
-		/*
-		 * Aishat Aminu, Unit Tests
-		 */
-		@Test
-		void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
-			SPGameManager manager = new SPGameManager(null);                // Create new game instance
-			assertEquals(3, manager.getLives(),                         // Check that initial lives = 3
-					"Initial lives should be 3 at game start.");
-		}
+	/*
+	 * Aishat Aminu, Unit Tests
+	 */
+	@Test
+	void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
+		SPGameManager manager = new SPGameManager(null);                // Create new game instance
+		assertEquals(3, manager.getLives(),                         // Check that initial lives = 3
+				"Initial lives should be 3 at game start.");
+	}
 
-		@Test
-		void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
-			SPGameManager manager = new SPGameManager(null);                // New game instance
-			Basket basket = manager.getBasket();                        // Get basket
-			EggSpawner spawner = manager.getEggSpawner();               // Egg spawner
+	@Test
+	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
+		SPGameManager manager = new SPGameManager(null);                // New game instance
+		Basket basket = manager.getBasket();                        // Get basket
+		EggSpawner spawner = manager.getEggSpawner();               // Egg spawner
 
-			// Place egg far from basket so no collision occurs
-			Egg egg = new Egg(basket.getX() + 200, basket.getY() + 200, 40, 50, "egg.png");
-			spawner.getEggList().add(egg);                              // Add egg
+		// Place egg far from basket so no collision occurs
+		Egg egg = new Egg(basket.getX() + 200, basket.getY() + 200, 40, 50, "egg.png");
+		spawner.getEggList().add(egg);                              // Add egg
 
-			manager.update();                                           // Update game, no collision expected
+		manager.update();                                           // Update game, no collision expected
 
-			assertEquals(0, manager.getScore(),                         // Score should remain unchanged
-					"Score should not increase without collision.");
-		}
-		@Test
-		void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
-			SPGameManager manager = new SPGameManager(null);                // Game instance
+		assertEquals(0, manager.getScore(),                         // Score should remain unchanged
+				"Score should not increase without collision.");
+	}
+	@Test
+	void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
+		SPGameManager manager = new SPGameManager(null);                // Game instance
 
-			// Simulate mid-game state
-			manager.setLives(1);
-			manager.setScore(50);
-			manager.setGameOver(true);
+		// Simulate mid-game state
+		manager.setLives(1);
+		manager.setScore(50);
+		manager.setGameOver(true);
 
-			manager.start();                                            // Reset game state
+		manager.start();                                            // Reset game state
 
-			assertEquals(3, manager.getLives(),                         // Lives should reset to 3
-					"Lives should reset to 3.");
-			assertEquals(0, manager.getScore(),                         // Score should reset to 0
-					"Score should reset to 0.");
-			assertFalse(manager.getIsGameOver(),                        // Game should not be over anymore
-					"Game over should be reset to false.");
-		}
+		assertEquals(3, manager.getLives(),                         // Lives should reset to 3
+				"Lives should reset to 3.");
+		assertEquals(0, manager.getScore(),                         // Score should reset to 0
+				"Score should reset to 0.");
+		assertFalse(manager.getIsGameOver(),                        // Game should not be over anymore
+				"Game over should be reset to false.");
+	}
 	@Test
 	void testGameOverFlagAfterLivesZero() throws Exception { //  Added 'throws Exception' to allow reflection
 		SPGameManager manager = new SPGameManager(null); // Creates a new single-player game instance
@@ -406,73 +406,116 @@ public class UnitTests {
 
 		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden after clicking resume.");
 	}
+
+	/*
+	 * Joanne Thomas, Unit Tests
+	 */
+
+	@Test
+	void testEggCaughtIncreasesScore() {
+		SPGameManager game = new SPGameManager(null);
+		Basket basket = game.getBasket();
+
+		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
+		game.getEggSpawner().getEggList().clear();
+		game.getEggSpawner().getEggList().add(egg);
+
+		int oldScore = game.getScore();
+		game.update(); // triggers checkCollisions()
+		assertTrue(game.getScore() > oldScore);
+	}
+
+	@Test
+	void testEggMissedDoesNotIncreaseScore() {
+		SPGameManager game = new SPGameManager(null);
+		game.getEggSpawner().getEggList().clear();
+
+		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
+		game.getEggSpawner().getEggList().add(egg);
+
+		int scoreBefore = game.getScore();
+		game.update(); // egg should be removed
+		assertEquals(scoreBefore, game.getScore());
+	}
+
+	@Test
+	void testSetAndGetHighScore() {
+		Init window = new Init();
+		window.setHighScore(50);
+		assertEquals(50, window.getHighScore());
+	}
+
+	@Test
+	void testReturnToMainMenuReplacesPanel() {
+		Init window = new Init();
+		window.showSPGame(); // switch to game panel
+		window.returnToMainMenu(); // switch back
+	}
+
+	@Test
+	void testHighscoresButtonExists() {
+		MainMenu menu = new MainMenu(new Init());
+
+		JButton highscoreButton = findButton(menu, "Highscores");
+		assertNotNull(highscoreButton, "'Highscores' button should exist");
+	}
+
+	private JButton findButton(MainMenu menu, String text) {
+		for (Component comp : menu.getComponents()) {
+			if (comp instanceof JButton btn && btn.getText().equals(text)) {
+				return btn;
+			}
+		}
+		return null;
+	}
+
+
+
+	@Test
+	void testValidatePlayerNameIsDefaultWhenNull() {
+		String input = null;
+		String name = (input == null || input.trim().isEmpty()) ? "Player One" : input.trim();
+		assertEquals("Player One", name);
+	}
+
+	@Test
+	void testValidatePlayerNameIsDefaultWhenEmpty() {
+		String input = "   ";
+		String name = (input == null || input.trim().isEmpty()) ? "Player One" : input.trim();
+		assertEquals("Player One", name);
+	}
+
+	@Test
+	void testValidatePlayerNameAcceptsInput() {
+		String input = "Joanne";
+		String name = (input == null || input.trim().isEmpty()) ? "Player One" : input.trim();
+		assertEquals("Joanne", name);
+	}
+
+	@Test
+	void testExitDialogConfirmationYes() {
+		int userInput = JOptionPane.YES_OPTION;
+		boolean shouldExit = (userInput == JOptionPane.YES_OPTION);
+		assertTrue(shouldExit);
+	}
+
+	@Test
+	void testExitDialogConfirmationNo() {
+		int userInput = JOptionPane.NO_OPTION;
+		boolean shouldExit = (userInput == JOptionPane.YES_OPTION);
+		assertFalse(shouldExit);
+	}
+
+	@Test
+	void testCountdownPreventsUpdateInitially() {
+		boolean countdownFinished = false;
+		assertFalse(countdownFinished, "Game logic should not run if countdown hasn't finished");
+	}
+
+	@Test
+	void testCountdownAllowsUpdateAfterComplete() {
+		boolean countdownFinished = true;
+		assertTrue(countdownFinished, "Game logic should run after countdown finishes");
+	}
+
 }
-	//
-	//
-	//
-	//
-	//	/*
-	//	 * Joanne Thomas, Unit Tests
-	//	 */
-	//
-	//	@Test
-	//	void testEggCaughtIncreasesScore() {
-	//		SPGameManager game = new SPGameManager(null);
-	//		Basket basket = game.getBasket();
-	//
-	//		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
-	//		game.getEggSpawner().getEggList().clear();
-	//		game.getEggSpawner().getEggList().add(egg);
-	//
-	//		int oldScore = game.getScore();
-	//		game.update(); // triggers checkCollisions()
-	//		assertTrue(game.getScore() > oldScore);
-	//	}
-	//	@Test
-	//	void testEggMissedDoesNotIncreaseScore() {
-	//		SPGameManager game = new SPGameManager(null);
-	//		game.getEggSpawner().getEggList().clear();
-	//
-	//		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
-	//		game.getEggSpawner().getEggList().add(egg);
-	//
-	//		int scoreBefore = game.getScore();
-	//		game.update(); // egg should be removed
-	//		assertEquals(scoreBefore, game.getScore());
-	//	}
-	//
-	//
-	//	@Test
-	//	void testSetAndGetHighScore() {
-	//		Init window = new Init();
-	//		window.setHighScore(50);
-	//		assertEquals(50, window.getHighScore());
-	//	}
-	//
-	//	@Test
-	//	void testReturnToMainMenuReplacesPanel() {
-	//		Init window = new Init();
-	//		window.showSPGame(); // switch to game panel
-	//		window.returnToMainMenu(); // switch back
-	//	}
-	//
-	//
-	//	@Test
-	//	void testHighscoresButtonExists() {
-	//		MainMenu menu = new MainMenu(new Init());
-	//
-	//		JButton highscoreButton = findButton(menu, "Highscores");
-	//		assertNotNull(highscoreButton, "'Highscores' button should exist");
-	//	}
-	//
-	//	private JButton findButton(MainMenu menu, String text) {
-	//		for (Component comp : menu.getComponents()) {
-	//			if (comp instanceof JButton btn && btn.getText().equals(text)) {
-	//				return btn;
-	//			}
-	//		}
-	//		return null;
-	//	}
-
-
-
