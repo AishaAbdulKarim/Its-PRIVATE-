@@ -156,7 +156,7 @@ public class UnitTests {
 		countdownField.setBoolean(manager, true);
 
 		//  Created an egg positioned directly over the basket to force a collision
-		Egg egg = new Egg(basket.getX(), basket.getY(), 40, 50, "egg.png");
+		Egg egg = new Egg(basket.getX(), basket.getY(), 40, 50, "egg_01.png");
 		spawner.getEggList().add(egg); // Add the egg to the game manually
 
 		// Run one update cycle should detect the egg-basket collision
