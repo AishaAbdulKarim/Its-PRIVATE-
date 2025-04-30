@@ -92,23 +92,6 @@ public class UnitTests {
 		}
 
 		@Test
-		void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
-			SPGameManager manager = new SPGameManager(null);                // Game instance
-			EggSpawner spawner = manager.getEggSpawner();               // Access egg list
-
-			// Create egg that's below the screen (missed)
-			Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 20, 40, 50, "egg.png");
-			spawner.getEggList().add(egg);                              // Add missed egg
-
-			int livesBefore = manager.getLives();                       // Store initial lives
-			manager.update();                                           // Update game to process missed egg
-
-			assertEquals(livesBefore - 1, manager.getLives(),           // Lives should decrease by 1
-					"Lives should decrease when egg is missed.");
-			assertTrue(spawner.getEggList().isEmpty(),                  // Egg should be removed
-	                "Missed egg should be removed.");
-		}
-		@Test
 		void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
 			SPGameManager manager = new SPGameManager(null);                // New game instance
 			Basket basket = manager.getBasket();                        // Get basket
@@ -176,7 +159,7 @@ public class UnitTests {
 		Egg egg = new Egg(basket.getX(), basket.getY(), 40, 50, "egg.png");
 		spawner.getEggList().add(egg); // Add the egg to the game manually
 
-		// Run one update cycle that  should detect the egg-basket collision
+		// Run one update cycle should detect the egg-basket collision
 		manager.update();
 
 		//  Asserts that score increased by 10 after catching the egg
@@ -184,6 +167,31 @@ public class UnitTests {
 
 		//  Asserts that the egg is removed from the egg list after being caught
 		assertEquals(0, spawner.getEggList().size(), "Egg should be removed after catch.");
+	}
+	@Test
+	void testEggMissedDecreasesLivesAndRemovesEgg() throws Exception {
+		//  single-player game manager instance
+		SPGameManager manager = new SPGameManager(null);
+		EggSpawner spawner = manager.getEggSpawner(); // Access egg spawner to manually add eggs
+
+		// Bypass the internal countdown so update() logic executes immediately
+		Field countdownField = SPGameManager.class.getDeclaredField("countdownFinished");
+		countdownField.setAccessible(true);
+		countdownField.setBoolean(manager, true);
+
+		//  Added an egg positioned below the screen to simulate a missed catch
+		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 20, 40, 50, "egg_01.png");
+		spawner.getEggList().add(egg);
+
+		int livesBefore = manager.getLives(); // Record lives before update
+
+		manager.update(); // Triggered game logic
+
+		//  Checked that a life was lost due to the missed egg
+		assertEquals(livesBefore - 1, manager.getLives(), "Lives should decrease when egg is missed.");
+
+		// Confirm the egg is removed from the game
+		assertTrue(spawner.getEggList().isEmpty(), "Missed egg should be removed.");
 	}
 
 
