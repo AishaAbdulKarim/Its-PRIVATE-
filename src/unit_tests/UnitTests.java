@@ -195,7 +195,9 @@ public class UnitTests {
 	}
 	@Test
 	public void testInitialSpawnRateSPMode() {
-
+		SPGameManager spGameManager = new SPGameManager("Test Player");
+		assertEquals(5, spGameManager.getEggSpawner().getSpawnRate(),
+				"Initial spawn rate should be 5");
 	}
 
 
