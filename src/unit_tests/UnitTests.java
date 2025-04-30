@@ -294,7 +294,20 @@ public class UnitTests {
 		panel.keyPressed(pauseEvent);
 		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden when unpaused.");
 	}
+	@Test
+	void testResumeButtonClickUnpausesGame() {
+		GamePanel panel = new GamePanel("test");
 
+		// Manually pause the game
+		KeyEvent pauseEvent = new KeyEvent(panel, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_P, 'P');
+		panel.keyPressed(pauseEvent);
+
+		// Simulate click on resume button
+		panel.resumeButton.doClick();
+
+		assertFalse(panel.resumeButton.isVisible(), "Resume button should be hidden after clicking resume.");
+	}
+}
 
 
 
