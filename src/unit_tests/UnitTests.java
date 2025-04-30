@@ -233,8 +233,36 @@ public class UnitTests {
 				"Spawn rate should increase after score crosses 150/300 points");
 	}
 	@Test
-	public void testSpawnRateIncreasesAfterScoreCheckpoint_GameManager()  {
+	public void testSpawnRateIncreasesAfterScoreCheckpoint_GameManager() throws Exception {
+		GameManager gameManager = new GameManager();
+		gameManager.start();
+		gameManager.setMultiplayer(true);
 
+		// Accessed eggSpawner
+		Field spawnerField = GameManager.class.getDeclaredField("eggSpawner");
+		spawnerField.setAccessible(true);
+		Object eggSpawner = spawnerField.get(gameManager);
+
+		Field spawnRateField = eggSpawner.getClass().getDeclaredField("spawnRate");
+		spawnRateField.setAccessible(true);
+		int initialSpawnRate = spawnRateField.getInt(eggSpawner);
+
+		// Set score = 300 to trigger scaling logic
+		Field scoreField = GameManager.class.getDeclaredField("score");
+		scoreField.setAccessible(true);
+		scoreField.setInt(gameManager, 300);
+
+		// Set checkpoint back to 0
+		Field checkpointField = GameManager.class.getDeclaredField("lastScoreCheckpoint");
+		checkpointField.setAccessible(true);
+		checkpointField.setInt(gameManager, 0);
+
+		gameManager.update(); // Triggers scaling
+
+		int updatedSpawnRate = spawnRateField.getInt(eggSpawner);
+
+		assertTrue(updatedSpawnRate > initialSpawnRate,
+				"GameManager spawn rate should increase after passing difficulty threshold");
 	}
 
 	//	/*
