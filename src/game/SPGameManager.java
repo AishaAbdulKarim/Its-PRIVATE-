@@ -23,7 +23,6 @@ public class SPGameManager {
     private String playerName;
     private boolean countdownFinished = false;
 
-
     private ArrayList<Egg> heartList = new ArrayList<>();  // List to store hearts
     private int lastHeartSpawnScore = 0;  // Tracks the last score at which a heart was spawned
 
@@ -31,7 +30,7 @@ public class SPGameManager {
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public SPGameManager(String playerName) {
         this.playerName = playerName;
-        start();
+        start();  // Initializes the game
     }
 
     // Initializes the game and resets necessary values
@@ -45,20 +44,22 @@ public class SPGameManager {
         isGameOver = false;  // Reset the game over flag
         lastScoreCheckpoint = 0;  // Reset the score checkpoint
         lastHeartSpawnScore = 0;  // Initialize the last heart spawn score to 0
+        countdownFinished = false; // <-- added
 
+        // added: start countdown in a new thread
         new Thread(() -> {
             try {
                 for (int i = 3; i >= 1; i--) {
-                    System.out.println(i); // or draw it later nicely
-                    Thread.sleep(1000);
+                    System.out.println(i); // You can later draw this instead of printing
+                    Thread.sleep(1000);    // Wait 1 second
                 }
                 System.out.println("Go!");
-                countdownFinished = true;
+                countdownFinished = true; // Allow the game to start
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
-
+        // <-- end added countdown block
 
         // Attempt to load the heart image from the file system
         try {
@@ -71,7 +72,6 @@ public class SPGameManager {
         // Initialize sounds
         eggCatch = new Sound("one.wav");
         lostLife = new Sound("lostLife.wav");
-
     }
 
     // Draws all game elements (basket, eggs, hearts, score, and lives) to the screen
@@ -100,7 +100,9 @@ public class SPGameManager {
     }
 
     // Updates game state including eggs, hearts, and difficulty
-    public void update(!countdownFinished) {
+    public void update() {
+        if (!countdownFinished) return; //pause game logic until countdown completes
+
         eggSpawner.update();  // Update the egg spawner (e.g., spawn new eggs)
         basket.update();  // Update the basket's position
         updateCollision();  // Check for collisions between eggs, hearts, and basket
@@ -139,6 +141,8 @@ public class SPGameManager {
             setGameOver(true);
         }
     }
+
+    // ... rest of the code remains unchanged ...
 
     // Updates the collision checks for eggs and hearts
     public void updateCollision() {
