@@ -200,8 +200,37 @@ public class UnitTests {
 				"Initial spawn rate should be 5");
 	}
 	@Test
-	public void testSpawnRateIncreasesAfterScoreCheckpoint_SPGameManager()  {
+	public void testSpawnRateIncreasesAfterScoreCheckpoint_SPGameManager() throws Exception {
+		// SPGameManager instance with a test player
+		SPGameManager spGameManager = new SPGameManager("Test Player");
 
+		// Accessing the private eggSpawner field using reflection
+		Field spawnerField = SPGameManager.class.getDeclaredField("eggSpawner");
+		spawnerField.setAccessible(true);
+		Object eggSpawner = spawnerField.get(spGameManager);
+
+		// Accessing the spawnRate inside EggSpawner using reflection
+		Field spawnRateField = eggSpawner.getClass().getDeclaredField("spawnRate");
+		spawnRateField.setAccessible(true);
+		int initialSpawnRate = spawnRateField.getInt(eggSpawner); // Store initial spawn rate
+
+		//  Set score to 300 manually to simulate two difficulty checkpoints
+		Field scoreField = SPGameManager.class.getDeclaredField("score");
+		scoreField.setAccessible(true);
+		scoreField.setInt(spGameManager, 300);
+
+		//  Bypass the countdown so update() logic runs
+		Field countdownField = SPGameManager.class.getDeclaredField("countdownFinished");
+		countdownField.setAccessible(true);
+		countdownField.setBoolean(spGameManager, true);
+
+		// Run update to trigger spawn rate increase logic
+		spGameManager.update();
+
+		//  Confirm that spawn rate increased from its original value
+		int updatedSpawnRate = spawnRateField.getInt(eggSpawner);
+		assertTrue(updatedSpawnRate > initialSpawnRate,
+				"Spawn rate should increase after score crosses 150/300 points");
 	}
 
 
