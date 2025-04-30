@@ -66,8 +66,16 @@ public class UnitTests {
 	void testGetAudioMusicNotNull() {
 		Sound mainMusic;
 		mainMusic = new Sound("musicOne.wav");
-		assertTrue(false);
+		assertTrue(mainMusic.musicFileExists());
 	}
+	
+	@Test
+	void testGetAudioEggCatchNotNull() {
+		Sound mainMusic;
+		mainMusic = new Sound("one.wav");
+		assertTrue(mainMusic.musicFileExists());
+	}
+	
 	
 	
 
