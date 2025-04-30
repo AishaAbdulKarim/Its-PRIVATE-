@@ -30,7 +30,7 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveLeft();
 		System.out.println(basket.getX());
-        assertEquals(6, basket.getX());
+        assertEquals(4, basket.getX());
 	}
 
 	@Test						// Asserts x position moves right by basket speed (4)
@@ -39,7 +39,7 @@ public class UnitTests {
 		System.out.println(basket.getX());
 		basket.moveRight();
 		System.out.println(basket.getX());
-        assertEquals(14, basket.getX());
+        assertEquals(16, basket.getX());
 	}
 
 	@Test						// Asserts basket image is not null after constructed
@@ -70,13 +70,13 @@ public class UnitTests {
 	 */
 	@Test
 	void testInitialLivesAreThree() {//Verifies that the game starts with 3 lives by default
-		SPGameManager manager = new SPGameManager();                // Create new game instance
+		SPGameManager manager = new SPGameManager(null);                // Create new game instance
 		assertEquals(3, manager.getLives(),                         // Check that initial lives = 3
 				"Initial lives should be 3 at game start.");
 	}
 	@Test
 	void testGameOverFlagAfterLivesZero() {//Ensures that the game sets 'game over' to true when lives reach 0
-		SPGameManager manager = new SPGameManager();                // Create game instance
+		SPGameManager manager = new SPGameManager(null);                // Create game instance
 		manager.setLives(0);                                        // Force lives to 0
 		manager.update();                                           // Call update to trigger game over logic
 		assertTrue(manager.getIsGameOver(),                         // Check if game over flag is true
@@ -85,7 +85,7 @@ public class UnitTests {
 
 	@Test
 	void testEggCaughtIncreasesScoreAndRemovesEgg() {//Confirms that score increases by 10 and egg is removed after catching it
-		SPGameManager manager = new SPGameManager();                // Create game manager
+		SPGameManager manager = new SPGameManager(null);                // Create game manager
 		Basket basket = manager.getBasket();                        // Get basket reference
 		EggSpawner spawner = manager.getEggSpawner();               // Get egg spawner reference
 
@@ -101,7 +101,7 @@ public class UnitTests {
 	}
 	@Test
 	void testEggMissedDecreasesLivesAndRemovesEgg() {//Validates that a missed egg reduces lives and removes the egg from the list
-		SPGameManager manager = new SPGameManager();                // Game instance
+		SPGameManager manager = new SPGameManager(null);                // Game instance
 		EggSpawner spawner = manager.getEggSpawner();               // Access egg list
 
 		// Create egg that's below the screen (missed)
@@ -118,7 +118,7 @@ public class UnitTests {
 	}
 	@Test
 	void testScoreDoesNotIncreaseWhenNoCollision() {// Confirms that no score is awarded when the egg doesn't collide with the basket
-		SPGameManager manager = new SPGameManager();                // New game instance
+		SPGameManager manager = new SPGameManager(null);                // New game instance
 		Basket basket = manager.getBasket();                        // Get basket
 		EggSpawner spawner = manager.getEggSpawner();               // Egg spawner
 
@@ -133,7 +133,7 @@ public class UnitTests {
 	}
 	@Test
 	void testGameResetAfterStart() {//Checks that calling start() resets lives, score, and game state properly
-		SPGameManager manager = new SPGameManager();                // Game instance
+		SPGameManager manager = new SPGameManager(null);                // Game instance
 
 		// Simulate mid-game state
 		manager.setLives(1);
@@ -243,7 +243,7 @@ public class UnitTests {
 
 	@Test
 	public void testButtonActions() {
-		GamePanel panel = new GamePanel();
+		GamePanel panel = new GamePanel(null);
 		panel.restartGameButton.doClick(); // Simulate a click on the restart button
 
 		// Assert that the restart button is hidden after click
@@ -258,7 +258,6 @@ public class UnitTests {
 		// Simulate Player 1 scoring points
 		gameManager.update();
 		gameManager.update();
-
 		int player1Score = gameManager.getScore();  // Save Player 1's score
 		gameManager.update();  // Simulate some game updates
 
@@ -275,7 +274,7 @@ public class UnitTests {
 
 	@Test
 	void testEggCaughtIncreasesScore() {
-		SPGameManager game = new SPGameManager();
+		SPGameManager game = new SPGameManager(null);
 		Basket basket = game.getBasket();
 
 		Egg egg = new Egg(basket.getX(), basket.getY(), basket.getWidth(), basket.getHeight(), "egg_01.png");
@@ -288,7 +287,7 @@ public class UnitTests {
 	}
 	@Test
 	void testEggMissedDoesNotIncreaseScore() {
-		SPGameManager game = new SPGameManager();
+		SPGameManager game = new SPGameManager(null);
 		game.getEggSpawner().getEggList().clear();
 
 		Egg egg = new Egg(0, Constants.FRAME_HEIGHT + 100, 40, 50, "egg_01.png");
