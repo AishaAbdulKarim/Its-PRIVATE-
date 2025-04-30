@@ -7,6 +7,7 @@ public class Sound {
     private byte[] audioData;
     private AudioFormat format;
     private DataLine.Info info;
+    private String fileName;
 
     // Dedicated persistent clip for loop/stop
     private Clip persistentClip;
@@ -16,6 +17,7 @@ public class Sound {
         try {
             File file = new File("audio/" + fileName);
             if (file.exists()) {
+            	this.fileName = fileName;
                 AudioInputStream stream = AudioSystem.getAudioInputStream(file);
                 format = stream.getFormat();
                 audioData = stream.readAllBytes();
@@ -58,5 +60,10 @@ public class Sound {
         if (persistentClip != null && persistentClip.isRunning()) {
             persistentClip.stop();
         }
+    }
+    
+    public boolean musicFileExists() {
+    	File file = new File("audio/" + fileName);
+    	return file.exists();
     }
 }
