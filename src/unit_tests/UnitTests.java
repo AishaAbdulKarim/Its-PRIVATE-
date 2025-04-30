@@ -232,7 +232,10 @@ public class UnitTests {
 		assertTrue(updatedSpawnRate > initialSpawnRate,
 				"Spawn rate should increase after score crosses 150/300 points");
 	}
+	@Test
+	public void testSpawnRateIncreasesAfterScoreCheckpoint_GameManager()  {
 
+	}
 
 	//	/*
 	//	 * Aisha Abdul Karim, Unit Tests
